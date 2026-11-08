@@ -4,8 +4,20 @@
 /* Latin forms only; translations and Greek keep their normal style. */
 .latin-term{font-style:italic}i.latin-term{font-family:Georgia,serif}
 
-/* Center the title alongside the Greek mark. */
-.brand{align-items:center;line-height:1;gap:12px;white-space:nowrap}
-.brand .brand-mark{display:block;font:normal 46px/1.1 Georgia,"Times New Roman",serif}
-.brand .brand-name{font:600 23px/1.2 system-ui,sans-serif}
-@media(max-width:760px){.brand{gap:7px}.brand .brand-mark{font-size:36px}.brand .brand-name{font-size:18px}}
+/* The title stays at the page center, independent of the side controls. */
+header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:20px;align-items:center}
+.brand{justify-self:start;align-items:baseline;gap:10px;line-height:1;white-space:nowrap}
+.brand .brand-mark,.brand .brand-latin{display:block;font:normal 46px/1.1 Georgia,"Times New Roman",serif}
+.brand .brand-latin{font-style:italic}
+.brand .brand-dash{font:normal 28px/1 Georgia,serif}
+.header-title{justify-self:center;font:600 23px/1.2 system-ui,sans-serif;color:var(--ink);text-decoration:none;white-space:nowrap}
+.topnav{justify-self:end}
+@media(max-width:900px){
+ header{height:auto;min-height:84px;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;padding:12px 14px}
+ .header-title{grid-column:1/-1;grid-row:1;font-size:21px}
+ .brand{grid-column:1;grid-row:2;gap:7px}
+ .brand .brand-mark,.brand .brand-latin{font-size:36px}
+ .brand .brand-dash{font-size:24px}
+ .topnav{grid-column:2;grid-row:2}
+}
+@media(max-width:480px){.header-title{font-size:20px}.brand .brand-mark,.brand .brand-latin{font-size:32px}}
