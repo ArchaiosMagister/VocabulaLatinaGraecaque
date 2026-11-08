@@ -6,6 +6,6 @@
 
 /* Keep the Greek mark and title on the same typographic baseline. */
 .brand{align-items:baseline;line-height:1;gap:12px;white-space:nowrap}
-.brand .brand-mark{display:block;font:normal 38px/1 Georgia,serif}
+.brand .brand-mark{display:block;font:normal 46px/1.1 Georgia,"Times New Roman",serif}
 .brand .brand-name{font:600 19px/1.2 system-ui,sans-serif}
-@media(max-width:760px){.brand{gap:7px}.brand .brand-mark{font-size:28px}.brand .brand-name{font-size:14px}}
+@media(max-width:760px){.brand{gap:7px}.brand .brand-mark{font-size:36px}.brand .brand-name{font-size:14px}}
