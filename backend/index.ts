@@ -42,7 +42,7 @@ export async function handler(req:Request){
  if(action==='report'){
  await take(req,'reports-minute',5);await take(req,'reports-day',50,86400);
  const message=text(b.message,2000,5);const entry=text(b.entry_form||'',300);
- await db('vocab_reports','POST',{kind:choice(b.kind,['translation','missing','units','other']),subject:choice(b.subject,['lat1','lat4','gr1']),mode:choice(b.mode,['general','examen']),units:b.units?.length?strings(b.units):[],entry_id:text(b.entry_id||'',100),entry_form:entry,message});
+ await db('vocab_reports','POST',{kind:choice(b.kind,['translation','missing','units','other']),subject:choice(b.subject,['lat1','lat2','lat4','gr1']),mode:choice(b.mode,['general','examen']),units:b.units?.length?strings(b.units):[],entry_id:text(b.entry_id||'',100),entry_form:entry,message});
  return respond({ok:true});
  }
  const tokenHash=await teacher(req);
@@ -50,7 +50,7 @@ export async function handler(req:Request){
  if(action==='logout'){await db('vocab_sessions?token_hash=eq.'+tokenHash,'DELETE');return respond({ok:true});}
  if(action==='teacher_words')return respond({words:await listWords(false)});
  if(action==='save_word'){
- const form=text(b.form,300,1);const payload={subject:choice(b.subject,['lat1','lat4','gr1']),form,form_key:form.normalize('NFC').toLowerCase(),meaning:text(b.meaning,1000,1),answers:strings(b.answers),units:strings(b.units),in_exam:b.in_exam===true,active:b.active!==false,updated_at:new Date().toISOString()};
+ const form=text(b.form,300,1);const payload={subject:choice(b.subject,['lat1','lat2','lat4','gr1']),form,form_key:form.normalize('NFC').toLowerCase(),meaning:text(b.meaning,1000,1),answers:strings(b.answers),units:strings(b.units),in_exam:b.in_exam===true,active:b.active!==false,updated_at:new Date().toISOString()};
  const rows=await db('vocab_words'+(b.id?'?id=eq.'+uuid(b.id):''),b.id?'PATCH':'POST',payload);if(!rows.length)throw new Failure(404,'No se encuentra esa palabra.');return respond({word:rows[0]});
  }
  if(action==='reports'){

@@ -10,7 +10,7 @@ create table public.vocab_sessions (
 create index vocab_sessions_expiry on public.vocab_sessions(expires_at);
 create table public.vocab_words (
  id uuid primary key default gen_random_uuid(),
- subject text not null check(subject in ('lat1','lat4','gr1')),
+ subject text not null check(subject in ('lat1','lat2','lat4','gr1')),
  form text not null check(length(form) between 1 and 300),
  form_key text not null,
  meaning text not null check(length(meaning) between 1 and 1000),
@@ -25,7 +25,7 @@ create table public.vocab_words (
 create table public.vocab_reports (
  id uuid primary key default gen_random_uuid(),
  kind text not null check(kind in ('translation','missing','units','other')),
- subject text not null check(subject in ('lat1','lat4','gr1')),
+ subject text not null check(subject in ('lat1','lat2','lat4','gr1')),
  mode text not null check(mode in ('general','examen')),
  units text[] not null default '{}',
  entry_id text not null default '' check(length(entry_id)<=100),
