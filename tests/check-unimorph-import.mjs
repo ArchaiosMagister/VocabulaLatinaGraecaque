@@ -57,7 +57,7 @@ for(const subject of ['lat1','lat4','gr1']){
   ids.add(item.id);
   assert.equal(item.subject,subject);
   assert.ok(item.unit&&item.topic&&item.answer);
-  if(item.mode==='write')assert.ok(item.accepted.includes(window.GrammarImported.norm(item.answer)),'Respuesta descartada '+item.id);
+  if(item.mode==='write')assert.ok(item.accepted.includes(window.GrammarImported.norm(item.answer.replaceAll('(ν)',''))),'Respuesta descartada '+item.id);
   if(item.mode==='choice')assert.equal(item.options.filter(x=>x===item.answer).length,1,'Opción ambigua '+item.id);
   if(item.language==='grc'&&item.mode==='write')assert.ok(!/\s/u.test(item.answer),'Griego no limpiado '+item.id);
  }
