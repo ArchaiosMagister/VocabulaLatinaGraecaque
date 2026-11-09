@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Ejercicios autocorregibles de gramática de Latín I, Griego I y Latín de 4.º ESO por unidades.">
+<title>Repaso de gramática · Vocabulario clásico</title>
+<link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+<script src="theme.js"></script>
+<link rel="stylesheet" href="style.css?v=20261108-theme1">
+<link rel="stylesheet" href="gramatica.css?v=1">
+<script src="data.js" defer></script>
+<script src="gramatica-contenidos.js" defer></script>
+<script src="gramatica-paradigmas.js" defer></script>
+<script src="gramatica-griego-ampliacion.js?v=1" defer></script>
+<script src="gramatica-importada.js?v=1" defer></script>
+<script src="gramatica.js?v=3" defer></script>
+</head><body>
+<header><a href="./" class="brand" aria-label="Inicio"><span class="brand-mark" lang="grc">ἀ</span><span class="brand-dash">–</span><span class="brand-latin" lang="la">ā</span></a><a href="./" class="header-title">Vocabulario clásico</a>
+<nav class="topnav"><a href="./">Vocabulario</a><a href="gramatica.html" aria-current="page">Gramática</a></nav></header>
+<main>
+<div class="page-toolbar"><p class="small">Práctica autocorregible · Latín I · Griego I · Latín 4.º ESO</p><div class="theme-picker"><label for="theme-select">Tema</label><select id="theme-select"><option value="system">Automático</option><option value="light">Claro</option><option value="dark">Oscuro</option></select></div></div>
+<section class="intro"><p class="eyebrow">APRENDER LA ESTRUCTURA</p><h1>La gramática se aprende<br>practicándola.</h1><p>Selecciona las unidades que has estudiado y repasa sus formas y construcciones.</p></section>
+<div class="layout"><aside class="panel">
+<h2>Preparar sesión</h2>
+<label for="subject">Asignatura</label><select id="subject"><option value="lat1">Latín I · 1.º Bachillerato</option><option value="gr1">Griego I · 1.º Bachillerato</option><option value="lat4">Latín · 4.º ESO</option></select>
+<div class="unithead"><label id="unit-label">Unidades</label><button id="all" class="text" type="button">Todas</button><button id="none" class="text" type="button">Ninguna</button></div><div id="units" class="units" role="group" aria-labelledby="unit-label"></div>
+<label for="topic">Contenido gramatical</label><select id="topic"><option value="all">Todos los contenidos</option></select>
+<label for="category">Tipo de contenido</label><select id="category"><option value="Morfología" selected>Morfología · nombres y verbos</option><option value="all">Todos · mezclados</option><option value="Morfología nominal">Morfología nominal</option><option value="Morfología verbal">Morfología verbal</option><option value="Sintaxis">Sintaxis</option><option value="Conceptos">Fundamentos / conceptos</option></select>
+<label for="answer-mode">Modalidad de ejercicio</label><select id="answer-mode"><option value="all">Mixta · test y escritura</option><option value="choice">Test de reconocimiento</option><option value="write">Escritura de flexiones</option></select>
+<label for="length">Preguntas por sesión</label><select id="length"><option>10</option><option>20</option><option>50</option><option value="all">Todas las disponibles</option></select>
+<label class="check"><input id="include-imported" type="checkbox" checked> Incluir flexiones importadas de UniMorph</label>
+<p id="imported-status" class="small" aria-live="polite">Buscando índices de UniMorph…</p>
+<label class="check"><input id="errors" type="checkbox"> Sólo repasar fallos pendientes</label>
+<button type="button" id="start" class="primary" disabled>Empezar práctica →</button>
+<p id="available" class="small" role="status" aria-live="polite"></p>
+</aside>
+<section>
+<div class="stats"><div><b id="learned">0</b><span>preguntas practicadas</span></div><div><b id="accuracy">—</b><span>acierto histórico</span></div><div><b id="pending">0</b><span>fallos pendientes</span></div></div>
+<article id="practice" class="practice" aria-live="polite">
+<div class="empty-symbol">ā · ἀ</div><p class="eyebrow">TU ESPACIO DE GRAMÁTICA</p><h2>¿Qué repasamos hoy?</h2><p>Elige una asignatura, unidades y actividad.</p></article>
+<div class="grammar-help">
+<details class="help" open><summary>Contenidos incluidos</summary><p id="topic-summary" class="small"></p><div id="outline"></div></details>
+<details class="help"><summary>Cómo se corrigen las respuestas</summary>
+<p>Los ejercicios de test se corrigen según soluciones y análisis gramaticales definidos. En la escritura de declinaciones y conjugaciones se comparan las formas de paradigmas revisables, no se predice una respuesta por semejanza ortográfica.</p>
+<p>Se aceptan tildes y macrones latinos opcionales; en griego no se exigen acentos ni espíritus, pero se distingue la iota suscrita. También se admiten las variantes de ν móvil expresamente indicadas. Las formas ambiguas no se emplean en preguntas de análisis único.</p>
+<p>Las flexiones de UniMorph son importadas mediante un proceso completo de lectura de los corpus originales y filtradas por los lemas del vocabulario del curso, por la unidad de adquisición y por la unidad de introducción del contenido gramatical. En las respuestas griegas la iota suscrita se mantiene diferenciada; no se aplican formas inventadas.</p><p>El temario y la distribución proceden del documento aportado para los tres cursos. Las preguntas son ejemplos didácticos creados a partir de esos epígrafes, no una transcripción del libro de teoría. Un tema está representado en el banco aunque no estén cubiertas todas las formas de todos los lemas.</p>
+<p>Los resultados se guardan solo en este navegador y no se transmiten a un servidor. También puedes usar el <a href="morfologia.html">ejercicio complementario de verbos latinos</a> conectado al banco del generador de exámenes.</p>
+</details>
+</div>
+</section></div><footer>Una forma comprendida, un paso más.</footer>
+</main></body></html>
