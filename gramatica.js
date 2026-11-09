@@ -66,7 +66,7 @@ function buildExercises(){
    for(const [feature,surface] of forms){
     const label=formatFeature(feature,p.kind);
     const base=subject+'|'+unit+'|'+p.id+'|'+feature;
-    const instruction=p.kind==='verbal'?label+' del '+p.desc:label;
+    const instruction=p.kind==='verbal'?(feature==='inf'?(p.desc||'infinitivo'):label+' del '+p.desc):label;
     items.push({id:base+'|write',subject,unit,topic,category,mode:'write',
       prompt:'Escribe '+instruction+' de '+p.lemma+'.',
       answer:surface,accepted:variants(surface),explanation:'Paradigma: '+p.lemma+' · '+instruction+'.',language:p.lang});
@@ -109,7 +109,7 @@ let session=null;
 const selectedUnits=()=>new Set([...$('units').querySelectorAll('input:checked')].map(x=>x.value));
 function getItems(ignoreErrors=false){
  const subject=$('subject').value,units=selectedUnits(),topic=$('topic').value,cat=$('category').value,mode=$('answer-mode').value;
- return exercises.concat($('include-imported').checked?imported:[]).filter(q=>q.subject===subject&&units.has(q.unit)&&(topic==='all'||q.unit+'|'+q.topic===topic)&&(cat==='all'||q.category===cat)&&(mode==='all'||q.mode===mode)&&(ignoreErrors||!$('errors').checked||progress[q.id]?.failed));
+ return exercises.concat($('include-imported').checked?imported:[]).filter(q=>q.subject===subject&&units.has(q.unit)&&(topic==='all'||q.unit+'|'+q.topic===topic)&&(cat==='all'||(cat==='Morfología'?q.category.startsWith('Morfología '):q.category===cat))&&(mode==='all'||q.mode===mode)&&(ignoreErrors||!$('errors').checked||progress[q.id]?.failed));
 }
 function stats(){
  const subject=$('subject').value;
