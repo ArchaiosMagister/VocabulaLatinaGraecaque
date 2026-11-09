@@ -188,8 +188,10 @@ function readingKey(feat){return feat.join(';')}
      if(assigned>(subject==='lat1'?10:subject==='lat4'?8:14))continue;
      const unit='UD '+assigned,heading=assigned===number?introducedTopic:'Repaso morfológico acumulativo';
      const label=description(feat,pos,pos==='V'&&norm(entry.form.split(',')[0]).endsWith('or'));if(!label)continue;
+     const fullEntry=window.GrammarEnunciation?.display(subject,entry.form,pos==='V');
+     if(pos==='V'&&!fullEntry)continue; // Sin enunciado docente completo no se pregunta la flexión verbal.
      const id=unit+'|'+entry.key+'|'+readingKey(feat);
-     if(!grouped.has(id))grouped.set(id,{id,subject,unit,topic:heading,category:pos==='V'?'Morfología verbal':'Morfología nominal',lemma:entry.form.split(',')[0],language:lang,label,forms:new Set(),key:entry.key,feature:readingKey(feat)});
+     if(!grouped.has(id))grouped.set(id,{id,subject,unit,topic:heading,category:pos==='V'?'Morfología verbal':'Morfología nominal',lemma:fullEntry||entry.form,language:lang,label,forms:new Set(),key:entry.key,feature:readingKey(feat)});
      grouped.get(id).forms.add(surface);
     }
    }
@@ -215,7 +217,7 @@ function readingKey(feat){return feat.join(';')}
     const base=subject+'|'+group.id;
     const suffix=' · '+group.label+' · '+group.unit;
     items.push({
-     id:'import|'+base+'|write',subject,unit:group.unit,topic:group.topic,category:group.category,mode:'write',
+     id:'import|'+base+'|write',subject,unit:group.unit,topic:group.topic,category:group.category,mode:'write',lemma:group.key,
      prompt:'Escribe '+group.label+' de '+group.lemma+'.',
      answer:surfaces[0],accepted:acceptable,language:lang,
      explanation:'UniMorph: '+group.lemma+suffix+'. Variantes aceptadas: '+surfaces.join(', ')+'.'
@@ -225,7 +227,7 @@ function readingKey(feat){return feat.join(';')}
     for(const surface of surfaces){
      if(bySurface.get(group.key+'|'+norm(surface)).size!==1)continue;
      items.push({
-      id:'import|'+base+'|analysis|'+norm(surface),subject,unit:group.unit,topic:group.topic,category:group.category,mode:'choice',
+      id:'import|'+base+'|analysis|'+norm(surface),subject,unit:group.unit,topic:group.topic,category:group.category,mode:'choice',lemma:group.key,
       prompt:'¿Qué análisis corresponde a «'+surface+'» de '+group.lemma+'?',
       answer:group.label,options:[group.label,...other],language:lang,
       explanation:'UniMorph: '+surface+' corresponde a '+group.label+'.'

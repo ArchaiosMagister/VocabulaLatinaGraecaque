@@ -10,14 +10,18 @@ function load(name,scope){
  vm.runInNewContext(code,scope,{filename:name,timeout:15000});
 }
 const html=fs.readFileSync(path.join(root,'gramatica.html'),'utf8');
-for(const script of ['gramatica-contenidos.js','gramatica-paradigmas.js','gramatica-griego-ampliacion.js','gramatica-importada.js','gramatica.js']){
+for(const script of ['gramatica-contenidos.js','gramatica-enunciados.js','gramatica-paradigmas.js','gramatica-latin-imperfectos.js','gramatica-griego-ampliacion.js','gramatica-importada.js','gramatica.js']){
  assert.ok(html.includes('src="'+script),'Falta cargar el módulo '+script);
 }
 assert.ok(html.includes('<option value="Morfología" selected>'),'El repaso debe empezar filtrado por morfología');
+assert.ok(!html.includes('id="topic"'),'No se debe dividir la selección de unidades por temas');
 assert.ok(html.indexOf('src="gramatica-paradigmas.js')<html.indexOf('src="gramatica-griego-ampliacion.js'),'La ampliación griega debe cargarse después de los paradigmas');
 assert.ok(html.indexOf('src="gramatica-griego-ampliacion.js')<html.indexOf('src="gramatica.js'),'Los paradigmas griegos deben cargarse antes del motor de ejercicios');
+load('data.js',{window:win});
+load('gramatica-enunciados.js',{window:win});
 load('gramatica-contenidos.js',{window:win});
 load('gramatica-paradigmas.js',{window:win});
+load('gramatica-latin-imperfectos.js',{window:win});
 load('gramatica-griego-ampliacion.js',{window:win});
 assert.equal(new Set(win.GRAMMAR_PARADIGMS.map(p=>p.id)).size,win.GRAMMAR_PARADIGMS.length,'IDs de paradigmas duplicados');
 assert.equal(win.GRAMMAR_PARADIGMS.filter(p=>p.id.startsWith('gr-')&&p.units.gr1).length>=20,true,'Cobertura mínima de paradigmas griegos');
@@ -38,7 +42,9 @@ load('gramatica.js',{window:win,document:doc,
 const d=win.GrammarPracticeDebug;
 assert.ok(d,'Debe exponerse el conjunto de preguntas para auditoría');
 assert.equal(warnings.length,0,'Ningún paradigma debe quedar sin tema');
-assert.equal(d.exercises.find(q=>q.id==='gr1|UD 6|gr-infinitivo|inf|write').prompt,'Escribe infinitivo de presente activo de λύω.','Enunciado de infinitivo claro');
+assert.equal(d.exercises.find(q=>q.id==='gr1|UD 6|gr-infinitivo|inf|write').prompt,'Escribe infinitivo de presente activo de '+win.GrammarEnunciation.display('gr1','λύω',true)+'.','Enunciado de infinitivo claro');
+assert.ok(Object.values(d.syllabi).every(units=>units.every(([unit])=>unit!=='UD 0')),'La unidad 0 debe desaparecer');
+assert.ok(d.exercises.every(q=>q.unit!=='UD 0'),'No se deben crear ejercicios de UD 0');
 const ids=new Set();
 const uniquePrompts=new Set();
 const greekUnits=new Set();
@@ -86,7 +92,17 @@ for(const [id,feature,expected] of [
  assert.equal(p.forms[feature],expected,'Flexión griega inesperada: '+id);
  assert.ok(d.exercises.some(q=>q.id.includes('|'+id+'|'+feature+'|write')&&q.accepted.includes(d.norm(expected))),'Flexión sin ejercicio autocorregible: '+id);
 }
-const sample={gr1:411,lat1:470,lat4:246};
+const imp1=d.exercises.filter(q=>q.subject==='lat1'&&q.unit==='UD 2'&&q.topic==='El imperfecto de indicativo'&&q.mode==='write');
+const imp4=d.exercises.filter(q=>q.subject==='lat4'&&q.unit==='UD 4'&&q.topic==='El imperfecto'&&q.mode==='write');
+assert.ok(new Set(imp1.map(q=>q.lemma)).size>=15,'Faltan verbos variados en el imperfecto de Latín I');
+assert.ok(new Set(imp4.map(q=>q.lemma)).size>=9,'Faltan verbos variados en el imperfecto de 4.º ESO');
+for(const q of [...imp1,...imp4]){
+ assert.match(q.prompt,/, [^,]+, [^,]+ \((?:1ª|2ª|3ª|4ª|mx\.)\)\./,'Enunciado verbal incompleto: '+q.id);
+ assert.ok(q.accepted.length>0,'Ejercicio no autocorregible: '+q.id);
+}
+assert.ok(imp1.some(q=>q.lemma==='duco'&&q.answer==='ducebam'),'Falta 3.ª conjugación');
+assert.ok(imp1.some(q=>q.lemma==='dormio'&&q.answer==='dormiebam'),'Falta 4.ª conjugación');
+const sample={gr1:400,lat1:550,lat4:280};
 for(const [subject,minCount] of Object.entries(sample))assert.ok(d.exercises.filter(q=>q.subject===subject).length>=minCount,'Cobertura insuficiente en '+subject);
 assert.ok(d.norm('λόγῳ')!==d.norm('λόγω'),'La iota suscrita debe conservarse');
 assert.deepEqual(Array.from(d.variants('λύουσι(ν)')),['λυουσι','λυουσιν']);
