@@ -76,7 +76,7 @@ async function main(){
   assert.ok(reportCall,'El aviso no se ha enviado');
   assert.ok(reportCall.entry_id.startsWith('grammar:gr1|UD 11|'),'El aviso no identifica la pregunta');
   assert.ok(reportCall.entry_form.includes(questionBeforeReport),'El aviso no indica la pregunta');
-  await page.locator('#report-dialog [data-close]').click();
+  await page.locator('#report-dialog [data-close]').first().click();
 
   await page.locator('#open-teacher').click();
   assert.equal(await page.locator('#teacher-username').inputValue(),'MagisterArchaios');
