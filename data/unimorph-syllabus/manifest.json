@@ -500,8 +500,8 @@
       "source_sha256": "09ff9231d90dbe481942bba143f04800ab919a31ab11801c01301488605cadd9",
       "source_bytes": 2057514,
       "source_rows": 41593,
-      "malformed_rows": 0,
-      "retained_rows": 1574,
+      "malformed_rows": 109,
+      "retained_rows": 1467,
       "retained_lemmas": 103,
       "vocabulary_lemmas": 349,
       "missing_vocabulary_lemmas": [
@@ -756,43 +756,43 @@
       "files": [
         {
           "path": "grc/part-00.json",
-          "rows": 105,
-          "bytes": 5935
+          "rows": 95,
+          "bytes": 6311
         },
         {
           "path": "grc/part-01.json",
-          "rows": 132,
-          "bytes": 6903
+          "rows": 125,
+          "bytes": 8001
         },
         {
           "path": "grc/part-02.json",
-          "rows": 240,
-          "bytes": 12953
+          "rows": 222,
+          "bytes": 15356
         },
         {
           "path": "grc/part-03.json",
-          "rows": 345,
-          "bytes": 18643
+          "rows": 326,
+          "bytes": 21551
         },
         {
           "path": "grc/part-04.json",
-          "rows": 210,
-          "bytes": 10613
+          "rows": 197,
+          "bytes": 12238
         },
         {
           "path": "grc/part-05.json",
-          "rows": 195,
-          "bytes": 9487
+          "rows": 179,
+          "bytes": 10299
         },
         {
           "path": "grc/part-06.json",
-          "rows": 182,
-          "bytes": 9256
+          "rows": 171,
+          "bytes": 10891
         },
         {
           "path": "grc/part-07.json",
-          "rows": 165,
-          "bytes": 8246
+          "rows": 152,
+          "bytes": 9504
         }
       ]
     }
