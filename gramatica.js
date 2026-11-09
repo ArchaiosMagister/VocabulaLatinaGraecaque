@@ -62,7 +62,7 @@ function buildExercises(){
   for(const [subject,unit] of Object.entries(p.units)){
    const topic=matchingTopic(p,subject,unit);
    if(!topic){console.warn('Paradigma sin tema reconocido:',p.id,subject,unit);continue}
-   const category=(p.kind==='verbal'||p.id==='gr-participio'||p.id==='lat-amans')?'Morfología verbal':'Morfología nominal';
+   const category=(p.kind==='verbal'||p.id==='gr-participio'||p.id==='gr-lyo-part'||p.id==='lat-amans')?'Morfología verbal':'Morfología nominal';
    for(const [feature,surface] of forms){
     const label=formatFeature(feature,p.kind);
     const base=subject+'|'+unit+'|'+p.id+'|'+feature;
