@@ -4,11 +4,11 @@ La web de gramática `gramatica.html` trabaja los epígrafes del documento docen
 
 ## Bancos de ejercicios
 
-- **Banco inicial:** preguntas-base de teoría y sintaxis más paradigmas modelo de declinaciones y conjugaciones, con **1.127 ejercicios generados** en la revisión actual (411 de Griego I, 470 de Latín I y 246 de Latín de 4.º ESO).
+- **Banco inicial:** preguntas-base de teoría y sintaxis más paradigmas modelo de declinaciones y conjugaciones, con **más de 1.400 ejercicios generados** en la revisión actual, incluidos nuevos paradigmas de imperfecto latino para varias conjugaciones.
 - **Banco importado:** se procesan las filas íntegras de los repositorios UniMorph `lat` y `grc`. Se conservan **todas las filas atestiguadas** correspondientes a los lemas de los vocabularios docentes, no una muestra de cada paradigma. La fuente y su revisión exacta quedan registradas en el manifiesto.
 - **Banco de verbos latinos complementario:** `morfologia.html` puede consultar el índice verbal del repositorio GeneradorExamenes, separado de este módulo.
 
-La interfaz presenta filtros de asignatura, unidad, apartado gramatical, categoría y modalidad. Permite hacer test de análisis, escribir flexiones, repetir errores, practicar de forma acumulativa y guardar progreso en el navegador. Si falta un índice publicado, los ejercicios iniciales siguen funcionando.
+La interfaz permite elegir asignatura, **unidades completas (sin desglosar por tema y sin UD 0)**, categoría (morfología nominal/verbal u otras actividades) y modalidad. Permite hacer test de análisis, escribir flexiones, repetir errores, practicar de forma acumulativa y guardar progreso en el navegador. Si falta un índice publicado, los ejercicios iniciales siguen funcionando.
 
 ## Importación automática
 
@@ -86,3 +86,12 @@ El flujo `.github/workflows/check-grammar-web.yml` ejecuta automáticamente en G
 5. Verificar que el estado de importación muestra ejercicios UniMorph. Si no se cargan, el banco docente local sigue disponible.
 
 Las respuestas se corrigen en el navegador; el progreso se conserva localmente y no requiere cuentas de alumno. La publicación en el sitio principal sigue siendo una operación distinta de las pruebas automáticas.
+
+
+## Revisión de unidades y enunciados (noviembre de 2026)
+
+- Se elimina la UD 0 de los filtros y del banco de preguntas practicables, aunque se conserve como fuente en el temario original.
+- Cada unidad se selecciona entera; no hay un selector independiente de temas gramaticales. El filtro nominal/verbal sigue siendo opcional.
+- Las preguntas de escritura utilizan el **enunciado completo de la palabra** documentado en los vocabularios: para verbos latinos ordinarios, presente, perfecto, supino y conjugación. Cuando una asignatura registra solo el presente, se busca la ficha completa del mismo lema en el vocabulario latino docente antes de formular la pregunta; no se reconstruyen partes principales por conjetura. Los deponentes y semideponentes mantienen su enunciado propio.
+- Los paradigmas docentes de imperfecto de Latín I, UD 2, se amplían a 18 verbos distintos repartidos entre las conjugaciones primera, segunda, tercera, cuarta y mixta. La UD 4 de Latín de 4.º ESO pasa a disponer de 11 verbos distintos. Las sesiones priorizan **lemas distintos** antes de repetir uno, cuando el banco tiene suficientes.
+- Las nuevas formas proceden de tablas explícitas en `gramatica-latin-imperfectos.js`. El vínculo con los enunciados se resuelve en `gramatica-enunciados.js`, usando `data.js` y sin añadir partes principales inventadas.
