@@ -46,6 +46,7 @@ const fetch=async url=>{
 };
 const ctx=vm.createContext({window,fetch,console});
 vm.runInContext(file('data.js'),ctx);
+vm.runInContext(file('gramatica-enunciados.js'),ctx);
 vm.runInContext(file('gramatica-importada.js'),ctx);
 for(const subject of ['lat1','lat4','gr1']){
  const result=await window.GrammarImported.load(subject);
@@ -58,6 +59,7 @@ for(const subject of ['lat1','lat4','gr1']){
   assert.equal(item.subject,subject);
   assert.ok(item.unit&&item.topic&&item.answer);
   if(item.mode==='write')assert.ok(item.accepted.includes(window.GrammarImported.norm(item.answer.replaceAll('(ν)',''))),'Respuesta descartada '+item.id);
+  if(item.mode==='write'&&item.language==='lat'&&item.category==='Morfología verbal')assert.match(item.prompt,/, [^,]+, [^,]+ \((?:1ª|2ª|3ª|4ª|mx\.|irr\.)\)|, [^,]+ \((?:1ª|2ª|3ª|4ª)\)/,'Enunciado importado incompleto: '+item.id);
   if(item.mode==='choice')assert.equal(item.options.filter(x=>x===item.answer).length,1,'Opción ambigua '+item.id);
   if(item.language==='grc'&&item.mode==='write')assert.ok(!/\s/u.test(item.answer),'Griego no limpiado '+item.id);
  }
