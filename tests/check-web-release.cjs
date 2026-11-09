@@ -25,7 +25,23 @@ for(const page of ['index.html','gramatica.html','morfologia.html']){
 }
 const home=fs.readFileSync(path.join(root,'index.html'),'utf8');
 assert.ok(/href="gramatica\.html"/.test(home),'La portada no enlaza a gramática');
+for(const [name,html,active] of [['Vocabulario',home,'./'],['Gramática',fs.readFileSync(path.join(root,'gramatica.html'),'utf8'),'gramatica.html']]){
+ assert.match(html,/aria-label="Secciones de estudio"/,'Navegación accesible: '+name);
+ for(const [href,label] of [['./','Vocabulario'],['gramatica.html','Gramática']]){
+  assert.ok(html.includes('class="study-tab" href="'+href+'"'),'Falta pestaña '+label+' en '+name);
+ }
+ assert.ok(html.includes('class="study-tab" href="'+active+'" aria-current="page"'),'La pestaña activa es incorrecta en '+name);
+ for(const id of ['open-report','open-teacher','report-dialog','teacher-dialog']){
+  assert.ok(html.includes('id="'+id+'"'),'Falta '+id+' en '+name);
+ }
+}
+assert.ok(home.includes('src="teacher.js"'),'Falta módulo docente de Vocabulario');
 const page=fs.readFileSync(path.join(root,'gramatica.html'),'utf8');
+for(const script of ['config.js','gramatica-admin.js'])assert.ok(page.includes('src="'+script),'Falta '+script+' en Gramática');
+const loginCode=fs.readFileSync(path.join(root,'teacher.js'),'utf8');
+const grammarAdmin=fs.readFileSync(path.join(root,'gramatica-admin.js'),'utf8');
+for(const script of [loginCode,grammarAdmin])assert.ok(script.includes('MagisterArchaios'),'Falta identificar el usuario docente');
+
 assert.ok(/id="start"/.test(page)&&/id="practice"/.test(page),'Falta interfaz para realizar el ejercicio');
 assert.ok(/id="errors"/.test(page),'Falta el modo de repaso de fallos');
 const manifestPath='data/unimorph-syllabus/manifest.json';

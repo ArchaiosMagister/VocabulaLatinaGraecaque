@@ -31,6 +31,27 @@ async function main(){
   const page=await browser.newPage({viewport:{width:1280,height:800}});
   const errors=[];
   page.on('pageerror',error=>errors.push(error.message));
+  const calls=[];
+  const sampleReport={
+   id:'00000000-0000-4000-8000-000000000001',subject:'gr1',mode:'general',
+   units:['UD 11'],entry_id:'grammar:example',entry_form:'Gramática · revisión del imperfecto',
+   message:'Hay una errata en la respuesta',created_at:'2026-11-09T10:00:00Z',
+   status:'pending',teacher_note:''
+  };
+  await page.route('**/functions/v1/vocabulary',async route=>{
+   const request=route.request().postDataJSON();calls.push(request);
+   const answers={
+    public_words:{words:[]},
+    login:{token:'a'.repeat(64)},
+    session:{teacher:true},
+    teacher_words:{words:[]},
+    reports:{reports:[sampleReport],more:false},
+    report:{ok:true},
+    update_report:{ok:true},
+    logout:{ok:true}
+   };
+   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(answers[request.action]||{ok:true})});
+  });
   await page.goto(origin+'/gramatica.html',{waitUntil:'load'});
   await page.waitForFunction(()=>!document.querySelector('#start')?.disabled);
   assert.equal(await page.locator('#category').inputValue(),'Morfología','La modalidad inicial debe centrarse en morfología');
@@ -43,6 +64,35 @@ async function main(){
   await page.selectOption('#topic','UD 11|El futuro y el imperfecto');
   await page.selectOption('#length','10');
   await page.locator('#start').click();
+
+  const questionBeforeReport=await page.locator('.grammar-question').textContent();
+  assert.deepEqual(await page.locator('header .study-tab').allTextContents(),['Vocabulario','Gramática']);
+  assert.equal(await page.locator('header .study-tab[aria-current="page"]').textContent(),'Gramática');
+  await page.locator('#open-report').click();
+  await page.locator('#grammar-report-message').fill('Esta respuesta morfológica debería revisarse.');
+  await page.locator('#grammar-report-send').click();
+  await page.locator('#report-dialog .feedback').waitFor();
+  const reportCall=calls.find(q=>q.action==='report');
+  assert.ok(reportCall,'El aviso no se ha enviado');
+  assert.ok(reportCall.entry_id.startsWith('grammar:gr1|UD 11|'),'El aviso no identifica la pregunta');
+  assert.ok(reportCall.entry_form.includes(questionBeforeReport),'El aviso no indica la pregunta');
+  await page.locator('#report-dialog [data-close]').first().click();
+
+  await page.locator('#open-teacher').click();
+  assert.equal(await page.locator('#teacher-username').inputValue(),'MagisterArchaios');
+  await page.locator('#teacher-username').fill('UsuarioIncorrecto');
+  await page.locator('#teacher-code').fill('x'.repeat(25));
+  await page.locator('#login-button').click();
+  assert.match(await page.locator('#login-status').textContent(),/usuario no es correcto/i);
+  assert.ok(!calls.some(q=>q.action==='login'),'No debe autenticar usuarios incorrectos');
+  await page.locator('#teacher-username').fill('MagisterArchaios');
+  await page.locator('#login-button').click();
+  await page.locator('#grammar-exercises .cardrow').first().waitFor();
+  assert.ok(calls.some(q=>q.action==='login'),'No se ha solicitado acceso con código');
+  await page.locator('[data-save-grammar-report]').click();
+  assert.ok(calls.some(q=>q.action==='update_report'),'No se pudo revisar el aviso');
+  await page.locator('#teacher-dialog [data-close]').click();
+
   for(let i=0;i<10;i++){
    const prompt=await page.locator('.grammar-question').textContent();
    const expected=await page.evaluate(text=>{
@@ -77,8 +127,25 @@ async function main(){
   await page.reload({waitUntil:'load'});
   await page.waitForFunction(()=>!document.querySelector('#start')?.disabled);
   assert.equal(await page.locator('#category').inputValue(),'Morfología');
+  for(const label of ['Vocabulario','Gramática']){
+   const tab=page.getByRole('link',{name:label,exact:true});
+   assert.equal(await tab.isVisible(),true,'Pestaña no visible: '+label);
+   const box=await tab.boundingBox();
+   assert.ok(box&&box.x>=0&&box.x+box.width<=375,'Pestaña fuera de pantalla: '+label);
+  }
+  assert.equal(await page.locator('#open-report').isVisible(),true,'Falta el botón de aviso en móvil');
+  assert.equal(await page.locator('#open-teacher').isVisible(),true,'Falta el acceso docente en móvil');
+
+  await page.goto(origin+'/',{waitUntil:'load'});
+  assert.equal(await page.locator('header .study-tab[aria-current="page"]').textContent(),'Vocabulario');
+  assert.deepEqual(await page.locator('header .study-tab').allTextContents(),['Vocabulario','Gramática']);
+  assert.equal(await page.locator('#open-report').isVisible(),true);
+  await page.locator('#open-teacher').click();
+  await page.locator('#teacher-content').waitFor({state:'visible'});
+  assert.match(await page.locator('#teacher-content .private-badge').first().textContent(),/MagisterArchaios/);
+  await page.locator('#teacher-dialog [data-close]').click();
   assert.deepEqual(errors,[],'Errores JavaScript del navegador');
-  console.log('OK navegador: 10 ejercicios griegos, corrección, repetición de errores y carga móvil.');
+  console.log('OK navegador: pestañas, avisos, acceso docente en ambas páginas, 10 ejercicios, corrección y carga móvil.');
  }finally{
   if(browser)await browser.close();
   await new Promise(resolve=>server.close(resolve));
