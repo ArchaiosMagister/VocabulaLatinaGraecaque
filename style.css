@@ -31,3 +31,5 @@ a{color:var(--green)}input::placeholder,textarea::placeholder{color:var(--muted)
 .theme-picker select{width:auto;min-width:125px;padding:7px 10px;font-size:13px}
 :root[data-theme="dark"] dialog::backdrop{background:#0009}
 @media(max-width:480px){.page-toolbar{gap:12px}.theme-picker{margin-left:auto}}
+
+.topnav .morph-nav{display:inline-block;color:var(--green);font-weight:650;text-decoration:none;white-space:nowrap;font-size:13px;padding:9px 5px}.topnav .morph-nav:hover{text-decoration:underline}.topnav .morph-nav:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
