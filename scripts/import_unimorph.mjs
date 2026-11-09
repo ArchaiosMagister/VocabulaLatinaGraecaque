@@ -31,6 +31,18 @@ function lemma(form){
  if(!head||/\s/u.test(head))return null;
  return canonical(head.split('/')[0]);
 }
+/* Greek UniMorph includes definite articles in noun surfaces; remove only
+   explicitly recognized article prefixes. Preserve the original for audit. */
+const ARTICLES=new Set(['ο','η','το','τον','την','του','τησ','τω','τη','οι','αι',
+ 'τουσ','τασ','τα','των','τοισ','ταισ','τω','τοιν','τοιν','τω','τα','τησ'].map(canonical));
+function cleanSurface(lang,surface){
+ const raw=String(surface||'').trim();
+ if(lang!=='grc'||!/\s/u.test(raw))return raw;
+ const split=raw.lastIndexOf(' ');
+ const last=raw.slice(split+1),prefix=raw.slice(0,split).trim();
+ const parts=prefix.split(/[,\s]+/u).filter(Boolean).map(canonical);
+ return parts.length&&parts.every(p=>ARTICLES.has(p))?last:null;
+}
 function selectVocab(data){
  const chosen={lat:new Set(),grc:new Set()},metadata={};
  for(const row of data){
@@ -75,10 +87,12 @@ async function importOne(lang,source,chosen){
   const features=rest.join('\t').trim(),key=canonical(head);
   if(!head.trim()||!surface.trim()||!features){bad++;continue}
   if(!chosen.has(key))continue;
-  const id=key+'\t'+canonical(surface)+'\t'+features;
+  const form=cleanSurface(lang,surface);
+  if(!form){bad++;continue}
+  const id=key+'\t'+canonical(form)+'\t'+features;
   if(seen.has(id))continue;seen.add(id);
   matchedRows++;seenLemmas.add(key);
-  shards[bucket(key,source.parts)].push([head,surface,features]);
+  shards[bucket(key,source.parts)].push(form===surface.trim()?[head,form,features]:[head,form,features,surface]);
  }
  if(sourceRows<1000)throw Error('Archivo fuente demasiado pequeño: '+lang+' '+sourceRows);
  const dest=path.join(TARGET,lang);
