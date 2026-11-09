@@ -55,6 +55,25 @@ window.GrammarImported=(()=>{
   return null;
  }
  function isProper(name){const c=String(name).trim()[0];return !!c&&c.toUpperCase()===c&&c.toLowerCase()!==c}
+/* UniMorph sometimes records multiple parts of speech for the same spelling.
+   Accept only the lexical category attested by the teacher's dictionary. */
+function lexicalKind(entry,subject){
+ const raw=String(entry.form),parts=raw.split(',').map(x=>x.trim());
+ const head=norm(parts[0]),next=norm(parts[1]||'');
+ const translation=String(entry.meaning||'');
+ if(/\((adv\.?|conj\.?|prep\.?|num\.?|part\.?|indecl\.?)\)/i.test(raw))return 'OTHER';
+ if(subject==='gr1'){
+  if(head.endsWith('ω')||head.endsWith('ομαι')||head.endsWith('μαι')||head==='ειμι')return 'V';
+  if(parts.length>=3||next.endsWith('ον')&&/^[–—−-]/.test(parts[1]||''))return 'ADJ';
+  return 'N';
+ }
+ if(/\((?:1ª|2ª|3ª|4ª|mx\.?|irr\.?|defect?\.?)\)/i.test(raw)||
+    parts.length>=3&&head.endsWith('o')&&/i$/.test(norm(parts[1]))&&!/^[–—−-]/.test(parts[1]))return 'V';
+ if(parts.length>=3)return 'ADJ';
+ if(next==='e'||next==='ntis'||next==='antis'||(next.endsWith('is')&&/\/a\b/.test(translation)))return 'ADJ';
+ if(parts.length===2&&/\/a\b/.test(translation)&&next.endsWith('is'))return 'ADJ';
+ return 'N';
+}
  function nominalTopic(subject,entry,pos,feat){
   if(pos==='PRO')return null; // pronominal ambiguity: curated paradigms already cover these.
   if(isProper(entry.form))return null; // avoid unlicensed name plurals.
@@ -161,6 +180,7 @@ function readingKey(feat){return feat.join(';')}
     for(const feat of features){
      if(feat.some(t=>BAD.has(t)))continue;
      const pos=feat[0];if(!['N','V','ADJ'].includes(pos))continue;
+     if(lexicalKind(entry,subject)!==pos)continue;
      const topic=pos==='V'?verbalTopic(subject,feat,entry):nominalTopic(subject,entry,pos,feat);
      if(!topic)continue;
      const [introducedUnit,introducedTopic]=topic,number=Number((introducedUnit.match(/\d+/)||[])[0]);
