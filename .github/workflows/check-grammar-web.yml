@@ -1,0 +1,49 @@
+name: Comprobar ejercicios de gramática y publicación web
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - feature/repaso-morfologia
+    paths:
+      - '.github/workflows/check-grammar-web.yml'
+      - 'tests/**'
+      - 'gramatica*'
+      - 'morfologia*'
+      - 'data/unimorph-syllabus/**'
+      - 'index.html'
+      - 'data.js'
+      - 'style.css'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    name: Validación antes de publicar en clase
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Descargar el código de la propuesta
+        uses: actions/checkout@v4
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar sintaxis del motor
+        run: |
+          node --check gramatica.js
+          node --check gramatica-importada.js
+          node --check gramatica-paradigmas.js
+          node --check gramatica-griego-ampliacion.js
+          node --check tests/check-grammar.cjs
+          node --check tests/check-web-release.cjs
+      - name: Comprobar autocorrección y currículo
+        run: node tests/check-grammar.cjs
+      - name: Comprobar ejercicios UniMorph
+        run: node tests/check-unimorph-import.mjs
+      - name: Comprobar archivos de la web publicados
+        run: node tests/check-web-release.cjs
