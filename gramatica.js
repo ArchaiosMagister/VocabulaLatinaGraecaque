@@ -4,11 +4,7 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/\u0345/g,'ι').replace(/\p{M}/gu,'').replace(/æ/g,'ae').replace(/œ/g,'oe').replace(/ς/g,'σ').replace(/[·.,;!?¿¡‘’'"]/g,'').replace(/\s+/g,' ').trim();
-const variants=s=>{
- const raw=String(s);
- if(!raw.includes('(ν)'))return [norm(raw)];
- return [norm(raw.replaceAll('(ν)','')),norm(raw.replaceAll('(ν)','ν'))];
-};
+const variants=s=>[...new Set(String(s).split(/\s*\/\s*/).flatMap(raw=>raw.includes('(ν)')?[norm(raw.replaceAll('(ν)','')),norm(raw.replaceAll('(ν)','ν'))]:[norm(raw)]))];
 const CASES={nom:'nominativo',gen:'genitivo',dat:'dativo',acc:'acusativo',abl:'ablativo',voc:'vocativo'};
 const GENDERS={m:'masculino',f:'femenino',n:'neutro'};
 const PEOPLE={'1':'1.ª persona','2':'2.ª persona','3':'3.ª persona'};
