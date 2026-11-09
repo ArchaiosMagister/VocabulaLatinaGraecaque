@@ -79,8 +79,10 @@ window.GrammarImported=(()=>{
   }
   return null;
  }
- function verbalTopic(subject,feat){
+ function verbalTopic(subject,feat,entry){
   if(subject==='gr1'||!feat.includes('IND')&&!feat.includes('IMP')&&!feat.includes('NFIN')&&!feat.includes('INF'))return null;
+  const deponent=norm(entry.form.split(',')[0]).endsWith('or');
+  if(deponent)return subject==='lat1'&&feat.includes('IND')&&feat.includes('PRS')?['UD 7','Verbos deponentes']:null;
   if(feat.includes('V.PTCP')||feat.includes('V.MSDR'))return null;
   const indicative=feat.includes('IND'),active=feat.includes('ACT'),passive=feat.includes('PASS');
   if(indicative&&active&&feat.includes('PRS'))return subject==='lat1'?['UD 1','El presente de indicativo y el infinitivo']:['UD 2','Presente'];
@@ -93,7 +95,7 @@ window.GrammarImported=(()=>{
   if(subject==='lat1'&&(feat.includes('INF')||feat.includes('NFIN'))&&active&&feat.includes('PRS'))return ['UD 1','El presente de indicativo y el infinitivo'];
   return null;
  }
- function description(feat,pos){
+ function description(feat,pos,deponent=false){
   if(pos==='V'){
    const who=feat.find(x=>x==='1'||x==='2'||x==='3'),number=feat.find(x=>NUMBER[x]);
    if(feat.includes('INF')||feat.includes('NFIN')){
@@ -102,7 +104,7 @@ window.GrammarImported=(()=>{
    if(!who||!number||!feat.includes('IND')&&!feat.includes('IMP'))return null;
    const tense=feat.includes('PRS')?'presente':feat.includes('FUT')?'futuro':feat.includes('PSTP')?'pluscuamperfecto':feat.includes('PRF')?'perfecto':feat.includes('IPFV')?'imperfecto':null;
    if(!tense)return null;
-   const voice=feat.includes('PASS')?'pasivo':feat.includes('ACT')?'activo':null;
+   const voice=deponent?'deponente':feat.includes('PASS')?'pasivo':feat.includes('ACT')?'activo':null;
    if(!voice)return null;
    const mode=feat.includes('IMP')?'imperativo':'indicativo';
    return PERSON[who]+' persona del '+NUMBER[number]+', '+tense+' de '+mode+' '+voice;
@@ -111,7 +113,20 @@ window.GrammarImported=(()=>{
   if(!cas||!num)return null;
   return CASES[cas]+' '+(gen?GENDER[gen]+' ':'')+NUMBER[num];
  }
- function readingKey(feat){return feat.join(';')}
+ 
+const SPLIT_FEATURES=new Set(['MASC','FEM','NEUT','NOM','GEN','DAT','ACC','ABL','VOC']);
+function splitFeatures(feat){
+ let result=[[]];
+ for(const tag of feat){
+  const values=tag.includes('+')?tag.split('+'):[tag];
+  if(values.length>1&&!values.every(v=>SPLIT_FEATURES.has(v)))return [];
+  result=result.flatMap(xs=>values.map(v=>xs.concat(v)));
+  if(result.length>8)return [];
+ }
+ return result;
+}
+
+function readingKey(feat){return feat.join(';')}
  async function getManifest(){
   if(!manifestPromise)manifestPromise=fetch(BASE+'manifest.json').then(r=>{if(!r.ok)throw Error('Índices todavía no publicados (HTTP '+r.status+')');return r.json()}).catch(e=>{manifestPromise=null;throw e});
   return manifestPromise;
@@ -137,17 +152,19 @@ window.GrammarImported=(()=>{
     const [head,surface,tags]=row,entry=lex.get(norm(head));
     if(!entry)continue;
     rows++;
-    const feat=String(tags).split(';');
-    if(feat.some(t=>BAD.has(t)))continue;
-    const pos=feat[0];if(!['N','V','ADJ'].includes(pos))continue;
-    const topic=pos==='V'?verbalTopic(subject,feat):nominalTopic(subject,entry,pos,feat);
-    if(!topic)continue;
-    const [unit,heading]=topic,number=Number((unit.match(/\d+/)||[])[0]);
-    if(entry.when>number)continue;
-    const label=description(feat,pos);if(!label)continue;
-    const id=unit+'|'+entry.key+'|'+readingKey(feat);
-    if(!grouped.has(id))grouped.set(id,{id,subject,unit,topic:heading,category:pos==='V'?'Morfología verbal':'Morfología nominal',lemma:entry.form.split(',')[0],language:lang,label,forms:new Set(),key:entry.key,feature:readingKey(feat)});
-    grouped.get(id).forms.add(surface);
+    const features=splitFeatures(String(tags).split(';'));
+    for(const feat of features){
+     if(feat.some(t=>BAD.has(t)))continue;
+     const pos=feat[0];if(!['N','V','ADJ'].includes(pos))continue;
+     const topic=pos==='V'?verbalTopic(subject,feat,entry):nominalTopic(subject,entry,pos,feat);
+     if(!topic)continue;
+     const [unit,heading]=topic,number=Number((unit.match(/\d+/)||[])[0]);
+     if(entry.when>number)continue;
+     const label=description(feat,pos,pos==='V'&&norm(entry.form.split(',')[0]).endsWith('or'));if(!label)continue;
+     const id=unit+'|'+entry.key+'|'+readingKey(feat);
+     if(!grouped.has(id))grouped.set(id,{id,subject,unit,topic:heading,category:pos==='V'?'Morfología verbal':'Morfología nominal',lemma:entry.form.split(',')[0],language:lang,label,forms:new Set(),key:entry.key,feature:readingKey(feat)});
+     grouped.get(id).forms.add(surface);
+    }
    }
    const items=[];
    const bySurface=new Map();
