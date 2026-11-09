@@ -75,7 +75,12 @@ window.GrammarImported=(()=>{
   if(subject==='gr1'){
    if(d==='first')return ['UD 3','Primera declinación'];
    if(d==='second')return norm(entry.form.split(',')[0]).endsWith('ον')?['UD 2','Segunda declinación: neutros']:['UD 1','Segunda declinación'];
-   if(d==='third')return ['UD 8','Tercera declinación'];
+   if(d==='third'){
+    const key=norm(entry.form.split(',')[0]);
+    const suffix=norm((entry.form.split(',')[1]||'').replace(/[–—−-]/g,''));
+    if(key.endsWith('οσ')&&(suffix.endsWith('εοσ')||suffix.endsWith('ουσ')))return ['UD 14','Temas en silbante'];
+    return ['UD 8','Tercera declinación'];
+   }
   }
   return null;
  }
@@ -158,8 +163,10 @@ function readingKey(feat){return feat.join(';')}
      const pos=feat[0];if(!['N','V','ADJ'].includes(pos))continue;
      const topic=pos==='V'?verbalTopic(subject,feat,entry):nominalTopic(subject,entry,pos,feat);
      if(!topic)continue;
-     const [unit,heading]=topic,number=Number((unit.match(/\d+/)||[])[0]);
-     if(entry.when>number)continue;
+     const [introducedUnit,introducedTopic]=topic,number=Number((introducedUnit.match(/\d+/)||[])[0]);
+     const assigned=Math.max(entry.when,number);
+     if(assigned>(subject==='lat1'?10:subject==='lat4'?8:14))continue;
+     const unit='UD '+assigned,heading=assigned===number?introducedTopic:'Repaso morfológico acumulativo';
      const label=description(feat,pos,pos==='V'&&norm(entry.form.split(',')[0]).endsWith('or'));if(!label)continue;
      const id=unit+'|'+entry.key+'|'+readingKey(feat);
      if(!grouped.has(id))grouped.set(id,{id,subject,unit,topic:heading,category:pos==='V'?'Morfología verbal':'Morfología nominal',lemma:entry.form.split(',')[0],language:lang,label,forms:new Set(),key:entry.key,feature:readingKey(feat)});
