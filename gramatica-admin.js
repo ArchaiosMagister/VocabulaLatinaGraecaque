@@ -173,7 +173,27 @@
    renderReports();
   }catch(error){message('grammar-reports-message',error.message,true)}
  }
- async function dashboard(){
+ async function loadCoverage(){
+  const target=$('grammar-coverage');
+  if(!target)return;
+  try{
+   const response=await fetch('data/morphology-coverage.json',{cache:'no-store'});
+   if(!response.ok)throw Error('Informe aún no publicado');
+   const data=await response.json();
+   if(data.schema!==1||!data.subjects)throw Error('Formato del informe desconocido');
+   const order=['lat1','lat4','gr1'];
+   target.innerHTML='<p class="notice">Lemas con <strong>al menos una forma autocorregible</strong>; no equivale a una declinación o conjugación completa.</p>'+
+    '<div class="grammar-teacher-totals">'+order.map(subject=>{
+     const info=data.subjects[subject];
+     if(!info)return '';
+     return '<div class="cardrow"><strong>'+esc(subjects[subject])+'</strong><p>'+info.withExercises+' de '+info.lemmas+' lemas con ejercicios</p><p class="meta">'+info.withoutExercises+' sin ejercicios · '+info.importedLemmas+' con UniMorph · '+info.curatedLemmas+' con formas docentes</p></div>';
+    }).join('')+'</div>'+
+    '<p><a href="data/morphology-coverage.md" target="_blank" rel="noopener">Informe completo y lista de lagunas</a></p>';
+  }catch(error){
+   target.textContent='La auditoría todavía no se ha publicado. Los ejercicios actuales siguen disponibles.';
+  }
+ }
+  async function dashboard(){
   if(!$('teacher-dialog')?.open)return;
   $('teacher-login').hidden=true;
   $('teacher-content').hidden=false;
@@ -183,6 +203,7 @@
    return `<div class="cardrow"><strong>${esc(name)}</strong><p>${count} ejercicios del banco inicial</p></div>`;
   }).join('');
   $('teacher-content').innerHTML=`<div class="toolbar"><span class="private-badge">MagisterArchaios · Sesión de profesor</span><button id="grammar-logout" type="button">Cerrar sesión</button></div>
+   <section class="teacher-section"><h3>Cobertura morfológica del vocabulario</h3><div id="grammar-coverage" role="status">Consultando cobertura…</div></section>
    <section class="teacher-section"><h3>Banco de ejercicios de gramática</h3>
     <p class="notice">Consulta los ejercicios y sus soluciones. Los datos importados de UniMorph se consultan desde la práctica del alumnado; esta lista muestra el banco inicial.</p>
     <div class="grammar-teacher-totals">${totals}</div>
@@ -209,7 +230,7 @@
   $('grammar-report-prev').onclick=()=>{offset=Math.max(0,offset-50);loadReports()};
   $('grammar-report-next').onclick=()=>{offset+=50;loadReports()};
   updateExerciseUnits();
-  await loadReports();
+  await Promise.all([loadReports(),loadCoverage()]);
  }
  document.addEventListener('click',async event=>{
   const button=event.target.closest('button');
