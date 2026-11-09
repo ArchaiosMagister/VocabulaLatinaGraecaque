@@ -97,6 +97,7 @@ async function loadImported(){
   if(request!==importRequest)return;
   imported=result.items;
   $('imported-status').textContent=imported.length.toLocaleString('es')+' ejercicios de flexión importados · '+result.rows.toLocaleString('es')+' registros morfológicos de UniMorph para vocabulario de '+subject+'.';
+  setupTopics();
  }catch(e){
   if(request!==importRequest)return;
   $('imported-status').textContent='Los índices UniMorph todavía no están disponibles: '+e.message+'. Los ejercicios originales siguen funcionando.';
@@ -127,6 +128,8 @@ function setupUnits(){
 function setupTopics(){
  const before=$('topic').value,subject=$('subject').value,units=selectedUnits();
  const choices=syllabi[subject].filter(([u])=>units.has(u)).flatMap(([unit,topics])=>topics.map(topic=>({value:unit+'|'+topic,label:unit+' · '+topic})));
+ const cumulative=[...new Set(imported.filter(q=>q.subject===subject&&units.has(q.unit)&&q.topic==='Repaso morfológico acumulativo').map(q=>q.unit))];
+ choices.push(...cumulative.map(unit=>({value:unit+'|Repaso morfológico acumulativo',label:unit+' · Repaso acumulativo'})));
  $('topic').innerHTML='<option value="all">Todos los contenidos</option>'+choices.map(x=>'<option value="'+esc(x.value)+'">'+esc(x.label)+'</option>').join('');
  $('topic').value=choices.some(x=>x.value===before)?before:'all';
  update();
