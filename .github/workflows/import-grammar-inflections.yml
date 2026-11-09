@@ -9,6 +9,8 @@ on:
       - .github/workflows/import-grammar-inflections.yml
       - scripts/import_unimorph.mjs
       - data.js
+      - gramatica-importada.js
+      - tests/check-unimorph-import.mjs
 permissions:
   contents: write
 concurrency:
@@ -29,6 +31,8 @@ jobs:
         run: node tests/check-grammar.cjs
       - name: Descargar el corpus original completo y extraer todas las flexiones de los lemas del curso
         run: node scripts/import_unimorph.mjs
+      - name: Verificar todos los índices y los ejercicios resultantes
+        run: node tests/check-unimorph-import.mjs
       - name: Publicar los índices partidos
         run: |
           git config user.name "github-actions[bot]"
