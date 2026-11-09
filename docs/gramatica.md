@@ -1,6 +1,6 @@
 # Práctica de gramática por unidades
 
-La web de gramática `gramatica.html` trabaja los epígrafes del documento docente: **Griego I (UD 0–14), Latín I (UD 0–10) y Latín de 4.º ESO (UD 1–8)**.
+La web de gramática `gramatica.html` trabaja los epígrafes del documento docente: **Griego I (UD 1–14), Latín I (UD 1–10) y Latín de 4.º ESO (UD 1–8)**.
 
 ## Bancos de ejercicios
 
