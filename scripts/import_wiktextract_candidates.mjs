@@ -105,6 +105,21 @@ for await(const line of reader){
  hash.update(line);matched++;
 }
 if(scanned<1||!records.size)throw Error('No se encontraron paradigmas candidatos para el vocabulario '+language);
+const allEntries=[...records.values()];
+const quality={
+ distinct_lemmas:new Set(allEntries.map(e=>e.lemma)).size,
+ by_part_of_speech:Object.fromEntries([...new Set(allEntries.map(e=>e.pos))].sort().map(pos=>[
+  pos,{entries:allEntries.filter(e=>e.pos===pos).length,forms:allEntries.filter(e=>e.pos===pos).reduce((s,e)=>s+e.forms.length,0)}
+ ])),
+ nominal_case_and_number:allEntries.filter(e=>e.pos!=='verb').reduce((sum,e)=>sum+e.forms.filter(f=>
+  f.tags.some(t=>['nominative','genitive','dative','accusative','vocative','ablative'].includes(t))&&
+  f.tags.some(t=>['singular','plural'].includes(t))&&!f.tags.includes('dual')).length,0),
+ finite_verbs_with_tense_person_number:allEntries.filter(e=>e.pos==='verb').reduce((sum,e)=>sum+e.forms.filter(f=>
+  f.tags.some(t=>['present','imperfect','aorist','future','perfect','pluperfect'].includes(t))&&
+  f.tags.some(t=>['first-person','second-person','third-person'].includes(t))&&
+  f.tags.some(t=>['singular','plural'].includes(t))&&
+  f.tags.some(t=>['indicative','imperative','subjunctive','optative'].includes(t))).length,0)
+};
 const destination=path.join(ROOT,'data','wiktextract-candidates-'+language+'.json');
 const data={
  schema:1,lang:language,source:origin,generated_at:new Date().toISOString(),
@@ -112,9 +127,9 @@ const data={
  license_url:'https://creativecommons.org/licenses/by-sa/4.0/',
  attribution:'Wiktionary contributors, via Wiktextract/kaikki.org; only modified and filtered data.',
  source_rows_scanned:scanned,matched_entries:matched,invalid_rows:bad,
- matched_rows_sha256:hash.digest('hex'),
+ matched_rows_sha256:hash.digest('hex'),quality,
  status:'CANDIDATE_ONLY_NOT_VALIDATED',
- entries:[...records.values()].sort((a,b)=>a.lemma.localeCompare(b.lemma))
+ entries:allEntries.sort((a,b)=>a.lemma.localeCompare(b.lemma))
 };
 fs.writeFileSync(destination,JSON.stringify(data,null,2)+'\n');
-console.log('CANDIDATOS '+language+': '+scanned+' entradas examinadas, '+data.entries.length+' lemas+categorías, '+data.entries.reduce((n,x)=>n+x.forms.length,0)+' formas. NO PUBLICADOS COMO RESPUESTAS.');
+console.log('CANDIDATOS '+language+': '+scanned+' entradas examinadas, '+data.entries.length+' lemas+categorías, '+data.entries.reduce((n,x)=>n+x.forms.length,0)+' formas; '+quality.nominal_case_and_number+' nominales con caso/número y '+quality.finite_verbs_with_tense_person_number+' verbales con tiempo/persona/número. NO PUBLICADOS COMO RESPUESTAS.');
