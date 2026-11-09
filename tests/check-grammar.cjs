@@ -9,9 +9,16 @@ function load(name,scope){
  const code=fs.readFileSync(path.join(root,name),'utf8');
  vm.runInNewContext(code,scope,{filename:name,timeout:15000});
 }
+const html=fs.readFileSync(path.join(root,'gramatica.html'),'utf8');
+for(const script of ['gramatica-contenidos.js','gramatica-paradigmas.js','gramatica-griego-ampliacion.js','gramatica-importada.js','gramatica.js']){
+ assert.ok(html.includes('src="'+script),'Falta cargar el módulo '+script);
+}
+assert.ok(html.indexOf('src="gramatica-paradigmas.js')<html.indexOf('src="gramatica-griego-ampliacion.js'),'La ampliación griega debe cargarse después de los paradigmas');
+assert.ok(html.indexOf('src="gramatica-griego-ampliacion.js')<html.indexOf('src="gramatica.js'),'Los paradigmas griegos deben cargarse antes del motor de ejercicios');
 load('gramatica-contenidos.js',{window:win});
 load('gramatica-paradigmas.js',{window:win});
 load('gramatica-griego-ampliacion.js',{window:win});
+assert.equal(new Set(win.GRAMMAR_PARADIGMS.map(p=>p.id)).size,win.GRAMMAR_PARADIGMS.length,'IDs de paradigmas duplicados');
 assert.equal(win.GRAMMAR_PARADIGMS.filter(p=>p.id.startsWith('gr-')&&p.units.gr1).length>=20,true,'Cobertura mínima de paradigmas griegos');
 const els=new Map();
 function element(id){
