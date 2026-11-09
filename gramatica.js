@@ -39,6 +39,8 @@ function matchingTopic(p,subject,unit){
  'lat1|lat-bellum':'Primera y segunda declinación',
  'lat1|lat-bonus':'Los adjetivos',
  'lat4|lat-fortis':'Adjetivos de la 3ª declinación',
+ 'lat4|lat-rex':'La tercera declinación',
+ 'lat4|lat-corpus':'La tercera declinación',
  'lat4|lat-amo-present':'Presente',
  'lat4|lat-amo-imperfect':'El imperfecto',
  'lat4|lat-amo-perfect':'El perfecto',
@@ -79,7 +81,7 @@ function buildExercises(){
     items.push({id:base+'|analysis',subject,unit,topic,category,mode:'choice',
       prompt:'¿Qué análisis corresponde a «'+surface+'» de '+p.lemma+'?',
       answer:label,options:[label,...shuffle(other).slice(0,3)],
-      explanation:p.lemma+' · '+p.desc?.concat(' · ')||'',language:p.lang,
+      explanation:p.lemma+' · '+(p.desc||'paradigma nominal')+' · '+instruction+'.',language:p.lang,
       morphologyExplanation:'La forma «'+surface+'» corresponde a '+instruction+'.'});
    }
   }
