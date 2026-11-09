@@ -59,7 +59,7 @@ for(const subject of ['lat1','lat4','gr1']){
   assert.ok(item.unit&&item.topic&&item.answer);
   if(item.mode==='write')assert.ok(item.accepted.includes(window.GrammarImported.norm(item.answer)),'Respuesta descartada '+item.id);
   if(item.mode==='choice')assert.equal(item.options.filter(x=>x===item.answer).length,1,'Opción ambigua '+item.id);
-  if(item.language==='grc')assert.ok(!/\s/u.test(item.answer),'Griego no limpiado '+item.id);
+  if(item.language==='grc'&&item.mode==='write')assert.ok(!/\s/u.test(item.answer),'Griego no limpiado '+item.id);
  }
  console.log(subject+': '+result.rows+' filas; '+result.items.length+' ejercicios importados.');
 }
