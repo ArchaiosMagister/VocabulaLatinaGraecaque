@@ -25,7 +25,7 @@ jobs:
   verificar:
     name: Validación antes de publicar en clase
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Descargar el código de la propuesta
         uses: actions/checkout@v4
@@ -41,9 +41,16 @@ jobs:
           node --check gramatica-griego-ampliacion.js
           node --check tests/check-grammar.cjs
           node --check tests/check-web-release.cjs
+          node --check tests/check-grammar-browser.cjs
       - name: Comprobar autocorrección y currículo
         run: node tests/check-grammar.cjs
       - name: Comprobar ejercicios UniMorph
         run: node tests/check-unimorph-import.mjs
       - name: Comprobar archivos de la web publicados
         run: node tests/check-web-release.cjs
+      - name: Instalar navegador de prueba
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Probar la web de clase con Chromium
+        run: node tests/check-grammar-browser.cjs
