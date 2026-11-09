@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - feature/repaso-morfologia
+      - feature/pestanas-navegacion-unificada
     paths:
       - '.github/workflows/check-grammar-web.yml'
       - 'tests/**'
@@ -14,6 +15,8 @@ on:
       - 'morfologia*'
       - 'data/unimorph-syllabus/**'
       - 'index.html'
+      - 'teacher.js'
+      - 'config.js'
       - 'data.js'
       - 'style.css'
   workflow_dispatch:
@@ -39,6 +42,8 @@ jobs:
           node --check gramatica-importada.js
           node --check gramatica-paradigmas.js
           node --check gramatica-griego-ampliacion.js
+          node --check gramatica-admin.js
+          node --check teacher.js
           node --check tests/check-grammar.cjs
           node --check tests/check-web-release.cjs
           node --check tests/check-grammar-browser.cjs
