@@ -10,6 +10,12 @@ on:
       - scripts/import_unimorph.mjs
       - data.js
       - gramatica-importada.js
+      - gramatica-griego-ampliacion.js
+      - gramatica-paradigmas.js
+      - gramatica.html
+      - gramatica.js
+      - gramatica-contenidos.js
+      - tests/check-grammar.cjs
       - tests/check-unimorph-import.mjs
 permissions:
   contents: write
