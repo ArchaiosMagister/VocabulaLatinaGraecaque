@@ -38,6 +38,12 @@ async function main(){
    message:'Hay una errata en la respuesta',created_at:'2026-11-09T10:00:00Z',
    status:'pending',teacher_note:''
   };
+  await page.route('**/data/morphology-coverage.json',async route=>{
+   const items={lat1:{lemmas:664,withExercises:282,withoutExercises:382,importedLemmas:261,curatedLemmas:30},
+    lat4:{lemmas:328,withExercises:170,withoutExercises:158,importedLemmas:157,curatedLemmas:19},
+    gr1:{lemmas:349,withExercises:55,withoutExercises:294,importedLemmas:51,curatedLemmas:8}};
+   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({schema:1,subjects:items})});
+  });
   await page.route('**/functions/v1/vocabulary',async route=>{
    const request=route.request().postDataJSON();calls.push(request);
    const answers={
@@ -89,6 +95,10 @@ async function main(){
   await page.locator('#teacher-username').fill('MagisterArchaios');
   await page.locator('#login-button').click();
   await page.locator('#grammar-exercises .cardrow').first().waitFor();
+  await page.locator('#grammar-coverage .cardrow').first().waitFor();
+  assert.match(await page.locator('#grammar-coverage').textContent(),/282 de 664 lemas/);
+  assert.match(await page.locator('#grammar-coverage').textContent(),/no equivale a una declinación o conjugación completa/);
+
   assert.ok(calls.some(q=>q.action==='login'),'No se ha solicitado acceso con código');
   await page.locator('[data-save-grammar-report]').click();
   assert.ok(calls.some(q=>q.action==='update_report'),'No se pudo revisar el aviso');
