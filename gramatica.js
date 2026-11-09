@@ -85,11 +85,30 @@ function buildExercises(){
  return items;
 }
 const exercises=buildExercises();
+let imported=[],importRequest=0;
+async function loadImported(){
+ const request=++importRequest,subject=$('subject').value;
+ if(!window.GrammarImported){$('imported-status').textContent='Módulo de importación no disponible.';return}
+ $('imported-status').textContent='Consultando las flexiones importadas…';
+ imported=[];
+ update();
+ try{
+  const result=await window.GrammarImported.load(subject);
+  if(request!==importRequest)return;
+  imported=result.items;
+  $('imported-status').textContent=imported.length.toLocaleString('es')+' ejercicios de flexión importados · '+result.rows.toLocaleString('es')+' registros morfológicos de UniMorph para vocabulario de '+subject+'.';
+ }catch(e){
+  if(request!==importRequest)return;
+  $('imported-status').textContent='Los índices UniMorph todavía no están disponibles: '+e.message+'. Los ejercicios originales siguen funcionando.';
+  imported=[];
+ }
+ update();
+}
 let session=null;
 const selectedUnits=()=>new Set([...$('units').querySelectorAll('input:checked')].map(x=>x.value));
 function getItems(ignoreErrors=false){
  const subject=$('subject').value,units=selectedUnits(),topic=$('topic').value,cat=$('category').value,mode=$('answer-mode').value;
- return exercises.filter(q=>q.subject===subject&&units.has(q.unit)&&(topic==='all'||q.unit+'|'+q.topic===topic)&&(cat==='all'||q.category===cat)&&(mode==='all'||q.mode===mode)&&(ignoreErrors||!$('errors').checked||progress[q.id]?.failed));
+ return exercises.concat($('include-imported').checked?imported:[]).filter(q=>q.subject===subject&&units.has(q.unit)&&(topic==='all'||q.unit+'|'+q.topic===topic)&&(cat==='all'||q.category===cat)&&(mode==='all'||q.mode===mode)&&(ignoreErrors||!$('errors').checked||progress[q.id]?.failed));
 }
 function stats(){
  const subject=$('subject').value;
@@ -103,6 +122,7 @@ function setupUnits(){
  const subject=$('subject').value;
  $('units').innerHTML=syllabi[subject].map(([unit])=>'<label><input type="checkbox" value="'+esc(unit)+'" checked> '+esc(unit)+'</label>').join('');
  setupTopics();
+ loadImported();
 }
 function setupTopics(){
  const before=$('topic').value,subject=$('subject').value,units=selectedUnits();
@@ -182,7 +202,7 @@ function finish(){
 }
 $('subject').onchange=setupUnits;
 $('units').onchange=setupTopics;
-for(const id of ['topic','category','answer-mode','errors'])$(id).onchange=update;
+for(const id of ['topic','category','answer-mode','errors','include-imported'])$(id).onchange=update;
 $('all').onclick=()=>{$('units').querySelectorAll('input').forEach(el=>el.checked=true);setupTopics()};
 $('none').onclick=()=>{$('units').querySelectorAll('input').forEach(el=>el.checked=false);setupTopics()};
 $('start').onclick=()=>start();
