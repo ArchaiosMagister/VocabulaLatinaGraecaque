@@ -11,6 +11,8 @@ function load(name,scope){
 }
 load('gramatica-contenidos.js',{window:win});
 load('gramatica-paradigmas.js',{window:win});
+load('gramatica-griego-ampliacion.js',{window:win});
+assert.equal(win.GRAMMAR_PARADIGMS.filter(p=>p.id.startsWith('gr-')&&p.units.gr1).length>=20,true,'Cobertura mínima de paradigmas griegos');
 const els=new Map();
 function element(id){
  if(!els.has(id))els.set(id,{
@@ -29,6 +31,11 @@ const d=win.GrammarPracticeDebug;
 assert.ok(d,'Debe exponerse el conjunto de preguntas para auditoría');
 assert.equal(warnings.length,0,'Ningún paradigma debe quedar sin tema');
 const ids=new Set();
+for(const p of win.GRAMMAR_PARADIGMS.filter(p=>p.id.startsWith('gr-'))){
+ assert.ok(p.units.gr1,'Paradigma griego sin unidad: '+p.id);
+ assert.ok(Object.values(p.forms).every(s=>typeof s==='string'&&s.length>0),'Forma vacía: '+p.id);
+}
+
 for(const q of d.exercises){
  assert.ok(q.id&&q.subject&&q.unit&&q.topic&&q.category&&q.prompt&&q.answer,q.id);
  assert.equal(ids.has(q.id),false,'ID duplicado: '+q.id);ids.add(q.id);
