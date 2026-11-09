@@ -31,12 +31,20 @@ const d=win.GrammarPracticeDebug;
 assert.ok(d,'Debe exponerse el conjunto de preguntas para auditoría');
 assert.equal(warnings.length,0,'Ningún paradigma debe quedar sin tema');
 const ids=new Set();
+const uniquePrompts=new Set();
+const greekUnits=new Set();
 for(const p of win.GRAMMAR_PARADIGMS.filter(p=>p.id.startsWith('gr-'))){
  assert.ok(p.units.gr1,'Paradigma griego sin unidad: '+p.id);
  assert.ok(Object.values(p.forms).every(s=>typeof s==='string'&&s.length>0),'Forma vacía: '+p.id);
 }
 
 for(const q of d.exercises){
+ if(q.subject==='gr1'&&q.category==='Morfología verbal')greekUnits.add(q.unit);
+ if(q.mode==='write'){
+  const key=[q.subject,q.unit,q.topic,q.prompt,q.answer].join('|');
+  assert.ok(!uniquePrompts.has(key),'Ejercicio escrito duplicado: '+key);
+  uniquePrompts.add(key);
+ }
  assert.ok(q.id&&q.subject&&q.unit&&q.topic&&q.category&&q.prompt&&q.answer,q.id);
  assert.equal(ids.has(q.id),false,'ID duplicado: '+q.id);ids.add(q.id);
  assert.ok(d.syllabi[q.subject].some(([unit,topics])=>unit===q.unit&&topics.includes(q.topic)),'Tema fuera de currículo: '+q.id);
@@ -52,6 +60,22 @@ for(const [subject,units] of Object.entries(d.syllabi)){
  for(const [unit,topics]of units)for(const topic of topics){
   assert.ok(d.exercises.some(q=>q.subject===subject&&q.unit===unit&&q.topic===topic),'Falta apartado: '+subject+' '+unit+' '+topic);
  }
+}
+for(const unit of ['UD 1','UD 2','UD 6','UD 10','UD 11','UD 12','UD 13','UD 14']){
+ assert.ok(greekUnits.has(unit),'Sin ejercicios de morfología verbal griega en '+unit);
+}
+for(const [id,feature,expected] of [
+ ['gr-lyo-mid-imperfect','1.sg','ἐλυόμην'],
+ ['gr-lyo-mid-future','2.pl','λύσεσθε'],
+ ['gr-lyo-mid-aor','1.sg','ἐλυσάμην'],
+ ['gr-lyo-pluperfect','1.sg','ἐλελύκειν'],
+ ['gr-poieo-contract','3.sg','ποιεῖ'],
+ ['gr-deloo-contract','3.sg','δηλοῖ']
+]){
+ const p=win.GRAMMAR_PARADIGMS.find(x=>x.id===id);
+ assert.ok(p,'Falta el paradigma '+id);
+ assert.equal(p.forms[feature],expected,'Flexión griega inesperada: '+id);
+ assert.ok(d.exercises.some(q=>q.id.includes('|'+id+'|'+feature+'|write')&&q.accepted.includes(d.norm(expected))),'Flexión sin ejercicio autocorregible: '+id);
 }
 assert.ok(d.norm('λόγῳ')!==d.norm('λόγω'),'La iota suscrita debe conservarse');
 assert.deepEqual(Array.from(d.variants('λύουσι(ν)')),['λυουσι','λυουσιν']);
