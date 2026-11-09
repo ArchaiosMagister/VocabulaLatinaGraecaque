@@ -21,6 +21,11 @@ permissions:
 
 jobs:
   candidates:
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [grc, lat]
+    if: github.event_name == 'pull_request' || matrix.language == inputs.language
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -33,10 +38,10 @@ jobs:
       - name: Verificar el importador con ejemplos conocidos
         run: node tests/check-wiktextract-candidates.mjs
       - name: Descargar Wiktextract y extraer candidatos del vocabulario
-        run: node scripts/import_wiktextract_candidates.mjs ${{ github.event_name == 'pull_request' && 'grc' || inputs.language }}
+        run: node scripts/import_wiktextract_candidates.mjs ${{ matrix.language }}
       - name: Guardar candidatos para revisión técnica
         uses: actions/upload-artifact@v4
         with:
-          name: wiktextract-candidatos
+          name: wiktextract-candidatos-${{ matrix.language }}
           path: data/wiktextract-candidates-*.json
           retention-days: 30
