@@ -13,7 +13,7 @@ const content=window.GRAMMAR_CONTENT;
 const paradigms=window.GRAMMAR_PARADIGMS;
 const corpus={lat1:'Latín I',gr1:'Griego I',lat4:'Latín · 4.º ESO'};
 if(!content||!paradigms){$('available').textContent='No se ha podido cargar el banco de ejercicios.';return}
-const syllabi=content.syllabi;
+const syllabi=Object.fromEntries(Object.entries(content.syllabi).map(([subject,units])=>[subject,units.filter(([unit])=>unit!=='UD 0')]));
 let progress={};
 try{progress=JSON.parse(localStorage.getItem('classics-grammar-v1')||'{}')||{}}catch{progress={}}
 function save(){try{localStorage.setItem('classics-grammar-v1',JSON.stringify(progress))}catch{$('available').textContent='No es posible guardar el progreso en este navegador.'}}
@@ -29,6 +29,7 @@ function matchingTopic(p,subject,unit){
  if(!found)return null;
  const topics=found[1];
  if(topics.includes(p.topic))return p.topic;
+ if(subject==='lat4'&&p.lang==='lat'&&p.desc==='imperfecto de indicativo activo'&&topics.includes('El imperfecto'))return 'El imperfecto';
  const aliases={
  'lat1|lat-puella':'Primera y segunda declinación',
  'lat1|lat-servus':'Primera y segunda declinación',
@@ -50,6 +51,7 @@ function matchingTopic(p,subject,unit){
 function buildExercises(){
  const items=[];
  content.questions.forEach((q,i)=>{
+  if(q.u==='UD 0')return;
   items.push({id:q.s+'|'+q.u+'|concept-'+i,subject:q.s,unit:q.u,topic:q.t,category:q.c,mode:'choice',prompt:q.p,answer:q.a,options:[q.a,...q.w],explanation:q.x,language:'es'});
  });
  for(const p of paradigms){
@@ -62,20 +64,21 @@ function buildExercises(){
   for(const [subject,unit] of Object.entries(p.units)){
    const topic=matchingTopic(p,subject,unit);
    if(!topic){console.warn('Paradigma sin tema reconocido:',p.id,subject,unit);continue}
+   const lemma=window.GrammarEnunciation?.display(subject,p.lemma,p.kind==='verbal')||p.lemma;
    const category=(p.kind==='verbal'||p.id==='gr-participio'||p.id==='gr-lyo-part'||p.id==='lat-amans')?'Morfología verbal':'Morfología nominal';
    for(const [feature,surface] of forms){
     const label=formatFeature(feature,p.kind);
     const base=subject+'|'+unit+'|'+p.id+'|'+feature;
     const instruction=p.kind==='verbal'?(feature==='inf'?(p.desc||'infinitivo'):label+' del '+p.desc):label;
     items.push({id:base+'|write',subject,unit,topic,category,mode:'write',
-      prompt:'Escribe '+instruction+' de '+p.lemma+'.',
-      answer:surface,accepted:variants(surface),explanation:'Paradigma: '+p.lemma+' · '+instruction+'.',language:p.lang});
+      prompt:'Escribe '+instruction+' de '+lemma+'.',lemma:p.lemma,
+      answer:surface,accepted:variants(surface),explanation:'Enunciado: '+lemma+' · '+instruction+'.',language:p.lang});
     const safe=variants(surface).every(x=>readings.get(x).size===1);
     if(!safe||forms.length<2)continue;
     const other=[...new Set(forms.filter(x=>x[0]!==feature).map(x=>formatFeature(x[0],p.kind)))].filter(x=>x!==label);
     if(other.length<1)continue;
     items.push({id:base+'|analysis',subject,unit,topic,category,mode:'choice',
-      prompt:'¿Qué análisis corresponde a «'+surface+'» de '+p.lemma+'?',
+      prompt:'¿Qué análisis corresponde a «'+surface+'» de '+lemma+'?',lemma:p.lemma,
       answer:label,options:[label,...shuffle(other).slice(0,3)],
       explanation:p.lemma+' · '+(p.desc||'paradigma nominal')+' · '+instruction+'.',language:p.lang,
       morphologyExplanation:'La forma «'+surface+'» corresponde a '+instruction+'.'});
@@ -97,7 +100,7 @@ async function loadImported(){
   if(request!==importRequest)return;
   imported=result.items;
   $('imported-status').textContent=imported.length.toLocaleString('es')+' ejercicios de flexión importados · '+result.rows.toLocaleString('es')+' registros morfológicos de UniMorph para vocabulario de '+subject+'.';
-  setupTopics();
+  update();
  }catch(e){
   if(request!==importRequest)return;
   $('imported-status').textContent='Los índices UniMorph todavía no están disponibles: '+e.message+'. Los ejercicios originales siguen funcionando.';
@@ -108,8 +111,8 @@ async function loadImported(){
 let session=null;
 const selectedUnits=()=>new Set([...$('units').querySelectorAll('input:checked')].map(x=>x.value));
 function getItems(ignoreErrors=false){
- const subject=$('subject').value,units=selectedUnits(),topic=$('topic').value,cat=$('category').value,mode=$('answer-mode').value;
- return exercises.concat($('include-imported').checked?imported:[]).filter(q=>q.subject===subject&&units.has(q.unit)&&(topic==='all'||q.unit+'|'+q.topic===topic)&&(cat==='all'||(cat==='Morfología'?q.category.startsWith('Morfología '):q.category===cat))&&(mode==='all'||q.mode===mode)&&(ignoreErrors||!$('errors').checked||progress[q.id]?.failed));
+ const subject=$('subject').value,units=selectedUnits(),cat=$('category').value,mode=$('answer-mode').value;
+ return exercises.concat($('include-imported').checked?imported:[]).filter(q=>q.subject===subject&&units.has(q.unit)&&(cat==='all'||(cat==='Morfología'?q.category.startsWith('Morfología '):q.category===cat))&&(mode==='all'||q.mode===mode)&&(ignoreErrors||!$('errors').checked||progress[q.id]?.failed));
 }
 function stats(){
  const subject=$('subject').value;
@@ -122,29 +125,20 @@ function stats(){
 function setupUnits(){
  const subject=$('subject').value;
  $('units').innerHTML=syllabi[subject].map(([unit])=>'<label><input type="checkbox" value="'+esc(unit)+'" checked> '+esc(unit)+'</label>').join('');
- setupTopics();
- loadImported();
-}
-function setupTopics(){
- const before=$('topic').value,subject=$('subject').value,units=selectedUnits();
- const choices=syllabi[subject].filter(([u])=>units.has(u)).flatMap(([unit,topics])=>topics.map(topic=>({value:unit+'|'+topic,label:unit+' · '+topic})));
- const cumulative=[...new Set(imported.filter(q=>q.subject===subject&&units.has(q.unit)&&q.topic==='Repaso morfológico acumulativo').map(q=>q.unit))];
- choices.push(...cumulative.map(unit=>({value:unit+'|Repaso morfológico acumulativo',label:unit+' · Repaso acumulativo'})));
- $('topic').innerHTML='<option value="all">Todos los contenidos</option>'+choices.map(x=>'<option value="'+esc(x.value)+'">'+esc(x.label)+'</option>').join('');
- $('topic').value=choices.some(x=>x.value===before)?before:'all';
  update();
+ loadImported();
 }
 function outline(){
  const subject=$('subject').value,units=selectedUnits();
- const selected=syllabi[subject].filter(([u])=>units.has(u));
- const topics=selected.flatMap(([u,ts])=>ts.map(t=>[u,t]));
- $('topic-summary').textContent=selected.length+' unidades · '+topics.length+' apartados gramaticales seleccionados. Los ejercicios abarcan todos los apartados descritos en el temario, con diferentes cantidades de preguntas por apartado.';
- $('outline').innerHTML=selected.map(([unit,ts])=>{
-  const list=ts.map(t=>{
-   const n=exercises.filter(x=>x.subject===subject&&x.unit===unit&&x.topic===t).length;
-   return '<li>'+esc(t)+' <span aria-label="'+n+' preguntas">('+n+')</span></li>';
-  }).join('');
-  return '<section class="grammar-outline-item"><h3>'+esc(unit)+'</h3><ul>'+list+'</ul></section>';
+ const selected=syllabi[subject].filter(([unit])=>units.has(unit));
+ const available=exercises.concat($('include-imported').checked?imported:[]);
+ $('topic-summary').textContent=selected.length+' unidades completas seleccionadas. Puedes filtrar por morfología nominal o verbal sin dividir las unidades.';
+ $('outline').innerHTML=selected.map(([unit])=>{
+  const q=available.filter(x=>x.subject===subject&&x.unit===unit);
+  const nominal=q.filter(x=>x.category==='Morfología nominal').length;
+  const verbal=q.filter(x=>x.category==='Morfología verbal').length;
+  const other=q.length-nominal-verbal;
+  return '<section class="grammar-outline-item"><h3>'+esc(unit)+'</h3><p>'+q.length+' ejercicios · '+nominal+' nominales · '+verbal+' verbales'+(other?' · '+other+' de otros contenidos':'')+'</p></section>';
  }).join('')||'<p>Selecciona al menos una unidad.</p>';
 }
 function update(){
@@ -152,11 +146,29 @@ function update(){
  $('available').textContent=n+' ejercicios disponibles para '+corpus[subject]+($('errors').checked?' · sólo fallos':'')+'.';
  $('start').disabled=n===0;stats();outline();
 }
+function variedQuestions(list,count){
+ const groups=new Map();
+ for(const q of shuffle(list)){
+  const key=q.lemma?q.subject+'|'+q.lemma:q.id;
+  if(!groups.has(key))groups.set(key,[]);
+  groups.get(key).push(q);
+ }
+ const keys=shuffle([...groups.keys()]),result=[];
+ while(result.length<count){
+  let added=0;
+  for(const key of shuffle(keys)){
+   const group=groups.get(key);
+   if(group.length){result.push(group.pop());added++;if(result.length===count)break}
+  }
+  if(!added)break;
+ }
+ return result;
+}
 function start(questions){
  const list=questions||getItems();
  if(!list.length)return;
  const count=$('length').value==='all'?list.length:Math.min(list.length,Number($('length').value));
- session={queue:shuffle(list).slice(0,count),i:0,right:0,wrong:[],done:false};
+ session={queue:variedQuestions(list,count),i:0,right:0,wrong:[],done:false};
  render();
 }
 function render(){
@@ -204,10 +216,10 @@ function finish(){
  $('grammar-again').onclick=()=>start();update();
 }
 $('subject').onchange=setupUnits;
-$('units').onchange=setupTopics;
-for(const id of ['topic','category','answer-mode','errors','include-imported'])$(id).onchange=update;
-$('all').onclick=()=>{$('units').querySelectorAll('input').forEach(el=>el.checked=true);setupTopics()};
-$('none').onclick=()=>{$('units').querySelectorAll('input').forEach(el=>el.checked=false);setupTopics()};
+$('units').onchange=update;
+for(const id of ['category','answer-mode','errors','include-imported'])$(id).onchange=update;
+$('all').onclick=()=>{$('units').querySelectorAll('input').forEach(el=>el.checked=true);update()};
+$('none').onclick=()=>{$('units').querySelectorAll('input').forEach(el=>el.checked=false);update()};
 $('start').onclick=()=>start();
 setupUnits();
 window.GrammarPracticeDebug={exercises,syllabi,variants,norm,currentQuestion:()=>session?.queue[session.i]||null}; // Datos de auditoría en la consola, sin efectos en la sesión.
