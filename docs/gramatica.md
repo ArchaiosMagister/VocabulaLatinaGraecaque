@@ -20,7 +20,7 @@ El flujo `.github/workflows/import-grammar-inflections.yml` reproduce la importa
 
 | Idioma | Filas de la fuente examinadas | Filas conservadas | Lemas del vocabulario presentes | Preguntas generadas |
 | --- | ---: | ---: | ---: | --- |
-| Latín | 976.489 | 10.036 | 476 de 772 | Latín I: 6.029; Latín 4.º: 3.399 |
+| Latín | 976.489 | 10.036 | 476 de 772 | Latín I: 5.766; Latín 4.º: 3.399 |
 | Griego antiguo | 41.593 | 1.467 | 103 de 349 | Griego I: 725 |
 
 Las filas conservadas son *lema + forma + etiqueta morfológica*: **no** representan 10.036 o 1.467 palabras distintas. El mismo lema puede tener muchas lecturas y formas, y algunas quedan fuera de los ejercicios por motivos curriculares.
@@ -61,7 +61,7 @@ node tests/check-grammar-browser.cjs
 node scripts/import_unimorph.mjs
 ```
 
-La última ejecución automatizada de GitHub Actions ha superado ambas suites, revisando recuentos de partes, duplicados, soluciones admitidas, artículo griego, lemas y asociación curricular. Es recomendable comprobar la navegación, el tema oscuro y la interacción de formularios en navegadores reales antes de fusionar la propuesta.
+La batería de GitHub Actions revisa el recuento de partes, duplicados, soluciones admitidas, artículo griego, lemas, enunciados completos, diversidad de verbos y asociación curricular. Se incluyen pruebas de navegador. Es recomendable comprobar la navegación, el tema oscuro y la interacción de formularios en navegadores reales antes de fusionar la propuesta.
 
 
 ## Preparar la publicación para clase (GitHub Pages)
