@@ -4,7 +4,7 @@ La web de gramática `gramatica.html` trabaja los epígrafes del documento docen
 
 ## Bancos de ejercicios
 
-- **Banco inicial:** 84 preguntas-base de teoría y sintaxis, más 55 paradigmas modelo de declinaciones y conjugaciones, con 1.039 ejercicios generados.
+- **Banco inicial:** preguntas-base de teoría y sintaxis más paradigmas modelo de declinaciones y conjugaciones, con **1.127 ejercicios generados** en la revisión actual (411 de Griego I, 470 de Latín I y 246 de Latín de 4.º ESO).
 - **Banco importado:** se procesan las filas íntegras de los repositorios UniMorph `lat` y `grc`. Se conservan **todas las filas atestiguadas** correspondientes a los lemas de los vocabularios docentes, no una muestra de cada paradigma. La fuente y su revisión exacta quedan registradas en el manifiesto.
 - **Banco de verbos latinos complementario:** `morfologia.html` puede consultar el índice verbal del repositorio GeneradorExamenes, separado de este módulo.
 
@@ -53,8 +53,36 @@ Ejecutar:
 
 ```sh
 node tests/check-grammar.cjs
-node scripts/import_unimorph.mjs
 node tests/check-unimorph-import.mjs
+node tests/check-web-release.cjs
+# La verificación de navegador requiere Playwright y Chromium:
+node tests/check-grammar-browser.cjs
+# Para regenerar fuentes (requiere Internet):
+node scripts/import_unimorph.mjs
 ```
 
 La última ejecución automatizada de GitHub Actions ha superado ambas suites, revisando recuentos de partes, duplicados, soluciones admitidas, artículo griego, lemas y asociación curricular. Es recomendable comprobar la navegación, el tema oscuro y la interacción de formularios en navegadores reales antes de fusionar la propuesta.
+
+
+## Preparar la publicación para clase (GitHub Pages)
+
+La página de repaso es `gramatica.html`, enlazada desde `index.html` como **Repaso de gramática**. Comparte el mismo repositorio y los mismos recursos estáticos que la página de vocabulario.
+
+**URL prevista después de publicarla:** https://archaiosmagister.github.io/VocabulaLatinaGraecaque/gramatica.html
+
+**Importante:** mientras la PR #1 permanezca sin fusionar en `main`, esa URL no tiene por qué mostrar los ejercicios. No debe compartirse como publicada hasta confirmar el despliegue. La rama `feature/repaso-morfologia` es solo la versión candidata.
+
+El flujo `.github/workflows/check-grammar-web.yml` ejecuta automáticamente en GitHub Actions:
+- Comprobación sintáctica de los módulos JavaScript.
+- Pruebas de morfología, corrección automática y distribución por unidades.
+- Comprobación de los datos UniMorph y de todos los archivos estáticos utilizados.
+- Prueba real de navegador Chromium: diez ejercicios griegos escritos, respuestas correctas e incorrectas, solución, repetición del fallo y carga a tamaño de móvil.
+
+**Procedimiento de publicación, una vez autorizada la fusión:**
+1. Confirmar que todos los controles de la PR #1 terminan en verde.
+2. Fusionar la PR en `main` y comprobar que GitHub Pages publica los cambios. Si la configuración de Pages no apunta a la rama `main` (raíz) ni a un flujo de despliegue adecuado, ajustarla en **Settings → Pages**.
+3. Abrir en navegador la URL anterior y comprobar que funciona, tanto en ordenador como en móvil; no dar por publicado el sitio solo por tener la CI en verde.
+4. Probar en clase **Griego I → UD 11 → Morfología verbal → Escritura de flexiones**, enviar una solución correcta y otra errónea, confirmar que aparece la respuesta y repetir el fallo. Hacer otra sesión con **Latín I**.
+5. Verificar que el estado de importación muestra ejercicios UniMorph. Si no se cargan, el banco docente local sigue disponible.
+
+Las respuestas se corrigen en el navegador; el progreso se conserva localmente y no requiere cuentas de alumno. La publicación en el sitio principal sigue siendo una operación distinta de las pruebas automáticas.
