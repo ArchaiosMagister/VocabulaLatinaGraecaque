@@ -61,7 +61,8 @@ async function main(){
   await page.locator('#units input[value="UD 11"]').check();
   await page.selectOption('#category','Morfología verbal');
   await page.selectOption('#answer-mode','write');
-  await page.selectOption('#topic','UD 11|El futuro y el imperfecto');
+  assert.equal(await page.locator('#topic').count(),0,'No debe haber subdivisión de unidades por temas');
+  assert.equal(await page.locator('#units input[value="UD 0"]').count(),0,'UD 0 no debe aparecer');
   await page.selectOption('#length','10');
   await page.locator('#start').click();
 
@@ -123,7 +124,29 @@ async function main(){
   await page.locator('#grammar-next-btn').click();
   assert.match(await page.locator('#practice').textContent(),/1 de 1 aciertos/);
 
-  await page.setViewportSize({width:375,height:812});
+  // Verificar diversidad real de paradigmas, sin UniMorph, en Latín I · UD 2.
+  await page.selectOption('#subject','lat1');
+  await page.locator('#none').click();
+  await page.locator('#units input[value="UD 2"]').check();
+  await page.selectOption('#category','Morfología verbal');
+  await page.selectOption('#answer-mode','write');
+  await page.locator('#include-imported').uncheck();
+  await page.locator('#start').click();
+  const different=new Set();
+  for(let i=0;i<10;i++){
+   const q=await page.evaluate(()=>window.GrammarPracticeDebug.currentQuestion());
+   assert.ok(q&&q.subject==='lat1'&&q.unit==='UD 2'&&q.topic==='El imperfecto de indicativo','La unidad debe seleccionarse completa');
+   different.add(q.lemma);
+   assert.match(q.prompt,/, [^,]+, [^,]+ \((?:1ª|2ª|3ª|4ª|mx\.)\)\./);
+   await page.locator('#grammar-input').fill(q.answer);
+   await page.locator('#grammar-form button[type="submit"]').click();
+   assert.match(await page.locator('#grammar-feedback').textContent(),/Correcto/);
+   await page.locator('#grammar-next-btn').click();
+  }
+  assert.equal(different.size,10,'Una sesión de 10 preguntas debe incluir 10 verbos diferentes');
+  assert.match(await page.locator('#practice').textContent(),/10 de 10 aciertos/);
+
+    await page.setViewportSize({width:375,height:812});
   await page.reload({waitUntil:'load'});
   await page.waitForFunction(()=>!document.querySelector('#start')?.disabled);
   assert.equal(await page.locator('#category').inputValue(),'Morfología');
