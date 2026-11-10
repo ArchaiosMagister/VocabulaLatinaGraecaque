@@ -25,8 +25,9 @@ for(const lang of ['lat','grc']){
  const minimum=lang==='lat'?10:8;
  const entry=[...byLemma.entries()].find(([,slots])=>slots.size>=minimum);
  assert.ok(entry,'No se encontró un sustantivo de referencia con '+minimum+' casillas: '+lang);
- const [lemma,slots]=entry;
- const base={lemma,word:lemma,entry:lemma,subjects:[lang==='lat'?'lat1':'gr1'],
+ const [originalLemma,slots]=entry;
+ const lemma=originalLemma.toLowerCase().normalize('NFD').replace(/\u0345/g,'ι').replace(/\p{M}/gu,'').replace(/æ/g,'ae').replace(/œ/g,'oe').replace(/ς/g,'σ');
+ const base={lemma,word:originalLemma,entry:originalLemma,subjects:[lang==='lat'?'lat1':'gr1'],
   pos:'noun',forms:[...slots.values()].map(f=>({form:f.form,tags:f.tags,raw_tags:f.tags})),
   source_page:'https://en.wiktionary.org/wiki/'+encodeURIComponent(lemma)};
  const fixturePath='tests/fixtures/crosscheck-'+lang+'-synthetic.json';
