@@ -41,6 +41,43 @@ window.GrammarOnlineBackup=(()=>{
    }
   }
  };
+
+ const nominalTopics={
+  lat1:{
+   first:[1,'Primera y segunda declinación'],
+   second:[1,'Primera y segunda declinación'],
+   third:[4,'Tercera declinación'],
+   fourth:[7,'Cuarta y quinta declinación'],
+   fifth:[7,'Cuarta y quinta declinación'],
+   adjective:[2,'Los adjetivos']
+  },
+  lat4:{
+   first:[1,'Primera declinación'],
+   second:[2,'Segunda declinación'],
+   third:[5,'La tercera declinación'],
+   fourth:[8,'Cuarta y quinta declinación'],
+   fifth:[8,'Cuarta y quinta declinación'],
+   adjective:[3,'Adjetivos']
+  }
+ };
+ const caseNames={nominative:'nominativo',genitive:'genitivo',dative:'dativo',
+  accusative:'acusativo',vocative:'vocativo',ablative:'ablativo'};
+ const genderNames={masculine:'masculino',feminine:'femenino',neuter:'neutro'};
+ const cleanEnding=s=>norm(String(s||'').replace(/^[\s\-–—−]+/,''));
+ const usableSurface=s=>typeof s==='string'&&s.length<=60&&/^[a-zāăēĕīĭōŏūŭȳÿæœ]+$/iu.test(s);
+ function nominalType(teacher){
+  if(!teacher||conjugation(teacher))return null;
+  const words=parts(teacher);
+  if(words.length===3)return 'adjective';
+  if(words.length!==2)return null;
+  const ending=cleanEnding(words[1]);
+  if(ending.endsWith('ae'))return 'first';
+  if(ending.endsWith('ei'))return 'fifth';
+  if(ending.endsWith('is'))return 'third';
+  if(ending.endsWith('us'))return 'fourth';
+  if(ending.endsWith('i'))return 'second';
+  return null;
+ }
  const requests=new Map();
  const firstUnit=entry=>{
   const units=(entry.units||[]).flatMap(unit=>{
@@ -64,9 +101,14 @@ window.GrammarOnlineBackup=(()=>{
   const units=new Set(selectedUnits);
   return [...lexicon(subject).values()].filter(v=>{
    const full=window.GrammarEnunciation?.display(subject,v.lemma,true);
-   if(!full||!window.GrammarEnunciation?.latinFull(full))return false;
-   return Object.values(topics[subject]).some(group=>Object.values(group).some(([intro])=>
-    units.has('UD '+Math.max(v.when,intro))));
+   const nominal=window.GrammarEnunciation?.display(subject,v.lemma,false);
+   const isVerb=!!(full&&window.GrammarEnunciation?.latinFull(full));
+   const nounClass=nominalType(nominal);
+   if(!isVerb&&!nounClass)return false;
+   const intros=isVerb?
+    Object.values(topics[subject]).flatMap(group=>Object.values(group).map(rule=>rule[0])):
+    [nominalTopics[subject][nounClass][0]];
+   return intros.some(intro=>units.has('UD '+Math.max(v.when,intro)));
   }).sort((a,b)=>a.when-b.when||a.lemma.localeCompare(b.lemma));
  }
  async function fetchEntry(lemma){
@@ -104,7 +146,7 @@ window.GrammarOnlineBackup=(()=>{
   });
   return found?{teacher,lexeme:found}:null;
  }
- function asQuestions(subject,lemma,data){
+ function asVerbalQuestions(subject,lemma,data){
   if(!topics[subject])return [];
   const match=matchingLemma(subject,lemma,data);
   if(!match)return [];
@@ -171,6 +213,87 @@ window.GrammarOnlineBackup=(()=>{
    }
   }
   return items;
+ }
+ function asNominalQuestions(subject,lemma,data){
+  if(!nominalTopics[subject])return [];
+  const teacher=window.GrammarEnunciation?.display(subject,lemma,false);
+  const type=nominalType(teacher);
+  if(!type)return [];
+  const entry=lexicon(subject).get(key(lemma));
+  if(!entry)return [];
+  const kind=type==='adjective'?'adj':'noun';
+  const expected=parts(teacher).map(norm);
+  const chosen=(data.lemmas||[]).find(x=>{
+   if(x.part_of_speech!==(kind==='adj'?'adjective':'noun')&&
+      !(kind==='adj'&&x.part_of_speech==='adj'))return false;
+   if(x.paradigm?.kind!==kind||!Array.isArray(x.principal_parts))return false;
+   if(expected.length!==x.principal_parts.length)return false;
+   if(!expected.every((val,i)=>norm(x.principal_parts[i]).endsWith(cleanEnding(val))))return false;
+   const gender=String(teacher).match(/\(([mfn])\.\)/i)?.[1];
+   if(gender&&x.gender&&{m:'masculine',f:'feminine',n:'neuter'}[gender]!==x.gender)return false;
+   return true;
+  });
+  if(!chosen)return [];
+  const [intro,heading]=nominalTopics[subject][type];
+  const assigned=Math.max(intro,entry.when);
+  if(assigned>(subject==='lat1'?10:8))return [];
+  const unit='UD '+assigned,topic=assigned===intro?heading:'Repaso morfológico acumulativo';
+  const forms=new Map();
+  for(const table of chosen.paradigm.tables||[]){
+   if(!Array.isArray(table.columns)||!Array.isArray(table.rows))continue;
+   for(const row of table.rows){
+    const cas=caseNames[String(row.label||'').toLowerCase()];
+    if(!cas||!Array.isArray(row.cells))continue;
+    for(let ci=0;ci<table.columns.length;ci++){
+     const col=String(table.columns[ci]).toLowerCase();
+     const num=kind==='noun'?(col==='singular'?'singular':col==='plural'?'plural':null):
+      table.title==='singular'?'singular':table.title==='plural'?'plural':null;
+     const gender=kind==='adj'?genderNames[col]:null;
+     if(!num||(kind==='adj'&&!gender)||!Array.isArray(row.cells[ci]))continue;
+     if(/^[A-ZÀ-Ü]/.test(entry.entry)&&num==='plural')continue;
+     // Only the primary listed form: dictionary tables may mix derived or
+     // alternative lexemes in later cells (e.g. puella / puellula).
+     const surface=row.cells[ci].find(usableSurface);
+     if(!surface)continue;
+     const feature=cas+'|'+(gender||'')+'|'+num;
+     if(!forms.has(feature))forms.set(feature,{cas,gender,num,surface});
+    }
+   }
+  }
+  if(forms.size<(kind==='adj'?18:8))return [];
+  const readings=new Map();
+  for(const [feature,row]of forms){
+   const form=norm(row.surface);
+   if(!readings.has(form))readings.set(form,new Set());
+   readings.get(form).add(feature);
+  }
+  const items=[];
+  for(const [feature,row]of forms){
+   const label=row.cas+(row.gender?' '+row.gender:'')+' '+row.num;
+   const base='online|latin-dictionary|'+subject+'|'+unit+'|'+key(lemma)+'|'+feature;
+   const explanation='Latin Dictionary (respaldo online): '+teacher+' · '+label+'.';
+   items.push({
+    id:base+'|write',subject,unit,topic,category:'Morfología nominal',mode:'write',
+    lemma:key(lemma),prompt:'Escribe '+label+' de '+teacher+'.',
+    answer:row.surface,accepted:[norm(row.surface)],explanation,language:'lat',
+    source:'Latin Dictionary API'
+   });
+   if(readings.get(norm(row.surface)).size!==1)continue;
+   const other=[...forms].filter(([k])=>k!==feature).map(([,r])=>
+    r.cas+(r.gender?' '+r.gender:'')+' '+r.num);
+   if(other.length<2)continue;
+   items.push({
+    id:base+'|choice',subject,unit,topic,category:'Morfología nominal',mode:'choice',
+    lemma:key(lemma),
+    prompt:'¿Qué análisis corresponde a «'+row.surface+'» de '+teacher+'?',
+    answer:label,options:[label,...[...new Set(other)].slice(0,3)],
+    explanation,language:'lat',source:'Latin Dictionary API'
+   });
+  }
+  return items;
+ }
+ function asQuestions(subject,lemma,data){
+  return [...asVerbalQuestions(subject,lemma,data),...asNominalQuestions(subject,lemma,data)];
  }
  async function load(subject,lemma){
   if(!topics[subject])return {items:[],supported:false,reason:'La fuente API validada es solo latina.'};
