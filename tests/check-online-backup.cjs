@@ -44,7 +44,7 @@ async function main(){
  assert.deepEqual([...new Set(write.map(q=>q.lemma))].sort(),['amo','duco']);
  assert.ok(write.every(q=>q.subject==='lat1'&&q.unit==='UD 1'&&q.topic==='El presente de indicativo y el infinitivo'));
  assert.ok(write.every(q=>q.category==='Morfología verbal'&&q.language==='lat'&&q.source==='GeneradorExamenes/UniMorph'));
- assert.ok(write.every(q=>q.accepted.includes(api.asQuestions?'':null)||q.accepted.length>0));
+ assert.ok(write.every(q=>q.accepted.length>0&&q.accepted.includes(q.answer.toLowerCase().normalize('NFD').replace(/\p{M}/gu,''))));
  assert.ok(write.some(q=>q.prompt.includes('amo, amavi, amatum (1ª)')));
  assert.ok(write.some(q=>q.prompt.includes('duco, duxi, ductum (3ª)')));
  assert.ok(!data.items.some(q=>q.answer==='AMO-NO-VALIDO'||q.answer==='amarem'));
