@@ -14,6 +14,7 @@ for(const [lemma,forms] of [
 rows.push(['amo','AMO-NO-VALIDO','V;IND;ACT;PRS;1;SG',2]);
 rows.push(['amo','amarem','V;SBJV;ACT;IPFV;1;SG',1]);
 rows.push(['palabra-inexistente','inventa','V;IND;ACT;PRS;1;SG',1]);
+while(rows.length<101)rows.push(['palabra-no-docente'+rows.length,'forma-'+rows.length,'V;IND;ACT;PRS;1;SG',1]);
 let callCount=0;
 const win={},scope={
  window:win,
