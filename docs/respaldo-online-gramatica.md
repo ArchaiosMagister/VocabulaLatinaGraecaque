@@ -1,49 +1,40 @@
-# Respaldo online de morfología
+# Respaldo online de la gramática clásica
 
-## Qué funciona
+## Estado y arquitectura
 
-La página `gramatica.html` mantiene el banco local de formas docentes y los índices UniMorph publicados con el propio repositorio. De forma opcional, mediante **Usar respaldo online de verbos latinos**, consulta un **índice JSON público de verbos latinos** publicado en el repositorio hermano [GeneradorExamenes](https://github.com/ArchaiosMagister/GeneradorExamenes).
+La página `gramatica.html` conserva como fuente principal sus índices de flexión locales y sus paradigmas docentes. El **respaldo online es opcional y se activa a petición del estudiante o profesor**, sin bloquear el repaso si falla la red.
 
-Fuente exacta:
-`https://raw.githubusercontent.com/ArchaiosMagister/GeneradorExamenes/main/data/unimorph/lat-v.json`
+Se ha comprobado que las páginas de Collatinus-web y Eulexis-web son consultables, pero **no** exponen para nuestra aplicación una API pública estructurada y utilizable mediante CORS que se haya podido validar. Por eso se enlazan como fuentes de consulta filológica, no se incrustan como claves de autocorrección.
 
-Esta fuente **no es Collatinus**: es un índice UniMorph que ya se usa desde `morfologia.html`. Por ello no debe presentarse como una segunda verificación independiente. Tiene sentido como **respaldo online de disponibilidad**, no como garantía de cobertura adicional universal.
+En su lugar se usa para las formas latinas la **[Latin Dictionary API](https://latindictionary.co/docs/api)**, que devuelve paradigmas JSON estructurados y anuncia acceso sin clave con un límite de consultas. Se comprobó en una petición HTTP real que admite CORS (`Access-Control-Allow-Origin: *`).
 
-### Qué se admite para autocorrección
+El adaptador `gramatica-respaldo-online.js` consulta **un lema por acción** en `https://latindictionary.co/api/v1/entry/<lema>`. No descarga todo un diccionario ni realiza centenares de solicitudes por clase; la fuente establece límites de peticiones, por lo que se utiliza deliberadamente de manera puntual. Los datos consultados son solo lemas públicos del vocabulario docente.
 
-El adaptador `gramatica-respaldo-online.js`:
+## Criterios de incorporación a la práctica
 
-1. Carga el índice remoto una sola vez por sesión, con timeout y estado de error claro.
-2. Conserva únicamente entradas del vocabulario del curso cuyo enunciado latino está documentado y contiene presente, perfecto, supino y conjugación.
-3. Acepta solamente formas etiquetadas exactamente como `V;IND;ACT;PRS;persona;número`, con rango 1, y paradigmas con al menos cuatro personas/números distintos.
-4. Descarta deponentes, entradas ajenas al curso y lecturas ambiguas en preguntas de reconocimiento.
-5. Asigna la unidad del currículo según la primera aparición del lema y la introducción del presente de indicativo, sin ofrecer UD 0.
-6. Convierte los datos en **los mismos objetos de ejercicio** del banco local: `id`, `subject`, `unit`, `topic`, `category`, `mode`, `lemma`, `prompt`, `answer`, `accepted`, `explanation`, `language`, y además `source`.
-7. Si hay ejercicios verbales locales para un lema, **no añade preguntas remotas duplicadas** de ese lema.
-8. Si falla Internet o la fuente, conserva los ejercicios locales y permite desactivar el respaldo.
+1. Debe tratarse de una palabra que aparezca en el vocabulario del **curso y unidades seleccionadas**.
+2. El verbo debe tener un enunciado completo documentado (presente, perfecto, supino, conjugación). Los elementos léxicos y la conjugación devueltos por la fuente tienen que coincidir con ese enunciado. Si hay discrepancias, no se añaden formas.
+3. Se aceptan exclusivamente las casillas con **modo, voz, tiempo, persona y número explícitos**, de las tablas del proveedor compatibles con el currículo de las asignaturas. Se excluyen tiempos o modos no estudiados, y se exige un mínimo de cuatro personas/números distintos por grupo.
+4. Para ejercicios de análisis, se excluyen las formas con lecturas múltiples dentro del conjunto de las tablas usadas. Las variantes explícitamente documentadas se admiten en escritura.
+5. Se evita duplicar una pregunta idéntica ya existente en el banco local. El resto de los ejercicios locales siguen disponibles.
+6. **La interfaz y la corrección son exactamente las mismas**: en el motor los datos externos se convierten al esquema de ejercicios `id`, `subject`, `unit`, `topic`, `category`, `mode`, `lemma`, `prompt`, `answer`, `accepted`, `explanation`, `language`, `source`.
+7. Si la fuente deja de responder, se muestra un mensaje y el banco local sigue funcionando. Es posible desactivar completamente el respaldo desde la pantalla de preparación.
 
-Los ejercicios que pasan esos filtros se muestran con **la misma tarjeta, enunciado, respuesta, corrección y repetición de fallos** que los otros ejercicios: no se incrusta una pantalla externa.
+La información se muestra con atribución a **Latin Dictionary** y sus fuentes (Wikcionario, Perseus, etc.), conforme al campo de atribución suministrado por su API. No se reutilizan descripciones ni textos extensos de diccionario.
 
-### Consulta externa para las lagunas
-
-La página incluye, en un apartado desplegable, enlaces a:
-
-- [Collatinus-web](https://outils.biblissima.fr/fr/collatinus-web/) para latín.
-- [Eulexis-web](https://outils.biblissima.fr/en/eulexis-web/) para griego antiguo.
-- [Logeion](https://logeion.uchicago.edu/) para consultar lemas de ambas lenguas.
-
-Son **páginas de consulta**, no API de soluciones. **Sus resultados no se extraen ni se usan automáticamente para calificar**: no se ha verificado una API pública estable con CORS, etiquetas y condiciones de uso compatibles con esa operación. Al abrirlas muestran su propia interfaz; el requisito de estilo homogéneo se cumple para las formas que realmente entran como ejercicios, no para webs ajenas.
-
-En griego no se dispone todavía de un índice remoto verificado de conjugaciones: el respaldo griego para nuevas formas consiste por ahora en la consulta manual a Eulexis/Logeion, no en autocorrección desde sus páginas.
+**Griego:** de momento no hemos validado una API de generación de paradigmas con la calidad suficiente. Se ofrece la consulta a Eulexis y Logeion, pero no la autocorrección con sus páginas externas.
 
 ## Relación con GeneradorExamenes
 
-**Son dos repositorios con bancos propios.** GeneradorExamenes publica su índice UniMorph y su programa de exámenes; VocabulaLatinaGraecaque utiliza un banco propio de gramática y puede consultar ahora el índice verbal del primero. En ese sentido, **existe reutilización de una fuente**, pero **todavía no hay un único banco central de paradigmas validados que alimente ambos generadores de preguntas**.
+**La base local de los dos repositorios no es una sola base compartida.**
 
-El formato de intercambio para los módulos es el objeto de ejercicio documentado arriba. Para compartir todos los paradigmas en el futuro, conviene publicar un índice de paradigmas canónico, versionado y con procedencia, y añadir adaptadores separados para Vocabulario (sesiones de autocorrección) y GeneradorExamenes (tablas de examen). No es prudente modificar automáticamente las preguntas de los exámenes antes de validar las nuevas flexiones.
+- `VocabulaLatinaGraecaque` dispone de los paradigmas docentes y el índice UniMorph filtrado para el currículo.
+- `GeneradorExamenes` tiene su propio índice UniMorph y sus reglas de examen; la página complementaria `morfologia.html` ya reutiliza uno de sus archivos `lat-v.json`.
+- Se revisó ese archivo como posible respaldo automático: sus coincidencias con nuestros vocabularios corresponden sobre todo a **deponentes**, de modo que no aporta un banco general de conjugaciones activas. Por eso el nuevo respaldo de `gramatica.html` utiliza Latin Dictionary API, no atribuye incorrectamente esas formas a verbos activos.
+- La estructura normalizada de los datos permite preparar posteriormente **un índice de paradigmas validado y reutilizable por ambos repositorios**. Todavía no se ha conectado a la generación automática de exámenes para evitar introducir análisis no contrastados.
 
 ## Pruebas
 
-`node tests/check-online-backup.cjs` comprueba el formato, las casillas, los enunciados y la ausencia de formas inventadas o de otras categorías.
+`node tests/check-online-backup.cjs` verifica las categorías y accidentes morfológicos, el contraste de enunciados y las unidades. La prueba de navegador `tests/check-grammar-browser.cjs` sustituye la API por una respuesta de control para comprobar que las formas externas se muestran como ejercicios normales, que no se duplican y que el respaldo puede desactivarse.
 
-La prueba Chromium de `tests/check-grammar-browser.cjs` simula una respuesta remota sin depender de la red de un tercero. Verifica la normalización al objeto de ejercicio y que puede desconectarse para utilizar solo los bancos locales.
+Los enlaces externos de Collatinus, Eulexis y Logeion pueden abrirse en otra pestaña. Su presentación es la de cada sitio; solo se garantiza el mismo formato **para las formas incorporadas realmente como preguntas en nuestra aplicación**.
