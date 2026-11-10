@@ -1,26 +1,28 @@
 #!/usr/bin/env node
 /**
- * Índice offline del presente griego. Datos estáticos del vocabulario docente;
- * las formas generadas por regla se distinguen de las excepciones explícitas.
- * Compatible con Node 20+, sin dependencias ni red.
+ * Lematización offline del presente de indicativo griego (ático escolar).
+ * Devuelve todas las lecturas del inventario, con grado de verificación.
+ * Sin red, dependencias de terceros ni modificación de la autocorrección.
  */
 import { readFileSync } from 'node:fs';
-const datasetUrl = new URL('../data/grc-present-indicative-offline.json', import.meta.url);
-export const corpus = JSON.parse(readFileSync(datasetUrl, 'utf8'));
+import { pathToFileURL } from 'node:url';
+const dataUrl = new URL('../data/grc-present-indicative-offline.json', import.meta.url);
+export const corpus = JSON.parse(readFileSync(dataUrl, 'utf8'));
 
 export function normalizeGreek(input) {
   return String(input ?? '').trim().toLowerCase().normalize('NFD')
-    .replace(/\u0345/g, 'ι')
-    .replace(/\p{M}/gu, '')
-    .replace(/ς/g, 'σ')
-    .replace(/[·.,;!?¿¡‘’'"«»]/gu, '')
-    .replace(/\s+/gu, ' ')
+    .replace(/\u0345/g, 'ι') // conservar la diferencia de iota suscrita
+    .replace(/\p{M}/gu, '').replace(/ς/g, 'σ')
+    .replace(/[·.,;!?¿¡‘’'"«»]/gu, '').replace(/\s+/gu, ' ')
     .normalize('NFC');
+}
+function exactGreek(input) {
+  return String(input ?? '').trim().toLowerCase().normalize('NFC')
+    .replace(/[·.,;!?¿¡‘’'"«»]/gu, '');
 }
 export function expandOptionalNu(surface) {
   if (!surface.endsWith('(ν)')) return [surface];
-  const without = surface.slice(0, -3);
-  return [without, without + 'ν'];
+  return [surface.slice(0, -3), surface.slice(0, -3) + 'ν'];
 }
 export function buildIndex(data = corpus) {
   const index = new Map();
@@ -29,26 +31,31 @@ export function buildIndex(data = corpus) {
       for (const [personNumber, surface] of Object.entries(paradigm.forms)) {
         const person = Number(personNumber[0]);
         const number = personNumber.slice(1) === 'sg' ? 'singular' : 'plural';
-        const record = {
-          lemma: lexeme.lemma,
-          form: surface,
-          voice: paradigm.voice,
-          deponent: lexeme.deponent,
-          inflection: lexeme.inflection,
-          tense: 'present',
-          mood: 'indicative',
-          person,
-          number,
-          status: paradigm.status
-        };
-        for (const formVariant of [surface, ...(paradigm.alternates?.[personNumber] ?? [])]) {
-          for (const variant of expandOptionalNu(formVariant)) {
+        for (const sourceVariant of [surface, ...(paradigm.alternates?.[personNumber] ?? [])]) {
+          for (const variant of expandOptionalNu(sourceVariant)) {
             const key = normalizeGreek(variant);
-          if (!index.has(key)) index.set(key, []);
-          if (!index.get(key).some(x =>
-            x.lemma === record.lemma && x.voice === record.voice &&
-            x.person === person && x.number === number
-          )) index.get(key).push(record);
+            if (!index.has(key)) index.set(key, []);
+            const record = {
+              lemma: lexeme.lemma,
+              form: surface,
+              matched_variant: variant,
+              voice: paradigm.voice,
+              deponent: lexeme.deponent,
+              inflection: lexeme.inflection,
+              tense: 'present',
+              mood: 'indicative',
+              person,
+              number,
+              status: paradigm.status,
+              verification: paradigm.review?.per_person?.[personNumber] ?? 'unreviewed',
+              review_tier: paradigm.review?.tier ?? 'unreviewed',
+              source_urls: paradigm.review?.source_urls ?? []
+            };
+            const records = index.get(key);
+            if (!records.some(x =>
+              x.lemma === record.lemma && x.voice === record.voice &&
+              x.person === person && x.number === number
+            )) records.push(record);
           }
         }
       }
@@ -57,17 +64,23 @@ export function buildIndex(data = corpus) {
   return index;
 }
 const index = buildIndex();
-/** Devuelve TODAS las lecturas posibles, sin inventar una desambiguación. */
+/**
+ * Incluye coincidencias sin diacríticos, indicándolo en accent_match.
+ * No desambigua por contexto y tampoco presupone que un lema de fuera
+ * del vocabulario sea imposible (p.ej. εἶμι y εἰμί pueden confluir sin acentos).
+ */
 export function lemmatizeGreekPresent(surface) {
   if (!String(surface ?? '').trim()) return [];
-  return index.get(normalizeGreek(surface)) ?? [];
+  const query = exactGreek(surface);
+  return (index.get(normalizeGreek(surface)) ?? []).map(record => ({
+    ...record,
+    accent_match: exactGreek(record.matched_variant) === query ? 'exact' : 'folded'
+  }));
 }
-if (process.argv[1] && import.meta.url === new URL('file://' + process.argv[1]).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const input = process.argv.slice(2).join(' ');
   if (!input) {
     console.error('Uso: node scripts/grc_present_lookup.mjs <forma griega>');
     process.exitCode = 2;
-  } else {
-    console.log(JSON.stringify(lemmatizeGreekPresent(input), null, 2));
-  }
+  } else console.log(JSON.stringify(lemmatizeGreekPresent(input), null, 2));
 }
