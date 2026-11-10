@@ -19,12 +19,39 @@ const answer={
   ]}
  }]
 };
+const cases=['nominative','genitive','dative','accusative','ablative','vocative'];
+const singular=['puella','puellae','puellae','puellam','puellā','puella'];
+const plural=['puellae','puellārum','puellīs','puellās','puellīs','puellae'];
+const puella={slug:'puella',attribution:'Perseus and Wiktionary (CC BY-SA)',lemmas:[
+ {part_of_speech:'noun',principal_parts:['puella','puellae'],gender:'feminine',
+ paradigm:{kind:'noun',tables:[{title:'declension',columns:['singular','plural'],
+  rows:cases.map((label,i)=>({label,cells:[i===0?['puella','puellula']:[singular[i]],[plural[i]]]}))}]}}
+]};
+const bonusSing=[
+ [['bonus'],['bona'],['bonum']],[['bonī'],['bonae'],['bonī']],
+ [['bonō'],['bonae'],['bonō']],[['bonum'],['bonam'],['bonum']],
+ [['bonō'],['bonā'],['bonō']],[['bone'],['bona'],['bonum']]
+];
+const bonusPl=[
+ [['bonī'],['bonae'],['bona']],[['bonōrum'],['bonārum'],['bonōrum']],
+ [['bonīs'],['bonīs'],['bonīs']],[['bonōs'],['bonās'],['bona']],
+ [['bonīs'],['bonīs'],['bonīs']],[['bonī'],['bonae'],['bona']]
+];
+const bonus={slug:'bonus',lemmas:[
+ {part_of_speech:'adjective',principal_parts:['bonus','bona','bonum'],
+  paradigm:{kind:'adj',tables:[
+   {title:'singular',columns:['masculine','feminine','neuter'],rows:cases.map((label,i)=>({label,cells:bonusSing[i]}))},
+   {title:'plural',columns:['masculine','feminine','neuter'],rows:cases.map((label,i)=>({label,cells:bonusPl[i]}))}
+  ]}}
+]};
 let calls=0;
 const win={},scope={window:win,console,AbortController,setTimeout,clearTimeout,
  fetch:async url=>{
   calls++;
-  assert.equal(url,'https://latindictionary.co/api/v1/entry/amo');
-  return {ok:true,json:async()=>answer};
+  assert.ok(url.startsWith('https://latindictionary.co/api/v1/entry/'));
+  const name=url.split('/').at(-1);
+  assert.ok(['amo','puella','bonus'].includes(name));
+  return {ok:true,json:async()=>({amo:answer,puella,bonus})[name]};
  }};
 function load(name){vm.runInNewContext(fs.readFileSync(path.join(root,name),'utf8'),scope,{filename:name})}
 load('data.js');load('gramatica-enunciados.js');load('gramatica-respaldo-online.js');
@@ -56,10 +83,21 @@ async function main(){
  const unknown=await api.load('lat1','palabra-inventada');
  assert.equal(unknown.items.length,0);
  assert.equal(calls,1,'Un lema ajeno al vocabulario no genera solicitudes');
+ const noun=await api.load('lat1','puella');
+ const nounWrites=noun.items.filter(q=>q.mode==='write');
+ assert.equal(nounWrites.length,12,'Las declinaciones deben admitir seis casos y dos números');
+ assert.ok(nounWrites.every(q=>q.category==='Morfología nominal'&&q.topic==='Primera y segunda declinación'));
+ assert.ok(nounWrites.every(q=>!q.accepted.includes('puellula')),'No se admiten diminutivos de la tabla como variantes');
+ assert.ok(nounWrites.some(q=>q.answer==='puellārum'));
+ const adjective=await api.load('lat1','bonus');
+ const adjectiveWrites=adjective.items.filter(q=>q.mode==='write');
+ assert.equal(adjectiveWrites.length,36,'Tres géneros, seis casos y dos números');
+ assert.ok(adjectiveWrites.some(q=>q.topic==='Los adjetivos'&&q.prompt.includes('femenino singular')));
+ assert.equal(calls,3);
  const greek=await api.load('gr1','λύω');
  assert.equal(greek.supported,false);
  assert.equal(greek.items.length,0,'El diccionario latino no genera respuestas griegas');
- assert.equal(calls,1);
+ assert.equal(calls,3);
  const altered=JSON.parse(JSON.stringify(answer));
  altered.lemmas[0].principal_parts[2]='un-perfecto-falso';
  assert.equal(api.asQuestions('lat1','amo',altered).length,0,'Rechazar principales que no coincidan con el vocabulario');
