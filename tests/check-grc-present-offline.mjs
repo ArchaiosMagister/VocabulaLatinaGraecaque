@@ -55,8 +55,9 @@ assert.equal(forms,810);
 assert.equal(deponents,7);
 assert.equal(lexicalMiddle,1);
 assert.equal(reviewedDirect,8);
-assert.equal(reviewedLexical,5);
-assert.equal(candidates,14);
+assert.equal(reviewedLexical,17);
+assert.equal(candidates,2);
+assert.deepEqual(corpus.entries.flatMap(e=>e.paradigms.filter(p=>p.review.tier==='candidate_only').map(()=>e.lemma)).sort(),['ἀναγιγνώσκω','εἰσβάλλω'].sort());
 
 function get(lemma,voice) {
  const e=corpus.entries.find(x=>normalizeGreek(x.lemma)===normalizeGreek(lemma));
