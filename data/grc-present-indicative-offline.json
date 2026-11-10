@@ -1,10 +1,10 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "language": "grc",
   "dialect": "Attic / classical school paradigm",
   "scope": "Present indicative, 6 persons: thematic -ω active and middle-passive; contract -έω/-άω; deponents -ομαι; explicit εἰμί; exceptional πλέω and ἀποπλέω.",
   "provenance": "Greek I teacher vocabulary (data.js), with generated thematic paradigms and explicit paradigms for εἰμί/πλέω.",
-  "verification": "rule_generated = classroom paradigms derived from patterns, not independent corpus attestations; explicit_exception = specified full forms. Do not use for automatic marking without targeted validation. Alternativas documentadas en alternates también deben indexarse.",
+  "verification": "Las formas se distinguen entre contrastadas directamente, sustentadas por patrón y candidatas. La mayoría NO está contrastada forma por forma. Úsese solo para consulta y no para corrección de exámenes sin revisión adicional.",
   "excludes": [
     "δύναμαι (athematic; out of scope)",
     "impersonal δεῖ/χρή (no full six-person paradigm)",
@@ -20,9 +20,13 @@
   ],
   "summary": {
     "lexemes": 81,
-    "paradigms": 116,
-    "finiteForms": 696,
-    "deponents": 8
+    "paradigms": 135,
+    "finiteForms": 810,
+    "deponents": 7,
+    "lexicalMiddle": 1,
+    "reviewedDirect": 8,
+    "reviewedLexical": 17,
+    "candidates": 2
   },
   "entries": [
     {
@@ -47,6 +51,19 @@
             "1pl": "ἀγγέλλομεν",
             "2pl": "ἀγγέλλετε",
             "3pl": "ἀγγέλλουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -59,6 +76,24 @@
             "1pl": "ἀγγελλόμεθα",
             "2pl": "ἀγγέλλεσθε",
             "3pl": "ἀγγέλλονται"
+          },
+          "alternates": {
+            "2sg": [
+              "ἀγγέλλει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -86,6 +121,19 @@
             "1pl": "ἄγομεν",
             "2pl": "ἄγετε",
             "3pl": "ἄγουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -98,6 +146,24 @@
             "1pl": "ἀγόμεθα",
             "2pl": "ἄγεσθε",
             "3pl": "ἄγονται"
+          },
+          "alternates": {
+            "2sg": [
+              "ἄγει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -124,6 +190,19 @@
             "1pl": "ἀδικοῦμεν",
             "2pl": "ἀδικεῖτε",
             "3pl": "ἀδικοῦσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -136,6 +215,24 @@
             "1pl": "ἀδικούμεθα",
             "2pl": "ἀδικεῖσθε",
             "3pl": "ἀδικοῦνται"
+          },
+          "alternates": {
+            "2sg": [
+              "ἀδικεῖ"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -162,6 +259,19 @@
             "1pl": "αἰτοῦμεν",
             "2pl": "αἰτεῖτε",
             "3pl": "αἰτοῦσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -174,6 +284,24 @@
             "1pl": "αἰτούμεθα",
             "2pl": "αἰτεῖσθε",
             "3pl": "αἰτοῦνται"
+          },
+          "alternates": {
+            "2sg": [
+              "αἰτεῖ"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -201,6 +329,19 @@
             "1pl": "ἀκούομεν",
             "2pl": "ἀκούετε",
             "3pl": "ἀκούουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -213,6 +354,24 @@
             "1pl": "ἀκουόμεθα",
             "2pl": "ἀκούεσθε",
             "3pl": "ἀκούονται"
+          },
+          "alternates": {
+            "2sg": [
+              "ἀκούει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -239,6 +398,49 @@
             "1pl": "ἀναγιγνώσκομεν",
             "2pl": "ἀναγιγνώσκετε",
             "3pl": "ἀναγιγνώσκουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "ἀναγιγνώσκομαι",
+            "2sg": "ἀναγιγνώσκῃ",
+            "3sg": "ἀναγιγνώσκεται",
+            "1pl": "ἀναγιγνωσκόμεθα",
+            "2pl": "ἀναγιγνώσκεσθε",
+            "3pl": "ἀναγιγνώσκονται"
+          },
+          "alternates": {
+            "2sg": [
+              "ἀναγιγνώσκει"
+            ]
+          },
+          "review": {
+            "tier": "candidate_only",
+            "source_urls": [],
+            "note": "Voz generada como candidata morfológica, pendiente de corroboración lexicográfica para este lema.",
+            "per_person": {
+              "1sg": "candidate",
+              "2sg": "candidate",
+              "3sg": "candidate",
+              "1pl": "candidate",
+              "2pl": "candidate",
+              "3pl": "candidate"
+            }
           }
         }
       ]
@@ -265,6 +467,19 @@
             "1pl": "ἀνακράζομεν",
             "2pl": "ἀνακράζετε",
             "3pl": "ἀνακράζουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -292,6 +507,19 @@
             "1pl": "ἀποθνῄσκομεν",
             "2pl": "ἀποθνῄσκετε",
             "3pl": "ἀποθνῄσκουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -318,6 +546,19 @@
             "1pl": "ἀποκτείνομεν",
             "2pl": "ἀποκτείνετε",
             "3pl": "ἀποκτείνουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -330,6 +571,24 @@
             "1pl": "ἀποκτεινόμεθα",
             "2pl": "ἀποκτείνεσθε",
             "3pl": "ἀποκτείνονται"
+          },
+          "alternates": {
+            "2sg": [
+              "ἀποκτείνει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -356,6 +615,19 @@
             "1pl": "ἀποπλέομεν",
             "2pl": "ἀποπλεῖτε",
             "3pl": "ἀποπλέουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -382,6 +654,51 @@
             "1pl": "ἁρπάζομεν",
             "2pl": "ἁρπάζετε",
             "3pl": "ἁρπάζουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "ἁρπάζομαι",
+            "2sg": "ἁρπάζῃ",
+            "3sg": "ἁρπάζεται",
+            "1pl": "ἁρπαζόμεθα",
+            "2pl": "ἁρπάζεσθε",
+            "3pl": "ἁρπάζονται"
+          },
+          "alternates": {
+            "2sg": [
+              "ἁρπάζει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://atlas.perseus.tufts.edu/dictionaries/entry/urn:cite2:scaife-viewer:dictionaries.v1:lsj-n15399/"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -409,6 +726,19 @@
             "1pl": "ἄρχομεν",
             "2pl": "ἄρχετε",
             "3pl": "ἄρχουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -421,6 +751,24 @@
             "1pl": "ἀρχόμεθα",
             "2pl": "ἄρχεσθε",
             "3pl": "ἄρχονται"
+          },
+          "alternates": {
+            "2sg": [
+              "ἄρχει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -447,6 +795,19 @@
             "1pl": "αὐλοῦμεν",
             "2pl": "αὐλεῖτε",
             "3pl": "αὐλοῦσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -473,6 +834,24 @@
             "1pl": "ἀφικνούμεθα",
             "2pl": "ἀφικνεῖσθε",
             "3pl": "ἀφικνοῦνται"
+          },
+          "alternates": {
+            "2sg": [
+              "ἀφικνεῖ"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -499,6 +878,19 @@
             "1pl": "βάλλομεν",
             "2pl": "βάλλετε",
             "3pl": "βάλλουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -511,6 +903,24 @@
             "1pl": "βαλλόμεθα",
             "2pl": "βάλλεσθε",
             "3pl": "βάλλονται"
+          },
+          "alternates": {
+            "2sg": [
+              "βάλλει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -538,6 +948,19 @@
             "1pl": "βασιλεύομεν",
             "2pl": "βασιλεύετε",
             "3pl": "βασιλεύουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -569,6 +992,21 @@
             "2sg": [
               "βούλῃ"
             ]
+          },
+          "review": {
+            "tier": "direct_paradigm",
+            "source_urls": [
+              "https://en.wiktionary.org/wiki/βούλομαι"
+            ],
+            "note": "Seis personas contrastadas con un paradigma publicado; revisar variantes dialectales o contextuales.",
+            "per_person": {
+              "1sg": "reference_checked",
+              "2sg": "reference_checked",
+              "3sg": "reference_checked",
+              "1pl": "reference_checked",
+              "2pl": "reference_checked",
+              "3pl": "reference_checked"
+            }
           }
         }
       ]
@@ -596,6 +1034,24 @@
             "1pl": "γιγνόμεθα",
             "2pl": "γίγνεσθε",
             "3pl": "γίγνονται"
+          },
+          "alternates": {
+            "2sg": [
+              "γίγνει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -623,6 +1079,19 @@
             "1pl": "γιγνώσκομεν",
             "2pl": "γιγνώσκετε",
             "3pl": "γιγνώσκουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -635,6 +1104,24 @@
             "1pl": "γιγνωσκόμεθα",
             "2pl": "γιγνώσκεσθε",
             "3pl": "γιγνώσκονται"
+          },
+          "alternates": {
+            "2sg": [
+              "γιγνώσκει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -662,6 +1149,19 @@
             "1pl": "γράφομεν",
             "2pl": "γράφετε",
             "3pl": "γράφουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -674,6 +1174,24 @@
             "1pl": "γραφόμεθα",
             "2pl": "γράφεσθε",
             "3pl": "γράφονται"
+          },
+          "alternates": {
+            "2sg": [
+              "γράφει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -700,6 +1218,51 @@
             "1pl": "διαφέρομεν",
             "2pl": "διαφέρετε",
             "3pl": "διαφέρουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "διαφέρομαι",
+            "2sg": "διαφέρῃ",
+            "3sg": "διαφέρεται",
+            "1pl": "διαφερόμεθα",
+            "2pl": "διαφέρεσθε",
+            "3pl": "διαφέρονται"
+          },
+          "alternates": {
+            "2sg": [
+              "διαφέρει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://www.greek-language.gr/greekLang/ancient_greek/tools/lexicon/lemma.html?id=64"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -726,6 +1289,51 @@
             "1pl": "διαφθείρομεν",
             "2pl": "διαφθείρετε",
             "3pl": "διαφθείρουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "διαφθείρομαι",
+            "2sg": "διαφθείρῃ",
+            "3sg": "διαφθείρεται",
+            "1pl": "διαφθειρόμεθα",
+            "2pl": "διαφθείρεσθε",
+            "3pl": "διαφθείρονται"
+          },
+          "alternates": {
+            "2sg": [
+              "διαφθείρει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://www.greek-language.gr/greekLang/ancient_greek/tools/lexicon/lemma.html?id=65"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -752,6 +1360,19 @@
             "1pl": "διδάσκομεν",
             "2pl": "διδάσκετε",
             "3pl": "διδάσκουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -764,6 +1385,24 @@
             "1pl": "διδασκόμεθα",
             "2pl": "διδάσκεσθε",
             "3pl": "διδάσκονται"
+          },
+          "alternates": {
+            "2sg": [
+              "διδάσκει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -791,6 +1430,19 @@
             "1pl": "διώκομεν",
             "2pl": "διώκετε",
             "3pl": "διώκουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -803,6 +1455,24 @@
             "1pl": "διωκόμεθα",
             "2pl": "διώκεσθε",
             "3pl": "διώκονται"
+          },
+          "alternates": {
+            "2sg": [
+              "διώκει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -829,6 +1499,19 @@
             "1pl": "δοκοῦμεν",
             "2pl": "δοκεῖτε",
             "3pl": "δοκοῦσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -855,6 +1538,19 @@
             "1pl": "δουλεύομεν",
             "2pl": "δουλεύετε",
             "3pl": "δουλεύουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -882,6 +1578,19 @@
             "1pl": "ἐθέλομεν",
             "2pl": "ἐθέλετε",
             "3pl": "ἐθέλουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -908,6 +1617,21 @@
             "1pl": "ἐσμέν",
             "2pl": "ἐστέ",
             "3pl": "εἰσί(ν)"
+          },
+          "review": {
+            "tier": "direct_paradigm",
+            "source_urls": [
+              "https://github.com/jtauber/greek-inflexion/blob/master/test_data/ltrg_test.yaml"
+            ],
+            "note": "Seis personas contrastadas con un paradigma publicado; revisar variantes dialectales o contextuales.",
+            "per_person": {
+              "1sg": "reference_checked",
+              "2sg": "reference_checked",
+              "3sg": "reference_checked",
+              "1pl": "reference_checked",
+              "2pl": "reference_checked",
+              "3pl": "reference_checked"
+            }
           }
         }
       ]
@@ -934,6 +1658,49 @@
             "1pl": "εἰσβάλλομεν",
             "2pl": "εἰσβάλλετε",
             "3pl": "εἰσβάλλουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "εἰσβάλλομαι",
+            "2sg": "εἰσβάλλῃ",
+            "3sg": "εἰσβάλλεται",
+            "1pl": "εἰσβαλλόμεθα",
+            "2pl": "εἰσβάλλεσθε",
+            "3pl": "εἰσβάλλονται"
+          },
+          "alternates": {
+            "2sg": [
+              "εἰσβάλλει"
+            ]
+          },
+          "review": {
+            "tier": "candidate_only",
+            "source_urls": [],
+            "note": "Voz generada como candidata morfológica, pendiente de corroboración lexicográfica para este lema.",
+            "per_person": {
+              "1sg": "candidate",
+              "2sg": "candidate",
+              "3sg": "candidate",
+              "1pl": "candidate",
+              "2pl": "candidate",
+              "3pl": "candidate"
+            }
           }
         }
       ]
@@ -961,6 +1728,19 @@
             "1pl": "ἐπιθυμοῦμεν",
             "2pl": "ἐπιθυμεῖτε",
             "3pl": "ἐπιθυμοῦσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -973,6 +1753,24 @@
             "1pl": "ἐπιθυμούμεθα",
             "2pl": "ἐπιθυμεῖσθε",
             "3pl": "ἐπιθυμοῦνται"
+          },
+          "alternates": {
+            "2sg": [
+              "ἐπιθυμεῖ"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1000,6 +1798,24 @@
             "1pl": "ἐρχόμεθα",
             "2pl": "ἔρχεσθε",
             "3pl": "ἔρχονται"
+          },
+          "alternates": {
+            "2sg": [
+              "ἔρχει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1026,6 +1842,51 @@
             "1pl": "εὑρίσκομεν",
             "2pl": "εὑρίσκετε",
             "3pl": "εὑρίσκουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "εὑρίσκομαι",
+            "2sg": "εὑρίσκῃ",
+            "3sg": "εὑρίσκεται",
+            "1pl": "εὑρισκόμεθα",
+            "2pl": "εὑρίσκεσθε",
+            "3pl": "εὑρίσκονται"
+          },
+          "alternates": {
+            "2sg": [
+              "εὑρίσκει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://el.wiktionary.org/wiki/%CE%B5%E1%BD%91%CF%81%CE%AF%CF%83%CE%BA%CE%BF%CE%BC%CE%B1%CE%B9"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1052,6 +1913,51 @@
             "1pl": "εὐφραίνομεν",
             "2pl": "εὐφραίνετε",
             "3pl": "εὐφραίνουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "εὐφραίνομαι",
+            "2sg": "εὐφραίνῃ",
+            "3sg": "εὐφραίνεται",
+            "1pl": "εὐφραινόμεθα",
+            "2pl": "εὐφραίνεσθε",
+            "3pl": "εὐφραίνονται"
+          },
+          "alternates": {
+            "2sg": [
+              "εὐφραίνει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://greekdoc.com/lexicon/euf.html"
+            ],
+            "note": "Voz confirmada lexicográficamente; seis personas obtenidas por patrón regular.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1079,6 +1985,19 @@
             "1pl": "ἔχομεν",
             "2pl": "ἔχετε",
             "3pl": "ἔχουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -1091,6 +2010,24 @@
             "1pl": "ἐχόμεθα",
             "2pl": "ἔχεσθε",
             "3pl": "ἔχονται"
+          },
+          "alternates": {
+            "2sg": [
+              "ἔχει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1122,6 +2059,19 @@
             "2sg": [
               "ἡγῇ"
             ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1148,6 +2098,19 @@
             "1pl": "ἥκομεν",
             "2pl": "ἥκετε",
             "3pl": "ἥκουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1175,6 +2138,19 @@
             "1pl": "θαυμάζομεν",
             "2pl": "θαυμάζετε",
             "3pl": "θαυμάζουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -1187,6 +2163,24 @@
             "1pl": "θαυμαζόμεθα",
             "2pl": "θαυμάζεσθε",
             "3pl": "θαυμάζονται"
+          },
+          "alternates": {
+            "2sg": [
+              "θαυμάζει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1214,6 +2208,19 @@
             "1pl": "θεραπεύομεν",
             "2pl": "θεραπεύετε",
             "3pl": "θεραπεύουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -1226,6 +2233,24 @@
             "1pl": "θεραπευόμεθα",
             "2pl": "θεραπεύεσθε",
             "3pl": "θεραπεύονται"
+          },
+          "alternates": {
+            "2sg": [
+              "θεραπεύει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1252,6 +2277,51 @@
             "1pl": "θύομεν",
             "2pl": "θύετε",
             "3pl": "θύουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "θύομαι",
+            "2sg": "θύῃ",
+            "3sg": "θύεται",
+            "1pl": "θυόμεθα",
+            "2pl": "θύεσθε",
+            "3pl": "θύονται"
+          },
+          "alternates": {
+            "2sg": [
+              "θύει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://el.wiktionary.org/wiki/%CE%B8%CF%8D%CF%89"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1278,6 +2348,51 @@
             "1pl": "ἱδρύομεν",
             "2pl": "ἱδρύετε",
             "3pl": "ἱδρύουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "ἱδρύομαι",
+            "2sg": "ἱδρύῃ",
+            "3sg": "ἱδρύεται",
+            "1pl": "ἱδρυόμεθα",
+            "2pl": "ἱδρύεσθε",
+            "3pl": "ἱδρύονται"
+          },
+          "alternates": {
+            "2sg": [
+              "ἱδρύει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://www.greek-language.gr/digitalResources/ancient_greek/tools/liddell-scott/search.html?lq=%E1%BC%B1%CE%B4%CF%81%CF%8D%CF%89"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1304,6 +2419,19 @@
             "1pl": "καταλείπομεν",
             "2pl": "καταλείπετε",
             "3pl": "καταλείπουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -1316,6 +2444,24 @@
             "1pl": "καταλειπόμεθα",
             "2pl": "καταλείπεσθε",
             "3pl": "καταλείπονται"
+          },
+          "alternates": {
+            "2sg": [
+              "καταλείπει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1342,6 +2488,51 @@
             "1pl": "κατέχομεν",
             "2pl": "κατέχετε",
             "3pl": "κατέχουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "κατέχομαι",
+            "2sg": "κατέχῃ",
+            "3sg": "κατέχεται",
+            "1pl": "κατεχόμεθα",
+            "2pl": "κατέχεσθε",
+            "3pl": "κατέχονται"
+          },
+          "alternates": {
+            "2sg": [
+              "κατέχει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://el.wiktionary.org/wiki/%CE%BA%CE%B1%CF%84%CE%AD%CF%87%CF%89"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1368,6 +2559,19 @@
             "1pl": "κελεύομεν",
             "2pl": "κελεύετε",
             "3pl": "κελεύουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -1380,6 +2584,24 @@
             "1pl": "κελευόμεθα",
             "2pl": "κελεύεσθε",
             "3pl": "κελεύονται"
+          },
+          "alternates": {
+            "2sg": [
+              "κελεύει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1406,6 +2628,19 @@
             "1pl": "κιθαρίζομεν",
             "2pl": "κιθαρίζετε",
             "3pl": "κιθαρίζουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1432,6 +2667,51 @@
             "1pl": "κομίζομεν",
             "2pl": "κομίζετε",
             "3pl": "κομίζουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "κομίζομαι",
+            "2sg": "κομίζῃ",
+            "3sg": "κομίζεται",
+            "1pl": "κομιζόμεθα",
+            "2pl": "κομίζεσθε",
+            "3pl": "κομίζονται"
+          },
+          "alternates": {
+            "2sg": [
+              "κομίζει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://www.greek-language.gr/digitalResources/ancient_greek/tools/liddell-scott/search.html?lq=κομίζω"
+            ],
+            "note": "Voz confirmada lexicográficamente; seis personas obtenidas por patrón regular.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1459,6 +2739,19 @@
             "1pl": "λαμβάνομεν",
             "2pl": "λαμβάνετε",
             "3pl": "λαμβάνουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -1471,6 +2764,24 @@
             "1pl": "λαμβανόμεθα",
             "2pl": "λαμβάνεσθε",
             "3pl": "λαμβάνονται"
+          },
+          "alternates": {
+            "2sg": [
+              "λαμβάνει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1498,6 +2809,19 @@
             "1pl": "λέγομεν",
             "2pl": "λέγετε",
             "3pl": "λέγουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -1510,6 +2834,24 @@
             "1pl": "λεγόμεθα",
             "2pl": "λέγεσθε",
             "3pl": "λέγονται"
+          },
+          "alternates": {
+            "2sg": [
+              "λέγει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1537,6 +2879,19 @@
             "1pl": "λείπομεν",
             "2pl": "λείπετε",
             "3pl": "λείπουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -1549,6 +2904,24 @@
             "1pl": "λειπόμεθα",
             "2pl": "λείπεσθε",
             "3pl": "λείπονται"
+          },
+          "alternates": {
+            "2sg": [
+              "λείπει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1576,6 +2949,21 @@
             "1pl": "λύομεν",
             "2pl": "λύετε",
             "3pl": "λύουσι(ν)"
+          },
+          "review": {
+            "tier": "direct_paradigm",
+            "source_urls": [
+              "https://github.com/jtauber/greek-inflexion/blob/master/test_data/dik_test.yaml"
+            ],
+            "note": "Seis personas contrastadas con un paradigma publicado; revisar variantes dialectales o contextuales.",
+            "per_person": {
+              "1sg": "reference_checked",
+              "2sg": "reference_checked",
+              "3sg": "reference_checked",
+              "1pl": "reference_checked",
+              "2pl": "reference_checked",
+              "3pl": "reference_checked"
+            }
           }
         },
         {
@@ -1588,6 +2976,26 @@
             "1pl": "λυόμεθα",
             "2pl": "λύεσθε",
             "3pl": "λύονται"
+          },
+          "alternates": {
+            "2sg": [
+              "λύει"
+            ]
+          },
+          "review": {
+            "tier": "direct_paradigm",
+            "source_urls": [
+              "https://github.com/jtauber/greek-inflexion/blob/master/test_data/dik_test.yaml"
+            ],
+            "note": "Seis personas contrastadas con un paradigma publicado; revisar variantes dialectales o contextuales.",
+            "per_person": {
+              "1sg": "reference_checked",
+              "2sg": "reference_checked",
+              "3sg": "reference_checked",
+              "1pl": "reference_checked",
+              "2pl": "reference_checked",
+              "3pl": "reference_checked"
+            }
           }
         }
       ]
@@ -1615,6 +3023,19 @@
             "1pl": "μανθάνομεν",
             "2pl": "μανθάνετε",
             "3pl": "μανθάνουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1642,6 +3063,24 @@
             "1pl": "μαχόμεθα",
             "2pl": "μάχεσθε",
             "3pl": "μάχονται"
+          },
+          "alternates": {
+            "2sg": [
+              "μάχει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1668,6 +3107,19 @@
             "1pl": "μένομεν",
             "2pl": "μένετε",
             "3pl": "μένουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1695,6 +3147,19 @@
             "1pl": "μετέχομεν",
             "2pl": "μετέχετε",
             "3pl": "μετέχουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1721,6 +3186,48 @@
             "1pl": "νικῶμεν",
             "2pl": "νικᾶτε",
             "3pl": "νικῶσι(ν)"
+          },
+          "review": {
+            "tier": "direct_paradigm",
+            "source_urls": [
+              "https://github.com/jtauber/greek-inflexion/blob/master/test_data/ltrg_test.yaml"
+            ],
+            "note": "Seis personas contrastadas con un paradigma publicado; revisar variantes dialectales o contextuales.",
+            "per_person": {
+              "1sg": "reference_checked",
+              "2sg": "reference_checked",
+              "3sg": "reference_checked",
+              "1pl": "reference_checked",
+              "2pl": "reference_checked",
+              "3pl": "reference_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "νικῶμαι",
+            "2sg": "νικᾷ",
+            "3sg": "νικᾶται",
+            "1pl": "νικώμεθα",
+            "2pl": "νικᾶσθε",
+            "3pl": "νικῶνται"
+          },
+          "review": {
+            "tier": "direct_paradigm",
+            "source_urls": [
+              "https://github.com/jtauber/greek-inflexion/blob/master/test_data/ltrg_test.yaml"
+            ],
+            "note": "Seis personas contrastadas con un paradigma publicado; revisar variantes dialectales o contextuales.",
+            "per_person": {
+              "1sg": "reference_checked",
+              "2sg": "reference_checked",
+              "3sg": "reference_checked",
+              "1pl": "reference_checked",
+              "2pl": "reference_checked",
+              "3pl": "reference_checked"
+            }
           }
         }
       ]
@@ -1747,6 +3254,19 @@
             "1pl": "νομίζομεν",
             "2pl": "νομίζετε",
             "3pl": "νομίζουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -1759,6 +3279,24 @@
             "1pl": "νομιζόμεθα",
             "2pl": "νομίζεσθε",
             "3pl": "νομίζονται"
+          },
+          "alternates": {
+            "2sg": [
+              "νομίζει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1786,6 +3324,19 @@
             "1pl": "οἰκοῦμεν",
             "2pl": "οἰκεῖτε",
             "3pl": "οἰκοῦσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -1798,6 +3349,24 @@
             "1pl": "οἰκούμεθα",
             "2pl": "οἰκεῖσθε",
             "3pl": "οἰκοῦνται"
+          },
+          "alternates": {
+            "2sg": [
+              "οἰκεῖ"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1806,7 +3375,7 @@
       "lemma": "ὁρμάομαι",
       "gloss": "'atacar'",
       "inflection": "a",
-      "deponent": true,
+      "deponent": false,
       "source_units": [
         "Sin unidad acreditada"
       ],
@@ -1815,7 +3384,7 @@
       ],
       "paradigms": [
         {
-          "voice": "deponent",
+          "voice": "middle-lexical",
           "status": "rule_generated",
           "forms": {
             "1sg": "ὁρμῶμαι",
@@ -1824,9 +3393,25 @@
             "1pl": "ὁρμώμεθα",
             "2pl": "ὁρμᾶσθε",
             "3pl": "ὁρμῶνται"
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://atlas.perseus.tufts.edu/dictionaries/entry/urn:cite2:scaife-viewer:dictionaries.v1:cunliffe_lex-n7064/"
+            ],
+            "note": "Voz confirmada lexicográficamente; seis personas obtenidas por patrón regular.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
-      ]
+      ],
+      "morphology_note": "Forma media léxica de ὁρμάω (activo existente); no deponente estricto."
     },
     {
       "lemma": "παιδεύω",
@@ -1851,6 +3436,19 @@
             "1pl": "παιδεύομεν",
             "2pl": "παιδεύετε",
             "3pl": "παιδεύουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -1863,6 +3461,24 @@
             "1pl": "παιδευόμεθα",
             "2pl": "παιδεύεσθε",
             "3pl": "παιδεύονται"
+          },
+          "alternates": {
+            "2sg": [
+              "παιδεύει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1889,6 +3505,19 @@
             "1pl": "παραλαμβάνομεν",
             "2pl": "παραλαμβάνετε",
             "3pl": "παραλαμβάνουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -1901,6 +3530,24 @@
             "1pl": "παραλαμβανόμεθα",
             "2pl": "παραλαμβάνεσθε",
             "3pl": "παραλαμβάνονται"
+          },
+          "alternates": {
+            "2sg": [
+              "παραλαμβάνει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1927,6 +3574,51 @@
             "1pl": "παρέχομεν",
             "2pl": "παρέχετε",
             "3pl": "παρέχουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "παρέχομαι",
+            "2sg": "παρέχῃ",
+            "3sg": "παρέχεται",
+            "1pl": "παρεχόμεθα",
+            "2pl": "παρέχεσθε",
+            "3pl": "παρέχονται"
+          },
+          "alternates": {
+            "2sg": [
+              "παρέχει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://logeion.org/%CF%80%CE%B1%CF%81%CE%AD%CF%87%CF%89"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1953,6 +3645,19 @@
             "1pl": "πάσχομεν",
             "2pl": "πάσχετε",
             "3pl": "πάσχουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -1979,6 +3684,19 @@
             "1pl": "πείθομεν",
             "2pl": "πείθετε",
             "3pl": "πείθουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -1991,6 +3709,24 @@
             "1pl": "πειθόμεθα",
             "2pl": "πείθεσθε",
             "3pl": "πείθονται"
+          },
+          "alternates": {
+            "2sg": [
+              "πείθει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2017,6 +3753,19 @@
             "1pl": "πέμπομεν",
             "2pl": "πέμπετε",
             "3pl": "πέμπουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -2029,6 +3778,24 @@
             "1pl": "πεμπόμεθα",
             "2pl": "πέμπεσθε",
             "3pl": "πέμπονται"
+          },
+          "alternates": {
+            "2sg": [
+              "πέμπει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2055,6 +3822,19 @@
             "1pl": "πλέομεν",
             "2pl": "πλεῖτε",
             "3pl": "πλέουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2081,6 +3861,19 @@
             "1pl": "πράττομεν",
             "2pl": "πράττετε",
             "3pl": "πράττουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -2093,6 +3886,24 @@
             "1pl": "πραττόμεθα",
             "2pl": "πράττεσθε",
             "3pl": "πράττονται"
+          },
+          "alternates": {
+            "2sg": [
+              "πράττει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2119,6 +3930,51 @@
             "1pl": "προσβάλλομεν",
             "2pl": "προσβάλλετε",
             "3pl": "προσβάλλουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "προσβάλλομαι",
+            "2sg": "προσβάλλῃ",
+            "3sg": "προσβάλλεται",
+            "1pl": "προσβαλλόμεθα",
+            "2pl": "προσβάλλεσθε",
+            "3pl": "προσβάλλονται"
+          },
+          "alternates": {
+            "2sg": [
+              "προσβάλλει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://www.greek-language.gr/digitalResources/ancient_greek/tools/liddell-scott/search.html?lq=%CF%80%CF%81%CE%BF%CF%83%CE%B2%CE%AC%CE%BB%CE%BB%CF%89"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2145,6 +4001,24 @@
             "1pl": "προσερχόμεθα",
             "2pl": "προσέρχεσθε",
             "3pl": "προσέρχονται"
+          },
+          "alternates": {
+            "2sg": [
+              "προσέρχει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2171,6 +4045,19 @@
             "1pl": "ῥίπτομεν",
             "2pl": "ῥίπτετε",
             "3pl": "ῥίπτουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -2183,6 +4070,24 @@
             "1pl": "ῥιπτόμεθα",
             "2pl": "ῥίπτεσθε",
             "3pl": "ῥίπτονται"
+          },
+          "alternates": {
+            "2sg": [
+              "ῥίπτει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2209,6 +4114,51 @@
             "1pl": "στρατεύομεν",
             "2pl": "στρατεύετε",
             "3pl": "στρατεύουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "στρατεύομαι",
+            "2sg": "στρατεύῃ",
+            "3sg": "στρατεύεται",
+            "1pl": "στρατευόμεθα",
+            "2pl": "στρατεύεσθε",
+            "3pl": "στρατεύονται"
+          },
+          "alternates": {
+            "2sg": [
+              "στρατεύει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://logeion.org/στρατεύω"
+            ],
+            "note": "Voz confirmada lexicográficamente; seis personas obtenidas por patrón regular.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2236,6 +4186,19 @@
             "1pl": "σῴζομεν",
             "2pl": "σῴζετε",
             "3pl": "σῴζουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -2248,6 +4211,24 @@
             "1pl": "σῳζόμεθα",
             "2pl": "σῴζεσθε",
             "3pl": "σῴζονται"
+          },
+          "alternates": {
+            "2sg": [
+              "σῴζει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2274,6 +4255,19 @@
             "1pl": "τελευτῶμεν",
             "2pl": "τελευτᾶτε",
             "3pl": "τελευτῶσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2300,6 +4294,51 @@
             "1pl": "τέμνομεν",
             "2pl": "τέμνετε",
             "3pl": "τέμνουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "τέμνομαι",
+            "2sg": "τέμνῃ",
+            "3sg": "τέμνεται",
+            "1pl": "τεμνόμεθα",
+            "2pl": "τέμνεσθε",
+            "3pl": "τέμνονται"
+          },
+          "alternates": {
+            "2sg": [
+              "τέμνει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://classics.andrewgadsden.com/liddellandscott/entry/n103052"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2326,6 +4365,51 @@
             "1pl": "τήκομεν",
             "2pl": "τήκετε",
             "3pl": "τήκουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "τήκομαι",
+            "2sg": "τήκῃ",
+            "3sg": "τήκεται",
+            "1pl": "τηκόμεθα",
+            "2pl": "τήκεσθε",
+            "3pl": "τήκονται"
+          },
+          "alternates": {
+            "2sg": [
+              "τήκει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://greekdoc.github.io/lexicon/th.html"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2352,6 +4436,19 @@
             "1pl": "τρέχομεν",
             "2pl": "τρέχετε",
             "3pl": "τρέχουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2379,6 +4476,19 @@
             "1pl": "φέρομεν",
             "2pl": "φέρετε",
             "3pl": "φέρουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -2391,6 +4501,24 @@
             "1pl": "φερόμεθα",
             "2pl": "φέρεσθε",
             "3pl": "φέρονται"
+          },
+          "alternates": {
+            "2sg": [
+              "φέρει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2418,6 +4546,19 @@
             "1pl": "φεύγομεν",
             "2pl": "φεύγετε",
             "3pl": "φεύγουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2445,6 +4586,21 @@
             "1pl": "φιλοῦμεν",
             "2pl": "φιλεῖτε",
             "3pl": "φιλοῦσι(ν)"
+          },
+          "review": {
+            "tier": "direct_paradigm",
+            "source_urls": [
+              "https://www.parsedclassics.com/site/drills/attic-greek/w-verbs-contract-ind-mid-pass.html"
+            ],
+            "note": "Seis personas contrastadas con un paradigma publicado; revisar variantes dialectales o contextuales.",
+            "per_person": {
+              "1sg": "reference_checked",
+              "2sg": "reference_checked",
+              "3sg": "reference_checked",
+              "1pl": "reference_checked",
+              "2pl": "reference_checked",
+              "3pl": "reference_checked"
+            }
           }
         },
         {
@@ -2457,6 +4613,26 @@
             "1pl": "φιλούμεθα",
             "2pl": "φιλεῖσθε",
             "3pl": "φιλοῦνται"
+          },
+          "alternates": {
+            "2sg": [
+              "φιλεῖ"
+            ]
+          },
+          "review": {
+            "tier": "direct_paradigm",
+            "source_urls": [
+              "https://www.parsedclassics.com/site/drills/attic-greek/w-verbs-contract-ind-mid-pass.html"
+            ],
+            "note": "Seis personas contrastadas con un paradigma publicado; revisar variantes dialectales o contextuales.",
+            "per_person": {
+              "1sg": "reference_checked",
+              "2sg": "reference_checked",
+              "3sg": "reference_checked",
+              "1pl": "reference_checked",
+              "2pl": "reference_checked",
+              "3pl": "reference_checked"
+            }
           }
         }
       ]
@@ -2483,6 +4659,51 @@
             "1pl": "φονεύομεν",
             "2pl": "φονεύετε",
             "3pl": "φονεύουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "φονεύομαι",
+            "2sg": "φονεύῃ",
+            "3sg": "φονεύεται",
+            "1pl": "φονευόμεθα",
+            "2pl": "φονεύεσθε",
+            "3pl": "φονεύονται"
+          },
+          "alternates": {
+            "2sg": [
+              "φονεύει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://en.wiktionary.org/wiki/%CF%86%CE%BF%CE%BD%CE%B5%CF%8D%CE%BF%CE%BC%CE%B1%CE%B9"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2509,6 +4730,19 @@
             "1pl": "φυλάσσομεν",
             "2pl": "φυλάσσετε",
             "3pl": "φυλάσσουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -2521,6 +4755,24 @@
             "1pl": "φυλασσόμεθα",
             "2pl": "φυλάσσεσθε",
             "3pl": "φυλάσσονται"
+          },
+          "alternates": {
+            "2sg": [
+              "φυλάσσει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2547,6 +4799,19 @@
             "1pl": "φυλάττομεν",
             "2pl": "φυλάττετε",
             "3pl": "φυλάττουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         },
         {
@@ -2559,6 +4824,24 @@
             "1pl": "φυλαττόμεθα",
             "2pl": "φυλάττεσθε",
             "3pl": "φυλάττονται"
+          },
+          "alternates": {
+            "2sg": [
+              "φυλάττει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
@@ -2585,9 +4868,59 @@
             "1pl": "φύομεν",
             "2pl": "φύετε",
             "3pl": "φύουσι(ν)"
+          },
+          "review": {
+            "tier": "pattern_only",
+            "source_urls": [],
+            "note": "Patrón regular contrastado; formas individuales y restricciones léxicas aún no cotejadas.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
+          }
+        },
+        {
+          "voice": "middle-passive",
+          "status": "rule_generated",
+          "forms": {
+            "1sg": "φύομαι",
+            "2sg": "φύῃ",
+            "3sg": "φύεται",
+            "1pl": "φυόμεθα",
+            "2pl": "φύεσθε",
+            "3pl": "φύονται"
+          },
+          "alternates": {
+            "2sg": [
+              "φύει"
+            ]
+          },
+          "review": {
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://logeion.org/φύω"
+            ],
+            "note": "Voz confirmada lexicográficamente; seis personas obtenidas por patrón regular.",
+            "per_person": {
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
+            }
           }
         }
       ]
     }
-  ]
+  ],
+  "review_policy": {
+    "reference_checked": "Las seis personas del paradigma están reflejadas en la fuente indicada; no implica exhaustividad dialectal.",
+    "rule_checked": "La forma responde a un patrón gramatical documentado, pero no se ha cotejado individualmente.",
+    "candidate": "La forma es generable; su disponibilidad léxica y uso requieren revisión. No usar en corrección definitiva."
+  }
 }
