@@ -44,6 +44,13 @@ async function main(){
     gr1:{lemmas:349,withExercises:55,withoutExercises:294,importedLemmas:51,curatedLemmas:8}};
    await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({schema:1,subjects:items})});
   });
+  await page.route('https://raw.githubusercontent.com/ArchaiosMagister/GeneradorExamenes/main/data/unimorph/lat-v.json',async route=>{
+   const tags=['1;SG','2;SG','3;SG','1;PL','2;PL','3;PL'];
+   const forms=['moveō','movēs','movet','movēmus','movētis','movent'];
+   const rows=tags.map((feature,i)=>['moveo',forms[i],'V;IND;ACT;PRS;'+feature,1]);
+   while(rows.length<101)rows.push(['lema-no-curricular','x'+rows.length,'V;IND;ACT;PRS;1;SG',1]);
+   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({language:'lat',pos:'V',rows})});
+  });
   await page.route('**/functions/v1/vocabulary',async route=>{
    const request=route.request().postDataJSON();calls.push(request);
    const answers={
@@ -134,6 +141,18 @@ async function main(){
   await page.locator('#grammar-next-btn').click();
   assert.match(await page.locator('#practice').textContent(),/1 de 1 aciertos/);
 
+  // El respaldo remoto debe convertirse al mismo formato del banco local.
+  await page.selectOption('#subject','lat1');
+  await page.locator('#online-status').filter({hasText:'Respaldo online conectado'}).waitFor();
+  await page.locator('#include-imported').uncheck();
+  const backup=await page.evaluate(()=>window.GrammarPracticeDebug.available().filter(q=>q.source==='GeneradorExamenes/UniMorph'&&q.lemma==='moveo'));
+  assert.equal(backup.filter(q=>q.mode==='write').length,6);
+  assert.ok(backup.every(q=>q.subject==='lat1'&&q.category==='Morfología verbal'&&q.language==='lat'));
+  assert.match(backup[0].prompt,/moveo, movi, movitum \(2ª\)/);
+  assert.ok(backup.every(q=>q.explanation.includes('UniMorph')));
+  assert.equal(await page.locator('#include-online').isChecked(),true);
+  assert.equal(await page.locator('a[href="https://outils.biblissima.fr/en/eulexis-web/"]').count(),1);
+
   // Verificar diversidad real de paradigmas, sin UniMorph, en Latín I · UD 2.
   await page.selectOption('#subject','lat1');
   await page.locator('#none').click();
@@ -141,6 +160,7 @@ async function main(){
   await page.selectOption('#category','Morfología verbal');
   await page.selectOption('#answer-mode','write');
   await page.locator('#include-imported').uncheck();
+  await page.locator('#include-online').uncheck();
   await page.locator('#start').click();
   const different=new Set();
   for(let i=0;i<10;i++){
