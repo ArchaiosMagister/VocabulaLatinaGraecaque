@@ -108,11 +108,48 @@ async function loadImported(){
  }
  update();
 }
+let online=[],onlineRequest=0;
+async function loadOnline(){
+ const request=++onlineRequest,subject=$('subject').value;
+ online=[];
+ update();
+ if(!$('include-online').checked){
+  $('online-status').textContent='Respaldo online desactivado.';
+  return;
+ }
+ if(subject==='gr1'){
+  $('online-status').textContent='En griego no hay una fuente de conjugaciones remotas validada para autocorrección. Consulta Eulexis en el apartado de diccionarios.';
+  return;
+ }
+ if(!window.GrammarOnlineBackup){
+  $('online-status').textContent='El módulo de respaldo no está disponible.';
+  return;
+ }
+ $('online-status').textContent='Consultando el respaldo online de GeneradorExamenes…';
+ try{
+  const data=await window.GrammarOnlineBackup.load(subject);
+  if(request!==onlineRequest)return;
+  online=data.items;
+  const available=new Set(availablePool().filter(q=>q.source==='GeneradorExamenes/UniMorph'&&q.mode==='write').map(q=>norm(q.lemma)));
+  $('online-status').textContent='Respaldo online conectado: '+available.size+' verbos adicionales de tu vocabulario con formas escritas disponibles. Fuente: índice UniMorph de GeneradorExamenes.';
+ }catch(e){
+  if(request!==onlineRequest)return;
+  $('online-status').textContent='El respaldo online no responde ('+e.message+'). Los ejercicios locales siguen funcionando.';
+  online=[];
+ }
+ update();
+}
+function availablePool(){
+ const primary=exercises.concat($('include-imported').checked?imported:[]);
+ if(!$('include-online').checked||!online.length)return primary;
+ const known=new Set(primary.filter(q=>q.subject===$('subject').value&&q.category==='Morfología verbal'&&q.mode==='write'&&q.lemma).map(q=>norm(q.lemma)));
+ return primary.concat(online.filter(q=>!known.has(norm(q.lemma))));
+}
 let session=null;
 const selectedUnits=()=>new Set([...$('units').querySelectorAll('input:checked')].map(x=>x.value));
 function getItems(ignoreErrors=false){
  const subject=$('subject').value,units=selectedUnits(),cat=$('category').value,mode=$('answer-mode').value;
- return exercises.concat($('include-imported').checked?imported:[]).filter(q=>q.subject===subject&&units.has(q.unit)&&(cat==='all'||(cat==='Morfología'?q.category.startsWith('Morfología '):q.category===cat))&&(mode==='all'||q.mode===mode)&&(ignoreErrors||!$('errors').checked||progress[q.id]?.failed));
+ return availablePool().filter(q=>q.subject===subject&&units.has(q.unit)&&(cat==='all'||(cat==='Morfología'?q.category.startsWith('Morfología '):q.category===cat))&&(mode==='all'||q.mode===mode)&&(ignoreErrors||!$('errors').checked||progress[q.id]?.failed));
 }
 function stats(){
  const subject=$('subject').value;
@@ -127,11 +164,12 @@ function setupUnits(){
  $('units').innerHTML=syllabi[subject].map(([unit])=>'<label><input type="checkbox" value="'+esc(unit)+'" checked> '+esc(unit)+'</label>').join('');
  update();
  loadImported();
+ loadOnline();
 }
 function outline(){
  const subject=$('subject').value,units=selectedUnits();
  const selected=syllabi[subject].filter(([unit])=>units.has(unit));
- const available=exercises.concat($('include-imported').checked?imported:[]);
+ const available=availablePool();
  $('topic-summary').textContent=selected.length+' unidades completas seleccionadas. Puedes filtrar por morfología nominal o verbal sin dividir las unidades.';
  $('outline').innerHTML=selected.map(([unit])=>{
   const q=available.filter(x=>x.subject===subject&&x.unit===unit);
@@ -218,6 +256,7 @@ function finish(){
 $('subject').onchange=setupUnits;
 $('units').onchange=update;
 for(const id of ['category','answer-mode','errors','include-imported'])$(id).onchange=update;
+$('include-online').onchange=loadOnline;
 $('all').onclick=()=>{$('units').querySelectorAll('input').forEach(el=>el.checked=true);update()};
 $('none').onclick=()=>{$('units').querySelectorAll('input').forEach(el=>el.checked=false);update()};
 $('start').onclick=()=>start();
