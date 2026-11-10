@@ -261,5 +261,5 @@ $('all').onclick=()=>{$('units').querySelectorAll('input').forEach(el=>el.checke
 $('none').onclick=()=>{$('units').querySelectorAll('input').forEach(el=>el.checked=false);update()};
 $('start').onclick=()=>start();
 setupUnits();
-window.GrammarPracticeDebug={exercises,syllabi,variants,norm,currentQuestion:()=>session?.queue[session.i]||null}; // Datos de auditoría en la consola, sin efectos en la sesión.
+window.GrammarPracticeDebug={exercises,syllabi,variants,norm,currentQuestion:()=>session?.queue[session.i]||null,online:()=>online,available:()=>availablePool()}; // Datos de auditoría en la consola, sin efectos en la sesión.
 })();
