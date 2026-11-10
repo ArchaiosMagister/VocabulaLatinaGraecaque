@@ -8,6 +8,7 @@ on:
       - 'scripts/crosscheck_wiktextract_nominals.mjs'
       - 'tests/check-wiktextract-candidates.mjs'
       - 'tests/check-wiktextract-crosscheck.mjs'
+      - 'tests/check-wiktextract-crosscheck-fixtures.mjs'
       - 'tests/fixtures/wiktextract-*.jsonl'
       - '.github/workflows/import-wiktextract-candidates.yml'
   workflow_dispatch:
@@ -38,6 +39,8 @@ jobs:
         run: node --check scripts/import_wiktextract_candidates.mjs
       - name: Verificar el importador con ejemplos conocidos
         run: node tests/check-wiktextract-candidates.mjs
+      - name: Probar cotejo con acuerdo, discrepancia y homonimia
+        run: node tests/check-wiktextract-crosscheck-fixtures.mjs
       - name: Descargar Wiktextract y extraer candidatos del vocabulario
         if: github.event_name == 'pull_request' || matrix.language == inputs.language
         run: node scripts/import_wiktextract_candidates.mjs ${{ matrix.language }}
