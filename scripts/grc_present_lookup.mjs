@@ -41,13 +41,15 @@ export function buildIndex(data = corpus) {
           number,
           status: paradigm.status
         };
-        for (const variant of expandOptionalNu(surface)) {
-          const key = normalizeGreek(variant);
+        for (const formVariant of [surface, ...(paradigm.alternates?.[personNumber] ?? [])]) {
+          for (const variant of expandOptionalNu(formVariant)) {
+            const key = normalizeGreek(variant);
           if (!index.has(key)) index.set(key, []);
           if (!index.get(key).some(x =>
             x.lemma === record.lemma && x.voice === record.voice &&
             x.person === person && x.number === number
           )) index.get(key).push(record);
+          }
         }
       }
     }
