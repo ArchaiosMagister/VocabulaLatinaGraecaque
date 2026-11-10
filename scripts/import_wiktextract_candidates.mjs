@@ -57,9 +57,9 @@ function analyze(record){
   if(language==='lat'&&!/[a-z]/iu.test(form))continue;
   const recognized=tags.filter(t=>morphology.has(t));
   if(!recognized.length)continue;
-  const id=normalize(form)+'|'+recognized.join(';');
+  const id=normalize(form)+'|'+tags.join(';');
   if(byKey.has(id))continue;
-  byKey.set(id,{form,tags:recognized});
+  byKey.set(id,{form,tags:recognized,raw_tags:tags});
   if(byKey.size>=500)break; // bounded per lemma and part of speech
  }
  if(!byKey.size)return null;
@@ -94,9 +94,9 @@ for await(const line of reader){
  else{
   // Variants and etymology sections may create multiple records.
   const current=records.get(k);
-  const seen=new Set(current.forms.map(x=>normalize(x.form)+'|'+x.tags.join(';')));
+  const seen=new Set(current.forms.map(x=>normalize(x.form)+'|'+(x.raw_tags||x.tags).join(';')));
   for(const f of parsed.forms){
-   const id=normalize(f.form)+'|'+f.tags.join(';');
+   const id=normalize(f.form)+'|'+(f.raw_tags||f.tags).join(';');
    if(seen.has(id))continue;
    current.forms.push(f);seen.add(id);
    if(current.forms.length>=500)break;
