@@ -6,6 +6,8 @@ on:
     paths:
       - 'scripts/import_wiktextract_candidates.mjs'
       - 'scripts/crosscheck_wiktextract_nominals.mjs'
+      - 'scripts/check_collatinus_adjectives.mjs'
+      - 'tests/check-collatinus-adjectives.mjs'
       - 'tests/check-wiktextract-candidates.mjs'
       - 'tests/check-wiktextract-crosscheck.mjs'
       - 'tests/check-wiktextract-crosscheck-fixtures.mjs'
@@ -49,6 +51,11 @@ jobs:
         run: |
           node scripts/crosscheck_wiktextract_nominals.mjs ${{ matrix.language }}
           node tests/check-wiktextract-crosscheck.mjs ${{ matrix.language }}
+      - name: Comprobar adjetivos latinos con Collatinus independiente
+        if: matrix.language == 'lat' && (github.event_name == 'pull_request' || matrix.language == inputs.language)
+        run: |
+          node scripts/check_collatinus_adjectives.mjs
+          node tests/check-collatinus-adjectives.mjs
       - name: Guardar candidatos para revisión técnica
         if: github.event_name == 'pull_request' || matrix.language == inputs.language
         uses: actions/upload-artifact@v4
@@ -57,4 +64,5 @@ jobs:
           path: |
             data/wiktextract-candidates-*.json
             data/wiktextract-crosscheck-*.json
+            data/collatinus-verified-adjectives.json
           retention-days: 30
