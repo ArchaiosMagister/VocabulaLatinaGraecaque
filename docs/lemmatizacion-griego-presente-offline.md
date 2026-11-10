@@ -13,8 +13,8 @@
 | Deponentes estrictos | 7 |
 | Medios léxicos NO deponentes estrictos | 1 (ὁρμάομαι) |
 | Paradigmas con cotejo directo de seis personas | 8 |
-| Paradigmas con apoyo léxico y regla flexiva | 5 |
-| Paradigmas nuevos solo candidatos | 14 |
+| Paradigmas con apoyo léxico y regla flexiva | 17 |
+| Paradigmas nuevos solo candidatos | 2 |
 | Paradigmas sustentados por regla, pendientes de cotejo individual | 108 |
 
 Las 810 celdas **no** son 810 grafías distintas ni 810 formas individualmente atestiguadas. Una misma forma puede admitir varios análisis: λύει es tercera singular activa o segunda singular media-pasiva en su variante en -ει. También se permite la variante sin ν móvil y con ν móvil.
@@ -32,7 +32,7 @@ No se asume que toda voz media-pasiva tenga valor medio en cada contexto, ni que
 
 ## Ampliación del presente
 
-Se incorporan 19 paradigmas medio-pasivos para: ἀναγιγνώσκω, ἁρπάζω, διαφέρω, διαφθείρω, εἰσβάλλω, εὑρίσκω, εὐφραίνω, θύω, ἱδρύω, κατέχω, κομίζω, νικάω, παρέχω, προσβάλλω, στρατεύω, τέμνω, τήκω, φονεύω y φύω. Los que todavía no tienen respaldo léxico suficiente se identifican explícitamente como candidatos.
+Se incorporan 19 paradigmas medio-pasivos para: ἀναγιγνώσκω, ἁρπάζω, διαφέρω, διαφθείρω, εἰσβάλλω, εὑρίσκω, εὐφραίνω, θύω, ἱδρύω, κατέχω, κομίζω, νικάω, παρέχω, προσβάλλω, στρατεύω, τέμνω, τήκω, φονεύω y φύω. Tras el contraste de fuentes léxicas, únicamente los medios de **ἀναγιγνώσκω** y **εἰσβάλλω** permanecen como candidatos sin respaldo léxico suficiente. Las restantes nuevas voces están respaldadas al menos por una referencia léxica; sus seis personas siguen generadas por regla salvo los paradigmas cotejados íntegramente.
 
 **ὁρμάομαι no es deponente estricto:** existe ὁρμάω activo, con un significado relacionado pero diferente. La entrada de vocabulario se mantiene como medio léxico. Los siete deponentes estrictos del corpus son βούλομαι, γίγνομαι, ἔρχομαι, μάχομαι, ἀφικνέομαι, ἡγέομαι y προσέρχομαι.
 
@@ -53,6 +53,25 @@ Permanecen fuera de esta etapa **δύναμαι**, por ser atemático, los imper
 - [στρατεύω, LSJ vía Logeion](https://logeion.org/%CF%83%CF%84%CF%81%CE%B1%CF%84%CE%B5%CF%8D%CF%89).
 - [φύω, LSJ vía Logeion](https://logeion.org/%CF%86%CF%8D%CF%89).
 - [ὁρμάω, Cunliffe a través de Scaife ATLAS](https://atlas.perseus.tufts.edu/dictionaries/entry/urn%3Acite2%3Ascaife-viewer%3Adictionaries.v1%3Acunliffe_lex-n7064/).
+
+## Evidencia léxica ampliada en esta revisión
+
+Se han contrastado referencias de formas y usos de voz media-pasiva para otros doce verbos que antes eran únicamente candidatos:
+
+- [ἁρπάζω, LSJ a través de Scaife ATLAS](https://atlas.perseus.tufts.edu/dictionaries/entry/urn:cite2:scaife-viewer:dictionaries.v1:lsj-n15399/)
+- [διαφέρω, diccionario de griego antiguo](https://www.greek-language.gr/greekLang/ancient_greek/tools/lexicon/lemma.html?id=64)
+- [διαφθείρω, diccionario de griego antiguo](https://www.greek-language.gr/greekLang/ancient_greek/tools/lexicon/lemma.html?id=65)
+- [εὑρίσκομαι, Wikcionario griego](https://el.wiktionary.org/wiki/%CE%B5%E1%BD%91%CF%81%CE%AF%CF%83%CE%BA%CE%BF%CE%BC%CE%B1%CE%B9)
+- [θύω, Wikcionario griego](https://el.wiktionary.org/wiki/%CE%B8%CF%8D%CF%89)
+- [ἱδρύω, LSJ del Centro de la Lengua Griega](https://www.greek-language.gr/digitalResources/ancient_greek/tools/liddell-scott/search.html?lq=%E1%BC%B1%CE%B4%CF%81%CF%8D%CF%89)
+- [κατέχω, Wikcionario griego](https://el.wiktionary.org/wiki/%CE%BA%CE%B1%CF%84%CE%AD%CF%87%CF%89)
+- [παρέχω, LSJ vía Logeion](https://logeion.org/%CF%80%CE%B1%CF%81%CE%AD%CF%87%CF%89)
+- [προσβάλλω, LSJ del Centro de la Lengua Griega](https://www.greek-language.gr/digitalResources/ancient_greek/tools/liddell-scott/search.html?lq=%CF%80%CF%81%CE%BF%CF%83%CE%B2%CE%AC%CE%BB%CE%BB%CF%89)
+- [τέμνω, LSJ](https://classics.andrewgadsden.com/liddellandscott/entry/n103052)
+- [τήκω, GreekDoc](https://greekdoc.github.io/lexicon/th.html)
+- [φονεύομαι, Wikcionario](https://en.wiktionary.org/wiki/%CF%86%CE%BF%CE%BD%CE%B5%CF%8D%CE%BF%CE%BC%CE%B1%CE%B9)
+
+Estos enlaces se conservan por paradigma en la base. El respaldo confirma la **existencia de voz o construcción media-pasiva**, no la verificación individual de las seis personas.
 
 Los índices UniMorph existentes siguen separados y sometidos a su propia licencia. No se han mezclado corpus externos completos ni modificado el vocabulario original.
 
