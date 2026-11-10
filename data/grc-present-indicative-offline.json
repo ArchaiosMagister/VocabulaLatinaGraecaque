@@ -25,8 +25,8 @@
     "deponents": 7,
     "lexicalMiddle": 1,
     "reviewedDirect": 8,
-    "reviewedLexical": 5,
-    "candidates": 14
+    "reviewedLexical": 17,
+    "candidates": 2
   },
   "entries": [
     {
@@ -686,16 +686,18 @@
             ]
           },
           "review": {
-            "tier": "candidate_only",
-            "source_urls": [],
-            "note": "Voz generada como candidata morfológica, pendiente de corroboración lexicográfica para este lema.",
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://atlas.perseus.tufts.edu/dictionaries/entry/urn:cite2:scaife-viewer:dictionaries.v1:lsj-n15399/"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
             "per_person": {
-              "1sg": "candidate",
-              "2sg": "candidate",
-              "3sg": "candidate",
-              "1pl": "candidate",
-              "2pl": "candidate",
-              "3pl": "candidate"
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
             }
           }
         }
@@ -1248,16 +1250,18 @@
             ]
           },
           "review": {
-            "tier": "candidate_only",
-            "source_urls": [],
-            "note": "Voz generada como candidata morfológica, pendiente de corroboración lexicográfica para este lema.",
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://www.greek-language.gr/greekLang/ancient_greek/tools/lexicon/lemma.html?id=64"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
             "per_person": {
-              "1sg": "candidate",
-              "2sg": "candidate",
-              "3sg": "candidate",
-              "1pl": "candidate",
-              "2pl": "candidate",
-              "3pl": "candidate"
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
             }
           }
         }
@@ -1317,16 +1321,18 @@
             ]
           },
           "review": {
-            "tier": "candidate_only",
-            "source_urls": [],
-            "note": "Voz generada como candidata morfológica, pendiente de corroboración lexicográfica para este lema.",
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://www.greek-language.gr/greekLang/ancient_greek/tools/lexicon/lemma.html?id=65"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
             "per_person": {
-              "1sg": "candidate",
-              "2sg": "candidate",
-              "3sg": "candidate",
-              "1pl": "candidate",
-              "2pl": "candidate",
-              "3pl": "candidate"
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
             }
           }
         }
@@ -1868,16 +1874,18 @@
             ]
           },
           "review": {
-            "tier": "candidate_only",
-            "source_urls": [],
-            "note": "Voz generada como candidata morfológica, pendiente de corroboración lexicográfica para este lema.",
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://el.wiktionary.org/wiki/%CE%B5%E1%BD%91%CF%81%CE%AF%CF%83%CE%BA%CE%BF%CE%BC%CE%B1%CE%B9"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
             "per_person": {
-              "1sg": "candidate",
-              "2sg": "candidate",
-              "3sg": "candidate",
-              "1pl": "candidate",
-              "2pl": "candidate",
-              "3pl": "candidate"
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
             }
           }
         }
@@ -2301,16 +2309,18 @@
             ]
           },
           "review": {
-            "tier": "candidate_only",
-            "source_urls": [],
-            "note": "Voz generada como candidata morfológica, pendiente de corroboración lexicográfica para este lema.",
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://el.wiktionary.org/wiki/%CE%B8%CF%8D%CF%89"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
             "per_person": {
-              "1sg": "candidate",
-              "2sg": "candidate",
-              "3sg": "candidate",
-              "1pl": "candidate",
-              "2pl": "candidate",
-              "3pl": "candidate"
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
             }
           }
         }
@@ -2370,16 +2380,18 @@
             ]
           },
           "review": {
-            "tier": "candidate_only",
-            "source_urls": [],
-            "note": "Voz generada como candidata morfológica, pendiente de corroboración lexicográfica para este lema.",
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://www.greek-language.gr/digitalResources/ancient_greek/tools/liddell-scott/search.html?lq=%E1%BC%B1%CE%B4%CF%81%CF%8D%CF%89"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
             "per_person": {
-              "1sg": "candidate",
-              "2sg": "candidate",
-              "3sg": "candidate",
-              "1pl": "candidate",
-              "2pl": "candidate",
-              "3pl": "candidate"
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
             }
           }
         }
@@ -2508,16 +2520,18 @@
             ]
           },
           "review": {
-            "tier": "candidate_only",
-            "source_urls": [],
-            "note": "Voz generada como candidata morfológica, pendiente de corroboración lexicográfica para este lema.",
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://el.wiktionary.org/wiki/%CE%BA%CE%B1%CF%84%CE%AD%CF%87%CF%89"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
             "per_person": {
-              "1sg": "candidate",
-              "2sg": "candidate",
-              "3sg": "candidate",
-              "1pl": "candidate",
-              "2pl": "candidate",
-              "3pl": "candidate"
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
             }
           }
         }
@@ -3592,16 +3606,18 @@
             ]
           },
           "review": {
-            "tier": "candidate_only",
-            "source_urls": [],
-            "note": "Voz generada como candidata morfológica, pendiente de corroboración lexicográfica para este lema.",
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://logeion.org/%CF%80%CE%B1%CF%81%CE%AD%CF%87%CF%89"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
             "per_person": {
-              "1sg": "candidate",
-              "2sg": "candidate",
-              "3sg": "candidate",
-              "1pl": "candidate",
-              "2pl": "candidate",
-              "3pl": "candidate"
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
             }
           }
         }
@@ -3946,16 +3962,18 @@
             ]
           },
           "review": {
-            "tier": "candidate_only",
-            "source_urls": [],
-            "note": "Voz generada como candidata morfológica, pendiente de corroboración lexicográfica para este lema.",
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://www.greek-language.gr/digitalResources/ancient_greek/tools/liddell-scott/search.html?lq=%CF%80%CF%81%CE%BF%CF%83%CE%B2%CE%AC%CE%BB%CE%BB%CF%89"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
             "per_person": {
-              "1sg": "candidate",
-              "2sg": "candidate",
-              "3sg": "candidate",
-              "1pl": "candidate",
-              "2pl": "candidate",
-              "3pl": "candidate"
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
             }
           }
         }
@@ -4308,16 +4326,18 @@
             ]
           },
           "review": {
-            "tier": "candidate_only",
-            "source_urls": [],
-            "note": "Voz generada como candidata morfológica, pendiente de corroboración lexicográfica para este lema.",
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://classics.andrewgadsden.com/liddellandscott/entry/n103052"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
             "per_person": {
-              "1sg": "candidate",
-              "2sg": "candidate",
-              "3sg": "candidate",
-              "1pl": "candidate",
-              "2pl": "candidate",
-              "3pl": "candidate"
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
             }
           }
         }
@@ -4377,16 +4397,18 @@
             ]
           },
           "review": {
-            "tier": "candidate_only",
-            "source_urls": [],
-            "note": "Voz generada como candidata morfológica, pendiente de corroboración lexicográfica para este lema.",
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://greekdoc.github.io/lexicon/th.html"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
             "per_person": {
-              "1sg": "candidate",
-              "2sg": "candidate",
-              "3sg": "candidate",
-              "1pl": "candidate",
-              "2pl": "candidate",
-              "3pl": "candidate"
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
             }
           }
         }
@@ -4669,16 +4691,18 @@
             ]
           },
           "review": {
-            "tier": "candidate_only",
-            "source_urls": [],
-            "note": "Voz generada como candidata morfológica, pendiente de corroboración lexicográfica para este lema.",
+            "tier": "pattern_and_lexeme",
+            "source_urls": [
+              "https://en.wiktionary.org/wiki/%CF%86%CE%BF%CE%BD%CE%B5%CF%8D%CE%BF%CE%BC%CE%B1%CE%B9"
+            ],
+            "note": "La fuente documenta la forma o el uso medio-pasivo del lema; las seis personas se deducen del paradigma regular sin contraste individual.",
             "per_person": {
-              "1sg": "candidate",
-              "2sg": "candidate",
-              "3sg": "candidate",
-              "1pl": "candidate",
-              "2pl": "candidate",
-              "3pl": "candidate"
+              "1sg": "rule_checked",
+              "2sg": "rule_checked",
+              "3sg": "rule_checked",
+              "1pl": "rule_checked",
+              "2pl": "rule_checked",
+              "3pl": "rule_checked"
             }
           }
         }
