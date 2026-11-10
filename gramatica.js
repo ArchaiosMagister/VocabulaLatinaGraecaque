@@ -113,7 +113,7 @@ const attemptedOnline={lat1:new Set(),lat4:new Set()};
 function loadOnline(){
  const subject=$('subject').value;
  ++onlineRequest;
- if(onlineSubject!==subject){online=[];onlineSubject=subject}
+ if(onlineSubject!==subject){online=[];onlineSubject=subject;$('online-attribution').hidden=true;$('online-attribution-text').textContent=''}
  const enabled=$('include-online').checked&&subject!=='gr1';
  $('online-add').disabled=!enabled;
  $('online-lemma').disabled=!enabled;
@@ -135,7 +135,7 @@ async function addOnline(){
  const entry=typed?choices.find(x=>norm(x.lemma)===typed):
   choices.find(x=>!attemptedOnline[subject].has(x.lemma));
  if(!entry){
-  $('online-status').textContent=typed?'Ese lema no está entre los verbos con enunciado completo de las unidades seleccionadas.':'No quedan lemas pendientes de consulta en estas unidades.';
+  $('online-status').textContent=typed?'Ese lema no está entre las palabras flexivas identificadas para las unidades seleccionadas.':'No quedan palabras pendientes de consulta en estas unidades.';
   return;
  }
  const button=$('online-add');
@@ -145,6 +145,7 @@ async function addOnline(){
   const result=await window.GrammarOnlineBackup.load(subject,entry.lemma);
   if(request!==onlineRequest||subject!==$('subject').value)return;
   attemptedOnline[subject].add(entry.lemma);
+  if(result.attribution){$('online-attribution-text').textContent=result.attribution;$('online-attribution').hidden=false}
   if(result.items.length){
    const ids=new Set(online.map(q=>q.id));
    online.push(...result.items.filter(q=>!ids.has(q.id)));
