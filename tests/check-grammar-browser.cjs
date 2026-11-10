@@ -44,6 +44,16 @@ async function main(){
     gr1:{lemmas:349,withExercises:55,withoutExercises:294,importedLemmas:51,curatedLemmas:8}};
    await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({schema:1,subjects:items})});
   });
+  await page.route('https://latindictionary.co/api/v1/entry/laboro',async route=>{
+   const labels=['1st sg.','2nd sg.','3rd sg.','1st pl.','2nd pl.','3rd pl.'];
+   const present=['laborō','laborās','laborat','laborāmus','laborātis','laborant'];
+   const imperfect=['laborābam','laborābās','laborābat','laborābāmus','laborābātis','laborābant'];
+   const rows=labels.map((label,i)=>({label,cells:[[present[i]],[imperfect[i]]]}));
+   const body={slug:'laboro',url:'https://latindictionary.co/laboro',attribution:'Latin Dictionary; Perseus; Wiktionary CC BY-SA',
+    lemmas:[{headword:'laborō',part_of_speech:'verb',principal_parts:['laborō','laborāre','laborāvī','laborātum'],
+     inflection:'conjugation-1',paradigm:{kind:'verb',tables:[{title:'active indicative',columns:['present','imperfect'],rows}]}}]};
+   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(body)});
+  });
   await page.route('**/functions/v1/vocabulary',async route=>{
    const request=route.request().postDataJSON();calls.push(request);
    const answers={
@@ -134,6 +144,20 @@ async function main(){
   await page.locator('#grammar-next-btn').click();
   assert.match(await page.locator('#practice').textContent(),/1 de 1 aciertos/);
 
+  // El respaldo remoto se consulta de forma puntual y conserva el formato local.
+  await page.selectOption('#subject','lat1');
+  await page.locator('#online-lemma').fill('laboro');
+  await page.locator('#online-add').click();
+  await page.locator('#online-status').filter({hasText:'ejercicios adicionales'}).waitFor();
+  await page.locator('#include-imported').uncheck();
+  const backup=await page.evaluate(()=>window.GrammarPracticeDebug.available().filter(q=>q.source==='Latin Dictionary API'&&q.lemma==='laboro'));
+  assert.equal(backup.filter(q=>q.mode==='write').length,12);
+  assert.ok(backup.every(q=>q.subject==='lat1'&&q.category==='Morfología verbal'&&q.language==='lat'));
+  assert.match(backup[0].prompt,/laboro, laboravi, laboratum \(1ª\)/);
+  assert.ok(backup.every(q=>q.explanation.includes('Latin Dictionary')));
+  assert.equal(await page.locator('#include-online').isChecked(),true);
+  assert.equal(await page.locator('a[href="https://outils.biblissima.fr/en/eulexis-web/"]').count(),1);
+
   // Verificar diversidad real de paradigmas, sin UniMorph, en Latín I · UD 2.
   await page.selectOption('#subject','lat1');
   await page.locator('#none').click();
@@ -141,6 +165,7 @@ async function main(){
   await page.selectOption('#category','Morfología verbal');
   await page.selectOption('#answer-mode','write');
   await page.locator('#include-imported').uncheck();
+  await page.locator('#include-online').uncheck();
   await page.locator('#start').click();
   const different=new Set();
   for(let i=0;i<10;i++){

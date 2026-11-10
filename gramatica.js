@@ -108,11 +108,71 @@ async function loadImported(){
  }
  update();
 }
+let online=[],onlineSubject=null,onlineRequest=0;
+const attemptedOnline={lat1:new Set(),lat4:new Set()};
+function loadOnline(){
+ const subject=$('subject').value;
+ ++onlineRequest;
+ if(onlineSubject!==subject){online=[];onlineSubject=subject;$('online-attribution').hidden=true;$('online-attribution-text').textContent=''}
+ const enabled=$('include-online').checked&&subject!=='gr1';
+ $('online-add').disabled=!enabled;
+ $('online-lemma').disabled=!enabled;
+ if(subject==='gr1'){
+  $('online-status').textContent='Griego: sin API de conjugación suficientemente comprobada. Consulta Eulexis en la sección de diccionarios.';
+ }else if(!enabled){
+  $('online-status').textContent='Respaldo de Latin Dictionary desactivado; los ejercicios locales siguen disponibles.';
+ }else{
+  const added=new Set(availablePool().filter(q=>q.source==='Latin Dictionary API'&&q.mode==='write').map(q=>norm(q.lemma)));
+  $('online-status').textContent='Respaldo listo: '+added.size+' lemas adicionales cargados desde Latin Dictionary. Escribe un lema de tu vocabulario o deja el campo vacío para consultar el siguiente.';
+ }
+ update();
+}
+async function addOnline(){
+ const subject=$('subject').value,request=onlineRequest;
+ if(!$('include-online').checked||subject==='gr1'||!window.GrammarOnlineBackup)return;
+ const choices=window.GrammarOnlineBackup.candidates(subject,selectedUnits());
+ const typed=norm($('online-lemma').value.trim());
+ const entry=typed?choices.find(x=>norm(x.lemma)===typed):
+  choices.find(x=>!attemptedOnline[subject].has(x.lemma));
+ if(!entry){
+  $('online-status').textContent=typed?'Ese lema no está entre las palabras flexivas identificadas para las unidades seleccionadas.':'No quedan palabras pendientes de consulta en estas unidades.';
+  return;
+ }
+ const button=$('online-add');
+ button.disabled=true;
+ $('online-status').textContent='Consultando las formas de '+entry.lemma+' en Latin Dictionary…';
+ try{
+  const result=await window.GrammarOnlineBackup.load(subject,entry.lemma);
+  if(request!==onlineRequest||subject!==$('subject').value)return;
+  attemptedOnline[subject].add(entry.lemma);
+  if(result.attribution){$('online-attribution-text').textContent=result.attribution;$('online-attribution').hidden=false}
+  if(result.items.length){
+   const ids=new Set(online.map(q=>q.id));
+   online.push(...result.items.filter(q=>!ids.has(q.id)));
+  }
+  const available=availablePool().filter(q=>q.source==='Latin Dictionary API');
+  const lemmas=new Set(available.filter(q=>q.mode==='write').map(q=>norm(q.lemma)));
+  const state=result.items.length?
+   'Se han consultado '+result.items.length+' ejercicios de '+entry.lemma+'. Hay '+available.length+' ejercicios adicionales de '+lemmas.size+' lemas disponibles con el formato habitual.':
+   'No se incorporan formas de '+entry.lemma+': la entrada online no coincide de manera suficiente con su enunciado o su paradigma.';
+  $('online-status').textContent=state;
+  update();
+ }catch(error){
+  if(request!==onlineRequest)return;
+  $('online-status').textContent='No se ha podido consultar '+entry.lemma+' ('+error.message+'). Los ejercicios locales siguen funcionando.';
+ }finally{button.disabled=!$('include-online').checked||$('subject').value==='gr1'}
+}
+function availablePool(){
+ const primary=exercises.concat($('include-imported').checked?imported:[]);
+ if(!$('include-online').checked||!online.length)return primary;
+ const prompts=new Set(primary.map(q=>q.subject+'|'+q.unit+'|'+q.mode+'|'+norm(q.prompt)));
+ return primary.concat(online.filter(q=>!prompts.has(q.subject+'|'+q.unit+'|'+q.mode+'|'+norm(q.prompt))));
+}
 let session=null;
 const selectedUnits=()=>new Set([...$('units').querySelectorAll('input:checked')].map(x=>x.value));
 function getItems(ignoreErrors=false){
  const subject=$('subject').value,units=selectedUnits(),cat=$('category').value,mode=$('answer-mode').value;
- return exercises.concat($('include-imported').checked?imported:[]).filter(q=>q.subject===subject&&units.has(q.unit)&&(cat==='all'||(cat==='Morfología'?q.category.startsWith('Morfología '):q.category===cat))&&(mode==='all'||q.mode===mode)&&(ignoreErrors||!$('errors').checked||progress[q.id]?.failed));
+ return availablePool().filter(q=>q.subject===subject&&units.has(q.unit)&&(cat==='all'||(cat==='Morfología'?q.category.startsWith('Morfología '):q.category===cat))&&(mode==='all'||q.mode===mode)&&(ignoreErrors||!$('errors').checked||progress[q.id]?.failed));
 }
 function stats(){
  const subject=$('subject').value;
@@ -127,11 +187,12 @@ function setupUnits(){
  $('units').innerHTML=syllabi[subject].map(([unit])=>'<label><input type="checkbox" value="'+esc(unit)+'" checked> '+esc(unit)+'</label>').join('');
  update();
  loadImported();
+ loadOnline();
 }
 function outline(){
  const subject=$('subject').value,units=selectedUnits();
  const selected=syllabi[subject].filter(([unit])=>units.has(unit));
- const available=exercises.concat($('include-imported').checked?imported:[]);
+ const available=availablePool();
  $('topic-summary').textContent=selected.length+' unidades completas seleccionadas. Puedes filtrar por morfología nominal o verbal sin dividir las unidades.';
  $('outline').innerHTML=selected.map(([unit])=>{
   const q=available.filter(x=>x.subject===subject&&x.unit===unit);
@@ -218,9 +279,11 @@ function finish(){
 $('subject').onchange=setupUnits;
 $('units').onchange=update;
 for(const id of ['category','answer-mode','errors','include-imported'])$(id).onchange=update;
+$('include-online').onchange=loadOnline;
+$('online-add').onclick=addOnline;
 $('all').onclick=()=>{$('units').querySelectorAll('input').forEach(el=>el.checked=true);update()};
 $('none').onclick=()=>{$('units').querySelectorAll('input').forEach(el=>el.checked=false);update()};
 $('start').onclick=()=>start();
 setupUnits();
-window.GrammarPracticeDebug={exercises,syllabi,variants,norm,currentQuestion:()=>session?.queue[session.i]||null}; // Datos de auditoría en la consola, sin efectos en la sesión.
+window.GrammarPracticeDebug={exercises,syllabi,variants,norm,currentQuestion:()=>session?.queue[session.i]||null,online:()=>online,available:()=>availablePool()}; // Datos de auditoría en la consola, sin efectos en la sesión.
 })();
