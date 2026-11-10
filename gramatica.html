@@ -34,8 +34,10 @@
 <label for="length">Preguntas por sesión</label><select id="length"><option>10</option><option>20</option><option>50</option><option value="all">Todas las disponibles</option></select>
 <label class="check"><input id="include-imported" type="checkbox" checked> Incluir flexiones importadas de UniMorph</label>
 <p id="imported-status" class="small" aria-live="polite">Buscando índices de UniMorph…</p>
-<label class="check"><input id="include-online" type="checkbox" checked> Usar respaldo online de verbos latinos si faltan en el banco local</label>
-<p id="online-status" class="small" aria-live="polite">Comprobando fuente de respaldo…</p>
+<label class="check"><input id="include-online" type="checkbox" checked> Permitir respaldo de flexiones latinas desde el diccionario online</label>
+<label for="online-lemma">Lema que quieres incorporar (opcional)</label><input id="online-lemma" type="text" maxlength="60" autocomplete="off" placeholder="p. ej., amo o duco">
+<button type="button" id="online-add">Añadir formas de un verbo online</button>
+<p id="online-status" class="small" aria-live="polite">Respaldo disponible previa consulta, sin modificar los ejercicios locales.</p>
 <label class="check"><input id="errors" type="checkbox"> Sólo repasar fallos pendientes</label>
 <button type="button" id="start" class="primary" disabled>Empezar práctica →</button>
 <p id="available" class="small" role="status" aria-live="polite"></p>
@@ -55,7 +57,7 @@
 <details class="help"><summary>Consultar diccionarios online</summary>
 <p>Consulta complementaria para formas aún no incorporadas a la autocorrección. El resultado se abre en la página del diccionario, no modifica las respuestas de los ejercicios.</p>
 <p><a href="https://outils.biblissima.fr/fr/collatinus-web/" target="_blank" rel="noopener noreferrer">Collatinus · latín</a> · <a href="https://outils.biblissima.fr/en/eulexis-web/" target="_blank" rel="noopener noreferrer">Eulexis · griego</a> · <a href="https://logeion.uchicago.edu/" target="_blank" rel="noopener noreferrer">Logeion · léxico latino y griego</a></p>
-<p class="small">El respaldo automático disponible utiliza el índice verbal UniMorph del repositorio GeneradorExamenes. Sus preguntas aparecen con el mismo diseño y autocorrección de esta página; los diccionarios enlazados son referencias externas, no fuentes de soluciones importadas automáticamente.</p>
+<p class="small">El respaldo opcional de ejercicios latinos consulta las tablas estructuradas de Latin Dictionary, comprueba el enunciado del vocabulario y muestra sus preguntas con la misma tarjeta y corrección que el banco local. Los enlaces a Collatinus, Eulexis y Logeion son referencias externas, no fuentes de corrección automática.</p><p class="small">Fuente del respaldo: <a href="https://latindictionary.co/docs/api" target="_blank" rel="noopener noreferrer">Latin Dictionary API</a>; datos lexicográficos de Wikcionario y Perseus, entre otras fuentes, con atribución y licencias indicadas por su proveedor.</p>
 </details>
 </div>
 </section></div><footer>Una forma comprendida, un paso más.</footer>
