@@ -51,7 +51,7 @@ window.GrammarOnlineBackup=(()=>{
  }
  function asQuestions(subject,data){
   const lex=vocabulary(subject),introduced=subject==='lat1'?1:2;
-  const topic=subject==='lat1'?'El presente de indicativo y el infinitivo':'Presente';
+  const introducedTopic=subject==='lat1'?'El presente de indicativo y el infinitivo':'Presente';
   const grouped=new Map();
   for(const row of data.rows){
    if(!Array.isArray(row)||row.length<4)continue;
@@ -76,7 +76,7 @@ window.GrammarOnlineBackup=(()=>{
    const unitNum=Math.max(introduced,lex.get(lemma).when);
    const last=subject==='lat1'?10:8;
    if(unitNum>last)continue;
-   const unit='UD '+unitNum;
+   const unit='UD '+unitNum,topic=unitNum===introduced?introducedTopic:'Repaso morfológico acumulativo';
    const readings=new Map();
    for(const [feature,surfaces]of forms)for(const normalized of surfaces.keys()){
     if(!readings.has(normalized))readings.set(normalized,new Set());
