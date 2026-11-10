@@ -27,7 +27,7 @@ permissions:
 jobs:
   verificar:
     name: Validación antes de publicar en clase
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - name: Descargar el código de la propuesta
