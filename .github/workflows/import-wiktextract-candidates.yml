@@ -5,7 +5,9 @@ on:
     branches: [main]
     paths:
       - 'scripts/import_wiktextract_candidates.mjs'
+      - 'scripts/crosscheck_wiktextract_nominals.mjs'
       - 'tests/check-wiktextract-candidates.mjs'
+      - 'tests/check-wiktextract-crosscheck.mjs'
       - 'tests/fixtures/wiktextract-*.jsonl'
       - '.github/workflows/import-wiktextract-candidates.yml'
   workflow_dispatch:
@@ -39,10 +41,17 @@ jobs:
       - name: Descargar Wiktextract y extraer candidatos del vocabulario
         if: github.event_name == 'pull_request' || matrix.language == inputs.language
         run: node scripts/import_wiktextract_candidates.mjs ${{ matrix.language }}
+      - name: Cotejar paradigmas nominales y detectar contradicciones
+        if: github.event_name == 'pull_request' || matrix.language == inputs.language
+        run: |
+          node scripts/crosscheck_wiktextract_nominals.mjs ${{ matrix.language }}
+          node tests/check-wiktextract-crosscheck.mjs ${{ matrix.language }}
       - name: Guardar candidatos para revisión técnica
         if: github.event_name == 'pull_request' || matrix.language == inputs.language
         uses: actions/upload-artifact@v4
         with:
           name: wiktextract-candidatos-${{ matrix.language }}
-          path: data/wiktextract-candidates-*.json
+          path: |
+            data/wiktextract-candidates-*.json
+            data/wiktextract-crosscheck-*.json
           retention-days: 30
