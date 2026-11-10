@@ -16,6 +16,13 @@ for(const [name,url] of checks){
   if(type.includes('json')){
    const data=await response.json();
    sample=JSON.stringify(data).slice(0,1400);
+   if(name==='latin-entry'){
+    const summary=Object.entries(data).map(([key,value])=>[key,Array.isArray(value)?'array '+value.length:typeof value==='object'&&value?'object '+Object.keys(value).slice(0,20).join(','):typeof value]);
+    const lemma=data.lemmas?.[0]||{};
+    const candidates=Object.entries(lemma).filter(([k])=>/inflect|form|table|paradigm/i.test(k));
+    console.log('latin-entry-structure: '+JSON.stringify({top:summary,lemmaKeys:Object.keys(lemma),candidates}).slice(0,3500));
+   }
+
   }else{
    const text=await response.text();
    sample='HTML '+text.length+' characters';
