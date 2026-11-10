@@ -108,42 +108,64 @@ async function loadImported(){
  }
  update();
 }
-let online=[],onlineRequest=0;
-async function loadOnline(){
- const request=++onlineRequest,subject=$('subject').value;
- online=[];
- update();
- if(!$('include-online').checked){
-  $('online-status').textContent='Respaldo online desactivado.';
-  return;
- }
+let online=[],onlineSubject=null,onlineRequest=0;
+const attemptedOnline={lat1:new Set(),lat4:new Set()};
+function loadOnline(){
+ const subject=$('subject').value;
+ ++onlineRequest;
+ if(onlineSubject!==subject){online=[];onlineSubject=subject}
+ const enabled=$('include-online').checked&&subject!=='gr1';
+ $('online-add').disabled=!enabled;
+ $('online-lemma').disabled=!enabled;
  if(subject==='gr1'){
-  $('online-status').textContent='En griego no hay una fuente de conjugaciones remotas validada para autocorrección. Consulta Eulexis en el apartado de diccionarios.';
-  return;
- }
- if(!window.GrammarOnlineBackup){
-  $('online-status').textContent='El módulo de respaldo no está disponible.';
-  return;
- }
- $('online-status').textContent='Consultando el respaldo online de GeneradorExamenes…';
- try{
-  const data=await window.GrammarOnlineBackup.load(subject);
-  if(request!==onlineRequest)return;
-  online=data.items;
-  const available=new Set(availablePool().filter(q=>q.source==='GeneradorExamenes/UniMorph'&&q.mode==='write').map(q=>norm(q.lemma)));
-  $('online-status').textContent='Respaldo online conectado: '+available.size+' verbos adicionales de tu vocabulario con formas escritas disponibles. Fuente: índice UniMorph de GeneradorExamenes.';
- }catch(e){
-  if(request!==onlineRequest)return;
-  $('online-status').textContent='El respaldo online no responde ('+e.message+'). Los ejercicios locales siguen funcionando.';
-  online=[];
+  $('online-status').textContent='Griego: sin API de conjugación suficientemente comprobada. Consulta Eulexis en la sección de diccionarios.';
+ }else if(!enabled){
+  $('online-status').textContent='Respaldo de Latin Dictionary desactivado; los ejercicios locales siguen disponibles.';
+ }else{
+  const added=new Set(availablePool().filter(q=>q.source==='Latin Dictionary API'&&q.mode==='write').map(q=>norm(q.lemma)));
+  $('online-status').textContent='Respaldo listo: '+added.size+' lemas adicionales cargados desde Latin Dictionary. Escribe un lema de tu vocabulario o deja el campo vacío para consultar el siguiente.';
  }
  update();
+}
+async function addOnline(){
+ const subject=$('subject').value,request=onlineRequest;
+ if(!$('include-online').checked||subject==='gr1'||!window.GrammarOnlineBackup)return;
+ const choices=window.GrammarOnlineBackup.candidates(subject,selectedUnits());
+ const typed=norm($('online-lemma').value.trim());
+ const entry=typed?choices.find(x=>norm(x.lemma)===typed):
+  choices.find(x=>!attemptedOnline[subject].has(x.lemma));
+ if(!entry){
+  $('online-status').textContent=typed?'Ese lema no está entre los verbos con enunciado completo de las unidades seleccionadas.':'No quedan lemas pendientes de consulta en estas unidades.';
+  return;
+ }
+ const button=$('online-add');
+ button.disabled=true;
+ $('online-status').textContent='Consultando las formas de '+entry.lemma+' en Latin Dictionary…';
+ try{
+  const result=await window.GrammarOnlineBackup.load(subject,entry.lemma);
+  if(request!==onlineRequest||subject!==$('subject').value)return;
+  attemptedOnline[subject].add(entry.lemma);
+  if(result.items.length){
+   const ids=new Set(online.map(q=>q.id));
+   online.push(...result.items.filter(q=>!ids.has(q.id)));
+  }
+  const available=availablePool().filter(q=>q.source==='Latin Dictionary API');
+  const lemmas=new Set(available.filter(q=>q.mode==='write').map(q=>norm(q.lemma)));
+  const state=result.items.length?
+   'Se han consultado '+result.items.length+' ejercicios de '+entry.lemma+'. Hay '+available.length+' ejercicios adicionales de '+lemmas.size+' lemas disponibles con el formato habitual.':
+   'No se incorporan formas de '+entry.lemma+': la entrada online no coincide de manera suficiente con su enunciado o su paradigma.';
+  $('online-status').textContent=state;
+  update();
+ }catch(error){
+  if(request!==onlineRequest)return;
+  $('online-status').textContent='No se ha podido consultar '+entry.lemma+' ('+error.message+'). Los ejercicios locales siguen funcionando.';
+ }finally{button.disabled=!$('include-online').checked||$('subject').value==='gr1'}
 }
 function availablePool(){
  const primary=exercises.concat($('include-imported').checked?imported:[]);
  if(!$('include-online').checked||!online.length)return primary;
- const known=new Set(primary.filter(q=>q.subject===$('subject').value&&q.category==='Morfología verbal'&&q.mode==='write'&&q.lemma).map(q=>norm(q.lemma)));
- return primary.concat(online.filter(q=>!known.has(norm(q.lemma))));
+ const prompts=new Set(primary.map(q=>q.subject+'|'+q.unit+'|'+q.mode+'|'+norm(q.prompt)));
+ return primary.concat(online.filter(q=>!prompts.has(q.subject+'|'+q.unit+'|'+q.mode+'|'+norm(q.prompt))));
 }
 let session=null;
 const selectedUnits=()=>new Set([...$('units').querySelectorAll('input:checked')].map(x=>x.value));
@@ -257,6 +279,7 @@ $('subject').onchange=setupUnits;
 $('units').onchange=update;
 for(const id of ['category','answer-mode','errors','include-imported'])$(id).onchange=update;
 $('include-online').onchange=loadOnline;
+$('online-add').onclick=addOnline;
 $('all').onclick=()=>{$('units').querySelectorAll('input').forEach(el=>el.checked=true);update()};
 $('none').onclick=()=>{$('units').querySelectorAll('input').forEach(el=>el.checked=false);update()};
 $('start').onclick=()=>start();
