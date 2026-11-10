@@ -7,6 +7,8 @@ on:
       - 'scripts/import_wiktextract_candidates.mjs'
       - 'scripts/crosscheck_wiktextract_nominals.mjs'
       - 'scripts/check_collatinus_adjectives.mjs'
+      - 'scripts/check_greek_regular_datives.mjs'
+      - 'tests/check-greek-regular-datives.mjs'
       - 'tests/check-collatinus-adjectives.mjs'
       - 'tests/check-wiktextract-candidates.mjs'
       - 'tests/check-wiktextract-crosscheck.mjs'
@@ -56,6 +58,11 @@ jobs:
         run: |
           node scripts/check_collatinus_adjectives.mjs
           node tests/check-collatinus-adjectives.mjs
+      - name: Contrastar dativos griegos con reglas de declinación
+        if: matrix.language == 'grc' && (github.event_name == 'pull_request' || matrix.language == inputs.language)
+        run: |
+          node scripts/check_greek_regular_datives.mjs
+          node tests/check-greek-regular-datives.mjs
       - name: Guardar candidatos para revisión técnica
         if: github.event_name == 'pull_request' || matrix.language == inputs.language
         uses: actions/upload-artifact@v4
@@ -65,4 +72,5 @@ jobs:
             data/wiktextract-candidates-*.json
             data/wiktextract-crosscheck-*.json
             data/collatinus-verified-adjectives.json
+            data/greek-regular-datives.json
           retention-days: 30
