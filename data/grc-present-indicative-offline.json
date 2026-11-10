@@ -4,7 +4,7 @@
   "dialect": "Attic / classical school paradigm",
   "scope": "Present indicative, 6 persons: thematic -ω active and middle-passive; contract -έω/-άω; deponents -ομαι; explicit εἰμί; exceptional πλέω and ἀποπλέω.",
   "provenance": "Greek I teacher vocabulary (data.js), with generated thematic paradigms and explicit paradigms for εἰμί/πλέω.",
-  "verification": "rule_generated = classroom paradigms derived from patterns, not independent corpus attestations; explicit_exception = specified full forms. Do not use for automatic marking without targeted validation.",
+  "verification": "rule_generated = classroom paradigms derived from patterns, not independent corpus attestations; explicit_exception = specified full forms. Do not use for automatic marking without targeted validation. Alternativas documentadas en alternates también deben indexarse.",
   "excludes": [
     "δύναμαι (athematic; out of scope)",
     "impersonal δεῖ/χρή (no full six-person paradigm)",
@@ -559,11 +559,16 @@
           "status": "rule_generated",
           "forms": {
             "1sg": "βούλομαι",
-            "2sg": "βούλῃ",
+            "2sg": "βούλει",
             "3sg": "βούλεται",
             "1pl": "βουλόμεθα",
             "2pl": "βούλεσθε",
             "3pl": "βούλονται"
+          },
+          "alternates": {
+            "2sg": [
+              "βούλῃ"
+            ]
           }
         }
       ]
@@ -1107,11 +1112,16 @@
           "status": "rule_generated",
           "forms": {
             "1sg": "ἡγοῦμαι",
-            "2sg": "ἡγῇ",
+            "2sg": "ἡγεῖ",
             "3sg": "ἡγεῖται",
             "1pl": "ἡγούμεθα",
             "2pl": "ἡγεῖσθε",
             "3pl": "ἡγοῦνται"
+          },
+          "alternates": {
+            "2sg": [
+              "ἡγῇ"
+            ]
           }
         }
       ]
