@@ -16,7 +16,15 @@ La comparación utiliza el **lema, categoría léxica, caso, número y (para adj
 | Paradigmas con contradicción en casillas compartidas | 3 | 16 |
 | Entradas sin casillas cotejables en UniMorph | 11 | 70 |
 
-Las 193 casillas adicionales **no son todavía respuestas publicadas ni se consideran aprobadas**. Las cifras de concordancia tampoco equivalen a paradigmas completos o a un porcentaje global de cobertura.
+Las 193 casillas adicionales **no son todavía respuestas publicadas ni se consideran aprobadas**.
+
+## Segunda comprobación de formas regulares
+
+La integración con un modelo **independiente** de [Collatinus](https://github.com/biblissima/collatinus) (revisión fijada `e1fef78818b5c5f8e7f9754cf58f50062b30abff`, licencia GPL-3.0) ha confirmado **40 adjetivos latinos de tres terminaciones** para genitivo y dativo singular femenino: **80 casillas**. De los 62 adjetivos propuestos por el primer cotejo, 13 tenían un enunciado docente que no correspondía a este tipo de adjetivo (por ejemplo, nombres propios) y 9 no tenían un modelo cotejable; se excluyen. 
+
+Para los sustantivos griegos, el genitivo y el nominativo recogidos en UniMorph permiten contrastar los dativos propuestos con **reglas regulares explícitas de primera, segunda y tercera declinación**. Han encajado **63 de 69**; seis casos, en especial masculinos de primera declinación, quedan fuera de esta versión de las reglas y necesitan tratamiento especial.
+
+Ambos resultados permanecen etiquetados **PENDIENTES DE PUBLICACIÓN EN CLASE** mientras se comprueban la unidad curricular y las posibles duplicaciones con el banco existente. Los archivos `data/collatinus-verified-adjectives.json` y `data/greek-regular-datives.json` se generan como artefactos técnicos en GitHub Actions; no se cargan en `gramatica.html`. Las cifras de concordancia tampoco equivalen a paradigmas completos o a un porcentaje global de cobertura.
 
 **Limitación importante: las fuentes no son totalmente independientes.** El latín de UniMorph procede de Wikcionario inglés, como Wiktextract; un mismo error editorial puede estar presente en ambos índices. Por tanto, la concordancia entre ellos solo permite una **comprobación de consistencia**, no una certificación filológica.
 
