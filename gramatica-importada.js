@@ -5,6 +5,15 @@ window.GrammarImported=(()=>{
  const norm=s=>String(s||'').toLowerCase().normalize('NFD')
   .replace(/\u0345/g,'ι').replace(/\p{M}/gu,'').replace(/æ/g,'ae').replace(/œ/g,'oe')
   .replace(/ς/g,'σ').trim();
+ // Los acentos y espíritus distinguen lemas en ático: νόμος/νομός,
+ // βίος/βιός y δῆμος/δημός no deben heredar formas uno del otro.
+ const atticHeadKey=s=>String(s||'').trim().toLowerCase().normalize('NFD')
+  .replace(/[\u0304\u0306]/g,'').replace(/\u0300/g,'\u0301')
+  .normalize('NFC');
+ const atticHeadMatches=(sourceHead,teacherForm)=>{
+  const head=String(teacherForm||'').split(/[,+(]/)[0].trim().split('/')[0].trim();
+  return atticHeadKey(sourceHead)===atticHeadKey(head);
+ };
  const CASES={NOM:'nominativo',GEN:'genitivo',DAT:'dativo',ACC:'acusativo',VOC:'vocativo',ABL:'ablativo'};
  const GENDER={MASC:'masculino',FEM:'femenino',NEUT:'neutro'};
  const NUMBER={SG:'singular',PL:'plural'};
@@ -175,6 +184,9 @@ function readingKey(feat){return feat.join(';')}
     if(!Array.isArray(row)||row.length<3)continue;
     const [head,surface,tags]=row,entry=lex.get(norm(head));
     if(!entry)continue;
+    // UniMorph no indica dialecto por fila; la equivalencia de lema con
+    // acento exacto es condición NECESARIA, no certificación ática completa.
+    if(subject==='gr1'&&!atticHeadMatches(head,entry.form))continue;
     rows++;
     const features=splitFeatures(String(tags).split(';'));
     for(const feat of features){
@@ -239,5 +251,5 @@ function readingKey(feat){return feat.join(';')}
   cache.set(subject,promise);
   try{return await promise}catch(e){cache.delete(subject);throw e}
  }
- return {load,getManifest,norm,part,description};
+ return {load,getManifest,norm,part,description,atticHeadKey,atticHeadMatches};
 })();
