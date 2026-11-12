@@ -5,7 +5,7 @@ Generada automáticamente desde las flexiones importadas y los paradigmas docent
 
 | Curso | Lemas | Con ejercicios | Sin ejercicios | UniMorph | Paradigmas docentes |
 |---|---:|---:|---:|---:|---:|
-| Latín I | 664 | 282 | 382 | 261 | 30 |
+| Latín I | 663 | 283 | 380 | 262 | 30 |
 | Latín 4.º ESO | 328 | 171 | 157 | 158 | 19 |
 | Griego I | 349 | 55 | 294 | 51 | 8 |
 
@@ -16,9 +16,9 @@ Las palabras invariables no necesitan paradigma y las categorías estimadas prec
 
 | Tipo estimado | Lemas | Con ejercicios |
 |---|---:|---:|
-| nominal | 261 | 261 |
+| nominal | 262 | 262 |
 | verbal | 200 | 21 |
-| nominal-probable | 147 | 0 |
+| nominal-probable | 145 | 0 |
 | invariable | 51 | 0 |
 | por-clasificar | 5 | 0 |
 
@@ -46,7 +46,7 @@ Ejemplos prioritarios sin ejercicios:
 - Antonius, –i · nominal-probable · UD 2
 - appareo, apparui, apparitum (2ª) · verbal · UD 9–10
 - appello (1ª) · verbal · UD 5
-- appropinquo, appropinquavi, approprinquatum (1ª) · verbal · UD 2, UD 6
+- appropinquo, appropinquavi, appropinquatum (1ª) · verbal · UD 2, UD 6
 - Ardea, –æ · nominal-probable · UD 9–10
 - Aristides, –is (m.) · nominal-probable · UD 8
 

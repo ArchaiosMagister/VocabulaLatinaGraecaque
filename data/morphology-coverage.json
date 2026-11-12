@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-12T11:29:46.665Z",
+  "generated_at": "2026-11-12T12:12:39.888Z",
   "definition": "Presencia de al menos un ejercicio escrito autocorregible; NO supone paradigma completo.",
   "source_revisions": {
     "lat": "050924c9f013e6aba4d7c87be243a1d79b6c5b10",
@@ -9,24 +9,24 @@
   "subjects": {
     "lat1": {
       "entries": 856,
-      "lemmas": 664,
-      "withExercises": 282,
-      "withoutExercises": 382,
-      "importedLemmas": 261,
+      "lemmas": 663,
+      "withExercises": 283,
+      "withoutExercises": 380,
+      "importedLemmas": 262,
       "curatedLemmas": 30,
       "importedRows": 8461,
-      "importedQuestions": 5766,
+      "importedQuestions": 5783,
       "types": {
         "nominal": {
-          "lemmas": 261,
-          "withExercises": 261
+          "lemmas": 262,
+          "withExercises": 262
         },
         "verbal": {
           "lemmas": 200,
           "withExercises": 21
         },
         "nominal-probable": {
-          "lemmas": 147,
+          "lemmas": 145,
           "withExercises": 0
         },
         "invariable": {
@@ -250,7 +250,7 @@
         },
         {
           "lemma": "appropinquo",
-          "entry": "appropinquo, appropinquavi, approprinquatum (1ª)",
+          "entry": "appropinquo, appropinquavi, appropinquatum (1ª)",
           "units": [
             "UD 2",
             "UD 6"
@@ -826,7 +826,7 @@
         },
         {
           "lemma": "deligo",
-          "entry": "deligo, delegi, delictum (3ª)",
+          "entry": "deligo, delegi, delectum (3ª)",
           "units": [
             "UD 4",
             "UD 5"
@@ -1155,7 +1155,7 @@
         },
         {
           "lemma": "fugio",
-          "entry": "fugio, fugi – (4ª)",
+          "entry": "fugio, fugi – (mx.)",
           "units": [
             "UD 6",
             "UD 9–10"
@@ -1660,7 +1660,7 @@
         },
         {
           "lemma": "maneo",
-          "entry": "maneo, manui, mansum (2ª)",
+          "entry": "maneo, mansi, mansum (2ª)",
           "units": [
             "UD 5",
             "UD 9–10"
@@ -1839,7 +1839,7 @@
         },
         {
           "lemma": "moveo",
-          "entry": "moveo, movi, movitum (2ª)",
+          "entry": "moveo, movi, motum (2ª)",
           "units": [
             "UD 1",
             "UD 11–12"
@@ -2259,7 +2259,7 @@
         },
         {
           "lemma": "peto",
-          "entry": "peto, petivi, petitium (3ª)",
+          "entry": "peto, petivi, petitum (3ª)",
           "units": [
             "UD 11–12",
             "UD 8"
@@ -2784,14 +2784,6 @@
           "type": "nominal-probable"
         },
         {
-          "lemma": "sol",
-          "entry": "sol, solis (m.)",
-          "units": [
-            "UD 11–12"
-          ],
-          "type": "nominal-probable"
-        },
-        {
           "lemma": "soleo",
           "entry": "soleo, solitus sum (2ª)",
           "units": [
@@ -2800,14 +2792,6 @@
             "UD 9–10"
           ],
           "type": "verbal"
-        },
-        {
-          "lemma": "solis",
-          "entry": "solis, –is (m.)",
-          "units": [
-            "UD 7"
-          ],
-          "type": "nominal-probable"
         },
         {
           "lemma": "solvo",
@@ -7161,7 +7145,7 @@
         },
         {
           "lemma": "υπερ",
-          "entry": "ὐπέρ + genitivo / acusativo",
+          "entry": "ὑπέρ + genitivo / acusativo",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -7169,7 +7153,7 @@
         },
         {
           "lemma": "υπο",
-          "entry": "ὐπό + genitivo / acusativo / dativo",
+          "entry": "ὑπό + genitivo / acusativo / dativo",
           "units": [
             "Preposiciones"
           ],
