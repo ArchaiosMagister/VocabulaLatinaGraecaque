@@ -71,7 +71,7 @@ const report={schema:1,referenceDate:fixture.checkedAt,summary,
  sourceCommits:{lat:manifest.languages.lat.source_commit,grc:manifest.languages.grc.source_commit},
  sourceRows:{lat:manifest.languages.lat.retained_rows,grc:manifest.languages.grc.retained_rows},
  results};
-fs.writeFileSync(path.join(reportDir,'auditoria-100-formas.json'),JSON.stringify(report,null,2)+'\\n');
+fs.writeFileSync(path.join(reportDir,'auditoria-100-formas.json'),JSON.stringify(report,null,2)+'\n');
 const md=[
  '# Auditoría de 100 formas flexionadas',
  '',
@@ -88,7 +88,7 @@ const md=[
  ...results.map((r,i)=>'| '+(i+1)+' | '+r.language+' | '+r.lemma+' | '+r.feature+
  ' | '+r.expected+' | '+r.status+' | '+r.sourceForms.join(', ')+' |'),
  ''
-].join('\\n');
+].join('\n');
 fs.writeFileSync(path.join(reportDir,'auditoria-100-formas.md'),md);
 const bad=results.filter(x=>['extra-variants','contradictory'].includes(x.status));
 for(const item of results)console.log(item.id+' '+item.language+' '+item.lemma+' '+item.feature+
