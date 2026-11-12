@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "checkedAt": "2026-11-12",
-  "scope": "100 cotejos individuales de formas flexionadas: 50 latinas y 50 áticas (20 paradigmas × 5 formas), incluidas las formas ausentes del índice",
+  "scope": "100 cotejos: 25 formas de Latín I, 25 de Latín de 4.º y 50 de Griego I ático (20 paradigmas × 5 formas).",
   "method": "Se compara cada caso/número con el paradigma clásico indicado. El estado encontrado/correcto, ausente o discrepante se computa a partir de los índices realmente publicados. No inventar ni marcar como acreditadas formas ausentes.",
   "checks": [
     {
@@ -282,10 +282,10 @@
     {
       "id": "L026",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "puella",
-      "teacherEntryId": "375ac1ddbace9a8c",
-      "teacherHeadword": "puella, –æ",
+      "teacherEntryId": "50355a1cdb074b2f",
+      "teacherHeadword": "pŭēlla, –æ",
       "feature": "GEN;SG",
       "expected": "puellae",
       "authority": "https://dcc.dickinson.edu/grammar/latin/case-endings-five-declensions"
@@ -293,10 +293,10 @@
     {
       "id": "L027",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "puella",
-      "teacherEntryId": "375ac1ddbace9a8c",
-      "teacherHeadword": "puella, –æ",
+      "teacherEntryId": "50355a1cdb074b2f",
+      "teacherHeadword": "pŭēlla, –æ",
       "feature": "DAT;SG",
       "expected": "puellae",
       "authority": "https://dcc.dickinson.edu/grammar/latin/case-endings-five-declensions"
@@ -304,10 +304,10 @@
     {
       "id": "L028",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "puella",
-      "teacherEntryId": "375ac1ddbace9a8c",
-      "teacherHeadword": "puella, –æ",
+      "teacherEntryId": "50355a1cdb074b2f",
+      "teacherHeadword": "pŭēlla, –æ",
       "feature": "ACC;SG",
       "expected": "puellam",
       "authority": "https://dcc.dickinson.edu/grammar/latin/case-endings-five-declensions"
@@ -315,10 +315,10 @@
     {
       "id": "L029",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "puella",
-      "teacherEntryId": "375ac1ddbace9a8c",
-      "teacherHeadword": "puella, –æ",
+      "teacherEntryId": "50355a1cdb074b2f",
+      "teacherHeadword": "pŭēlla, –æ",
       "feature": "NOM;PL",
       "expected": "puellae",
       "authority": "https://dcc.dickinson.edu/grammar/latin/case-endings-five-declensions"
@@ -326,10 +326,10 @@
     {
       "id": "L030",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "puella",
-      "teacherEntryId": "375ac1ddbace9a8c",
-      "teacherHeadword": "puella, –æ",
+      "teacherEntryId": "50355a1cdb074b2f",
+      "teacherHeadword": "pŭēlla, –æ",
       "feature": "GEN;PL",
       "expected": "puellārum",
       "authority": "https://dcc.dickinson.edu/grammar/latin/case-endings-five-declensions"
@@ -337,10 +337,10 @@
     {
       "id": "L031",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "rex",
-      "teacherEntryId": "cf23fdbd5ae52dda",
-      "teacherHeadword": "rex, regis (m.)",
+      "teacherEntryId": "bce86167d19a1d17",
+      "teacherHeadword": "rēx, regis (m.)",
       "feature": "GEN;SG",
       "expected": "rēgis",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
@@ -348,10 +348,10 @@
     {
       "id": "L032",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "rex",
-      "teacherEntryId": "cf23fdbd5ae52dda",
-      "teacherHeadword": "rex, regis (m.)",
+      "teacherEntryId": "bce86167d19a1d17",
+      "teacherHeadword": "rēx, regis (m.)",
       "feature": "DAT;SG",
       "expected": "rēgī",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
@@ -359,10 +359,10 @@
     {
       "id": "L033",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "rex",
-      "teacherEntryId": "cf23fdbd5ae52dda",
-      "teacherHeadword": "rex, regis (m.)",
+      "teacherEntryId": "bce86167d19a1d17",
+      "teacherHeadword": "rēx, regis (m.)",
       "feature": "ACC;SG",
       "expected": "rēgem",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
@@ -370,10 +370,10 @@
     {
       "id": "L034",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "rex",
-      "teacherEntryId": "cf23fdbd5ae52dda",
-      "teacherHeadword": "rex, regis (m.)",
+      "teacherEntryId": "bce86167d19a1d17",
+      "teacherHeadword": "rēx, regis (m.)",
       "feature": "NOM;PL",
       "expected": "rēgēs",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
@@ -381,10 +381,10 @@
     {
       "id": "L035",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "rex",
-      "teacherEntryId": "cf23fdbd5ae52dda",
-      "teacherHeadword": "rex, regis (m.)",
+      "teacherEntryId": "bce86167d19a1d17",
+      "teacherHeadword": "rēx, regis (m.)",
       "feature": "GEN;PL",
       "expected": "rēgum",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
@@ -392,10 +392,10 @@
     {
       "id": "L036",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "dux",
-      "teacherEntryId": "1e1aafcadae82fd6",
-      "teacherHeadword": "dux, ducis (m.)",
+      "teacherEntryId": "f5043c3526eba43f",
+      "teacherHeadword": "dūx, ducis (m.)",
       "feature": "GEN;SG",
       "expected": "ducis",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
@@ -403,10 +403,10 @@
     {
       "id": "L037",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "dux",
-      "teacherEntryId": "1e1aafcadae82fd6",
-      "teacherHeadword": "dux, ducis (m.)",
+      "teacherEntryId": "f5043c3526eba43f",
+      "teacherHeadword": "dūx, ducis (m.)",
       "feature": "DAT;SG",
       "expected": "ducī",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
@@ -414,10 +414,10 @@
     {
       "id": "L038",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "dux",
-      "teacherEntryId": "1e1aafcadae82fd6",
-      "teacherHeadword": "dux, ducis (m.)",
+      "teacherEntryId": "f5043c3526eba43f",
+      "teacherHeadword": "dūx, ducis (m.)",
       "feature": "ACC;SG",
       "expected": "ducem",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
@@ -425,10 +425,10 @@
     {
       "id": "L039",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "dux",
-      "teacherEntryId": "1e1aafcadae82fd6",
-      "teacherHeadword": "dux, ducis (m.)",
+      "teacherEntryId": "f5043c3526eba43f",
+      "teacherHeadword": "dūx, ducis (m.)",
       "feature": "NOM;PL",
       "expected": "ducēs",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
@@ -436,10 +436,10 @@
     {
       "id": "L040",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "dux",
-      "teacherEntryId": "1e1aafcadae82fd6",
-      "teacherHeadword": "dux, ducis (m.)",
+      "teacherEntryId": "f5043c3526eba43f",
+      "teacherHeadword": "dūx, ducis (m.)",
       "feature": "GEN;PL",
       "expected": "ducum",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
@@ -447,10 +447,10 @@
     {
       "id": "L041",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "res",
-      "teacherEntryId": "93fa4176de7a1644",
-      "teacherHeadword": "res, rei",
+      "teacherEntryId": "7851974ab7020695",
+      "teacherHeadword": "rēs, rĕī",
       "feature": "GEN;SG",
       "expected": "reī",
       "authority": "https://dcc.dickinson.edu/grammar/latin/case-endings-five-declensions"
@@ -458,10 +458,10 @@
     {
       "id": "L042",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "res",
-      "teacherEntryId": "93fa4176de7a1644",
-      "teacherHeadword": "res, rei",
+      "teacherEntryId": "7851974ab7020695",
+      "teacherHeadword": "rēs, rĕī",
       "feature": "DAT;SG",
       "expected": "reī",
       "authority": "https://dcc.dickinson.edu/grammar/latin/case-endings-five-declensions"
@@ -469,10 +469,10 @@
     {
       "id": "L043",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "res",
-      "teacherEntryId": "93fa4176de7a1644",
-      "teacherHeadword": "res, rei",
+      "teacherEntryId": "7851974ab7020695",
+      "teacherHeadword": "rēs, rĕī",
       "feature": "ACC;SG",
       "expected": "rem",
       "authority": "https://dcc.dickinson.edu/grammar/latin/case-endings-five-declensions"
@@ -480,10 +480,10 @@
     {
       "id": "L044",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "res",
-      "teacherEntryId": "93fa4176de7a1644",
-      "teacherHeadword": "res, rei",
+      "teacherEntryId": "7851974ab7020695",
+      "teacherHeadword": "rēs, rĕī",
       "feature": "NOM;PL",
       "expected": "rēs",
       "authority": "https://dcc.dickinson.edu/grammar/latin/case-endings-five-declensions"
@@ -491,10 +491,10 @@
     {
       "id": "L045",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "res",
-      "teacherEntryId": "93fa4176de7a1644",
-      "teacherHeadword": "res, rei",
+      "teacherEntryId": "7851974ab7020695",
+      "teacherHeadword": "rēs, rĕī",
       "feature": "GEN;PL",
       "expected": "rērum",
       "authority": "https://dcc.dickinson.edu/grammar/latin/case-endings-five-declensions"
@@ -502,10 +502,10 @@
     {
       "id": "L046",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "consul",
-      "teacherEntryId": "d98b12ee43238966",
-      "teacherHeadword": "consul, consulis (m.)",
+      "teacherEntryId": "8549cf5efdffc6f9",
+      "teacherHeadword": "cōnsŭl, cōnsŭlis (m.)",
       "feature": "GEN;SG",
       "expected": "cōnsulis",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
@@ -513,10 +513,10 @@
     {
       "id": "L047",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "consul",
-      "teacherEntryId": "d98b12ee43238966",
-      "teacherHeadword": "consul, consulis (m.)",
+      "teacherEntryId": "8549cf5efdffc6f9",
+      "teacherHeadword": "cōnsŭl, cōnsŭlis (m.)",
       "feature": "DAT;SG",
       "expected": "cōnsulī",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
@@ -524,10 +524,10 @@
     {
       "id": "L048",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "consul",
-      "teacherEntryId": "d98b12ee43238966",
-      "teacherHeadword": "consul, consulis (m.)",
+      "teacherEntryId": "8549cf5efdffc6f9",
+      "teacherHeadword": "cōnsŭl, cōnsŭlis (m.)",
       "feature": "ACC;SG",
       "expected": "cōnsulem",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
@@ -535,10 +535,10 @@
     {
       "id": "L049",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "consul",
-      "teacherEntryId": "d98b12ee43238966",
-      "teacherHeadword": "consul, consulis (m.)",
+      "teacherEntryId": "8549cf5efdffc6f9",
+      "teacherHeadword": "cōnsŭl, cōnsŭlis (m.)",
       "feature": "NOM;PL",
       "expected": "cōnsulēs",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
@@ -546,10 +546,10 @@
     {
       "id": "L050",
       "language": "lat",
-      "subject": "lat1",
+      "subject": "lat4",
       "lemma": "consul",
-      "teacherEntryId": "d98b12ee43238966",
-      "teacherHeadword": "consul, consulis (m.)",
+      "teacherEntryId": "8549cf5efdffc6f9",
+      "teacherHeadword": "cōnsŭl, cōnsŭlis (m.)",
       "feature": "GEN;PL",
       "expected": "cōnsulum",
       "authority": "https://romanreader.lyceum.institute/grammar/allen-greenough/inflection-and-nouns"
