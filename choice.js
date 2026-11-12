@@ -94,9 +94,15 @@ function choicePartOfSpeech(e) {
       /\b(bueno|malo|grande|pequeno|fuerte|feliz|triste|justo|injusto|sabio|joven|viejo|nuevo|veloz|rapido|lento|hermoso|bonito|celebre|famoso|audaz|prudente|rico|pobre|libre|mucho|poco|primero|ultimo|todo|nuestro|suyo|proximo|cercano|lejano)\b/.test(first)) return 'adjetivo';
   return 'sustantivo';
 }
+// Un objeto de vocabulario no se modifica durante la sesión: calcular afinidad una sola vez.
+const CHOICE_INFO_CACHE = new WeakMap();
 function choiceInfo(e) {
+  const cached = CHOICE_INFO_CACHE.get(e);
+  if (cached) return cached;
   const words = choiceWords(e);
-  return {pos: choicePartOfSpeech(e), words, topics: new Set(CHOICE_TOPICS.filter(t => [...words].some(w => t.words.has(w))).map(t => t.name))};
+  const info = {pos: choicePartOfSpeech(e), words, topics: new Set(CHOICE_TOPICS.filter(t => [...words].some(w => t.words.has(w))).map(t => t.name))};
+  CHOICE_INFO_CACHE.set(e, info);
+  return info;
 }
 function choiceConflicts(a, b, infoA, infoB) {
   if (a.id === b.id || choiceNormalize(a.meaning) === choiceNormalize(b.meaning)) return true;
