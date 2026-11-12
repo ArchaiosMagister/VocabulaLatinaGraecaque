@@ -1,6 +1,13 @@
 name: Importar flexiones UniMorph para gramática
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-grammar-inflections.yml'
+      - 'scripts/import_unimorph.mjs'
+      - 'data.js'
+      - 'tests/check-unimorph-import.mjs'
   push:
     branches:
       - main
@@ -40,11 +47,24 @@ jobs:
       - name: Verificar todos los índices y los ejercicios resultantes
         run: node tests/check-unimorph-import.mjs
       - name: Publicar los índices partidos
+        if: github.event_name == 'push'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A data/unimorph-syllabus
           if ! git diff --cached --quiet; then
             git commit -m "Importar los paradigmas curriculares UniMorph"
-            git push
+            # La auditoría de cobertura también puede escribir en main.
+            # Nunca forzar la rama: integrar la cabeza más reciente y reintentar.
+            for attempt in 1 2 3 4 5; do
+              if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+                exit 0
+              fi
+              echo "La rama ha avanzado: rebase y reintento ${attempt}/5"
+              git fetch origin "${GITHUB_REF_NAME}"
+              git rebase FETCH_HEAD
+              sleep "${attempt}"
+            done
+            echo "No se pudo publicar después de cinco intentos" >&2
+            exit 1
           fi
