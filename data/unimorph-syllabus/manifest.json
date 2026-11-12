@@ -27,8 +27,8 @@
       "source_bytes": 40357629,
       "source_rows": 976489,
       "malformed_rows": 0,
-      "retained_rows": 10036,
-      "retained_lemmas": 476,
+      "retained_rows": 10048,
+      "retained_lemmas": 477,
       "vocabulary_lemmas": 771,
       "missing_vocabulary_lemmas": [
         "abeo",
@@ -188,7 +188,7 @@
         "monstro",
         "moveo",
         "munio",
-        "mуro",
+        "myro",
         "nam",
         "narro",
         "navigo",
@@ -285,7 +285,6 @@
         "spero",
         "statuo",
         "studeo",
-        "stуlus",
         "sum",
         "suppliciter",
         "supprimo",
@@ -406,8 +405,8 @@
         },
         {
           "path": "lat/part-15.json",
-          "rows": 249,
-          "bytes": 10511
+          "rows": 261,
+          "bytes": 10888
         },
         {
           "path": "lat/part-16.json",
