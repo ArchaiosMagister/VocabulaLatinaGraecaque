@@ -21,13 +21,30 @@ function fingerprint(keys){
  for(let i=0;i<line.length;i++){hash^=line.charCodeAt(i);hash=Math.imul(hash,16777619)>>>0;}
  return hash.toString(16).padStart(8,'0');
 }
+// Conservar el cotejo con el DOCX, pero admitir solo excepciones documentadas
+// en las que el enunciado docente sea filológicamente erróneo.
+const exceptions=new Map();
+for(const fix of source.authorizedHeadwordCorrections||[]){
+ assert.ok(!exceptions.has(fix.id),'Excepción de procedencia duplicada: '+fix.id);
+ const entry=entries.find(e=>e.id===fix.id);
+ assert.ok(entry,'Falta la ficha corregida: '+fix.id);
+ assert.equal(entry.subject,fix.subject);
+ assert.equal(entry.mode,fix.mode);
+ assert.ok(entry.units.includes(fix.unit),'Unidad original perdida: '+fix.id);
+ assert.equal(entry.form,fix.correctedForm,'Se ha revertido un lema corregido: '+fix.id);
+ assert.equal(lemma(entry.form),fix.correctedLemma);
+ assert.ok(entry.originals.some(o=>o.startsWith(fix.sourceForm+':')),
+  'Se ha borrado la transcripción del Word original: '+fix.id);
+ exceptions.set(fix.id,fix);
+}
 const rows=new Map();
 for(const e of entries){
  if(!Array.isArray(e.units))throw Error('Unidades no válidas: '+e.id);
  for(const unit of e.units){
   const key=e.subject+'/'+e.mode+'/'+unit;
   if(!rows.has(key))rows.set(key,new Set());
-  rows.get(key).add(lemma(e.form));
+  const fix=exceptions.get(e.id);
+  rows.get(key).add(fix&&fix.unit===unit?fix.sourceLemma:lemma(e.form));
  }
 }
 const checked=new Set();
