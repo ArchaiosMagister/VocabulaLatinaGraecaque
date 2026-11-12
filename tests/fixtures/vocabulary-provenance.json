@@ -312,6 +312,39 @@
       "reason": "La fuente Word incrusta la letra cirílica ў en el sustantivo latino stylus; se restaura una y latina. En latín clásico también se documenta stilus, que no se impone a la lista del profesor.",
       "sourceLemma": "stуlus",
       "correctedLemma": "stylus"
+    },
+    {
+      "id": "4e48a20fbf2c03fb",
+      "subject": "gr1",
+      "mode": "general",
+      "unit": "Sin unidad acreditada",
+      "sourceForm": "κυνδύνος, –ου",
+      "sourceLemma": "κυνδυνοσ",
+      "correctedForm": "κίνδυνος, –ου (ὁ)",
+      "correctedLemma": "κινδυνοσ",
+      "reason": "Corrección acreditada de grafía ático-clásica y/o sustitución de caracteres no griegos; conservar la forma literal del Word original. Véase la cuarta tanda de revisión filológica."
+    },
+    {
+      "id": "a8f9a553fa6cf9e0",
+      "subject": "gr1",
+      "mode": "general",
+      "unit": "Sin unidad acreditada",
+      "sourceForm": "νεκρóς, –οῦ (ὁ)",
+      "sourceLemma": "νεκρoσ",
+      "correctedForm": "νεκρός, –οῦ (ὁ)",
+      "correctedLemma": "νεκροσ",
+      "reason": "Corrección acreditada de grafía ático-clásica y/o sustitución de caracteres no griegos; conservar la forma literal del Word original. Véase la cuarta tanda de revisión filológica."
+    },
+    {
+      "id": "440c382b8761b510",
+      "subject": "gr1",
+      "mode": "general",
+      "unit": "Sin unidad acreditada",
+      "sourceForm": "Προταγόρας, –ου",
+      "sourceLemma": "προταγορασ",
+      "correctedForm": "Πρωταγόρας, –ου (ὁ)",
+      "correctedLemma": "πρωταγορασ",
+      "reason": "Corrección acreditada de grafía ático-clásica y/o sustitución de caracteres no griegos; conservar la forma literal del Word original. Véase la cuarta tanda de revisión filológica."
     }
   ]
 }
