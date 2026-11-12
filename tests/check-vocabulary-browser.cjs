@@ -94,6 +94,24 @@ async function main(){
     }
    }
   }
+  const greekSynonyms=await page.evaluate(()=>{
+   const tests=[
+    ['general','ἀρχή, –ῆς','origen'],
+    ['general','οἰκέω','habitar'],
+    ['examen','οἰκέω','vivir'],
+    ['general','ἄρχων, –οντος (ὁ)','arconte'],
+    ['examen','ἄρχων, −οντος (ὁ)','líder'],
+    ['general','ἡγεμών, –ονος (M)','líder'],
+    ['general','λαμβάνω','tomar']
+   ];
+   return tests.map(([mode,form,answer])=>{
+    const word=VOCAB.find(e=>e.subject==='gr1'&&e.mode===mode&&e.form===form);
+    return {mode,form,answer,found:!!word,accepted:word?correct(word,answer,false):false,
+     rejectsWrong:word?!correct(word,'tractor',false):false};
+   });
+  });
+  assert.ok(greekSynonyms.every(x=>x.found&&x.accepted&&x.rejectsWrong),
+   'No se admiten todas las equivalencias griegas validadas: '+JSON.stringify(greekSynonyms));
   assert.deepEqual(errors,[],'Errores de ejecución en navegador');
   console.log('OK navegador: '+cases+' selecciones de unidad, reinicios, cambio de corpus y distractores.');
  }finally{if(browser)await browser.close();await new Promise(resolve=>server.close(resolve))}
