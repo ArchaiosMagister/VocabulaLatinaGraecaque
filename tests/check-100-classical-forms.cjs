@@ -62,6 +62,34 @@ const summary={checks:results.length,latin:results.filter(x=>x.language==='lat')
  matched:count('matched'),absent:count('absent'),
  extraVariants:count('extra-variants'),contradictory:count('contradictory')};
 assert.equal(summary.checks,100);
+// Preserve all 100 observations, including missing forms, as downloadable
+// machine-readable and human-readable reports from each CI execution.
+const reportDir=path.join(root,'reports');
+fs.mkdirSync(reportDir,{recursive:true});
+const manifest=JSON.parse(read('data/unimorph-syllabus/manifest.json'));
+const report={schema:1,referenceDate:fixture.checkedAt,summary,
+ sourceCommits:{lat:manifest.languages.lat.source_commit,grc:manifest.languages.grc.source_commit},
+ sourceRows:{lat:manifest.languages.lat.retained_rows,grc:manifest.languages.grc.retained_rows},
+ results};
+fs.writeFileSync(path.join(reportDir,'auditoria-100-formas.json'),JSON.stringify(report,null,2)+'\\n');
+const md=[
+ '# Auditoría de 100 formas flexionadas',
+ '',
+ 'Cotejo de 50 formas latinas y 50 formas áticas con paradigmas clásicos.',
+ '',
+ '| Estado | Total |',
+ '| --- | ---: |',
+ ...['matched','absent','extraVariants','contradictory'].map(k=>'| '+k+' | '+summary[k]+' |'),
+ '',
+ 'Una forma ausente **no** está verificada. No se acreditan automáticamente otras flexiones del corpus.',
+ '',
+ '| N.º | Lengua | Lema | Caso/número | Forma clásica esperada | Resultado | Formas presentes en UniMorph |',
+ '| --- | --- | --- | --- | --- | --- | --- |',
+ ...results.map((r,i)=>'| '+(i+1)+' | '+r.language+' | '+r.lemma+' | '+r.feature+
+ ' | '+r.expected+' | '+r.status+' | '+r.sourceForms.join(', ')+' |'),
+ ''
+].join('\\n');
+fs.writeFileSync(path.join(reportDir,'auditoria-100-formas.md'),md);
 const bad=results.filter(x=>['extra-variants','contradictory'].includes(x.status));
 for(const item of results)console.log(item.id+' '+item.language+' '+item.lemma+' '+item.feature+
  ' expected='+item.expected+' status='+item.status+' index='+JSON.stringify(item.sourceForms));
