@@ -55,6 +55,7 @@ jobs:
           node --check tests/check-vocabulary-scope.cjs
           node --check tests/check-vocabulary-provenance.cjs
           node --check tests/check-lexical-corrections.cjs
+          node --check tests/check-lexical-batch2.cjs
           node --check tests/check-vocabulary-browser.cjs
           node --check tests/check-grammar.cjs
           node --check tests/check-web-release.cjs
@@ -65,6 +66,8 @@ jobs:
         run: node tests/check-vocabulary-provenance.cjs
       - name: Probar correcciones filológicas de lemas y respuestas
         run: node tests/check-lexical-corrections.cjs
+      - name: Verificar la segunda tanda de revisión filológica
+        run: node tests/check-lexical-batch2.cjs
       - name: Comprobar el respaldo online con un banco de prueba
         run: node tests/check-online-backup.cjs
       - name: Comprobar autocorrección y currículo
