@@ -72,17 +72,20 @@ assert.equal(greekKeys.length,source.greekGeneralAlphabetical.count,
 assert.equal(fingerprint(greekKeys),source.greekGeneralAlphabetical.fnv32,
  'No coincide el conjunto de lemas del Griego general con el archivo alfabético');
 
-// La procedencia por unidad del griego GENERAL se infiere EXCLUSIVAMENTE del
-// lema acreditado en las listas de EXAMEN, que sí tienen unidades identificadas.
+// Las unidades acreditadas se atribuyen por coincidencia ENTRE DOCUMENTOS
+// ORIGINALES, no por una grafía enmendada posteriormente. Si al corregir
+// κυνδύνος→κίνδυνος aparece un nuevo parecido con la lista de examen, NO
+// se asigna automáticamente esa unidad a la fuente alfabética.
+const historicalLemma=e=>exceptions.get(e.id)?.sourceLemma||lemma(e.form);
 const exam=new Map();
 for(const e of entries.filter(x=>x.subject==='gr1'&&x.mode==='examen')){
- const k=lemma(e.form);
+ const k=historicalLemma(e);
  if(!exam.has(k))exam.set(k,new Set());
  for(const unit of e.units)exam.get(k).add(unit);
 }
 let accredited=0,unattributed=0;
 for(const e of greek){
- const proven=exam.get(lemma(e.form))||new Set();
+ const proven=exam.get(historicalLemma(e))||new Set();
  const unresolved=e.units.includes('Sin unidad acreditada');
  if(unresolved){unattributed++;assert.equal(e.units.length,1,'No mezclar una unidad no acreditada con otras: '+e.form);
   assert.equal(proven.size,0,'Falta vincular un lema griego con su unidad acreditada: '+e.form);
