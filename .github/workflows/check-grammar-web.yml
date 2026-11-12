@@ -6,6 +6,7 @@ on:
       - main
   push:
     branches:
+      - main
       - feature/repaso-morfologia
       - feature/pestanas-navegacion-unificada
     paths:
@@ -16,6 +17,9 @@ on:
       - 'data/unimorph-syllabus/**'
       - 'index.html'
       - 'teacher.js'
+      - 'app.js'
+      - 'choice.js'
+      - 'scope.js'
       - 'config.js'
       - 'data.js'
       - 'style.css'
@@ -45,9 +49,16 @@ jobs:
           node --check gramatica-griego-ampliacion.js
           node --check gramatica-admin.js
           node --check teacher.js
+          node --check app.js
+          node --check choice.js
+          node --check scope.js
+          node --check tests/check-vocabulary-scope.cjs
+          node --check tests/check-vocabulary-browser.cjs
           node --check tests/check-grammar.cjs
           node --check tests/check-web-release.cjs
           node --check tests/check-grammar-browser.cjs
+      - name: Verificar el alcance por curso, unidades y distractores
+        run: node tests/check-vocabulary-scope.cjs
       - name: Comprobar el respaldo online con un banco de prueba
         run: node tests/check-online-backup.cjs
       - name: Comprobar autocorrección y currículo
@@ -61,4 +72,6 @@ jobs:
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
       - name: Probar la web de clase con Chromium
-        run: node tests/check-grammar-browser.cjs
+        run: |
+          node tests/check-grammar-browser.cjs
+          node tests/check-vocabulary-browser.cjs
