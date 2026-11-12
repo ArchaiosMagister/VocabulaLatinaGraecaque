@@ -112,6 +112,24 @@ async function main(){
   });
   assert.ok(greekSynonyms.every(x=>x.found&&x.accepted&&x.rejectsWrong),
    'No se admiten todas las equivalencias griegas validadas: '+JSON.stringify(greekSynonyms));
+  const prepositionCases=await page.evaluate(()=>{
+   const specs=[
+    ['examen','διά + acusativo','a causa de',true],
+    ['examen','διά + acusativo','a través de',false],
+    ['general','διά + genitivo / acusativo','a través de',true],
+    ['general','διά + genitivo / acusativo','por medio de',true],
+    ['examen','περί + genitivo','acerca de',true],
+    ['examen','ὑπό + genitivo','por',true],
+    ['general','παρά + genitivo / acusativo / dativo','al lado de',true],
+    ['general','παρά + genitivo / acusativo / dativo','a lado de',false]
+   ];
+   return specs.map(([mode,form,answer,expected])=>{
+    const entry=VOCAB.find(x=>x.subject==='gr1'&&x.mode===mode&&x.form===form);
+    return {mode,form,answer,expected,found:!!entry,actual:entry?correct(entry,answer,false):null};
+   });
+  });
+  assert.ok(prepositionCases.every(x=>x.found&&x.actual===x.expected),
+   'Fallo de régimen o traducción griega en Chromium: '+JSON.stringify(prepositionCases));
   assert.deepEqual(errors,[],'Errores de ejecución en navegador');
   console.log('OK navegador: '+cases+' selecciones de unidad, reinicios, cambio de corpus y distractores.');
  }finally{if(browser)await browser.close();await new Promise(resolve=>server.close(resolve))}
