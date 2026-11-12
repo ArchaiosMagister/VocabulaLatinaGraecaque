@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-12T11:06:37.279Z",
+  "generated_at": "2026-11-12T11:29:46.665Z",
   "definition": "Presencia de al menos un ejercicio escrito autocorregible; NO supone paradigma completo.",
   "source_revisions": {
     "lat": "050924c9f013e6aba4d7c87be243a1d79b6c5b10",
@@ -3433,23 +3433,23 @@
     "lat4": {
       "entries": 506,
       "lemmas": 328,
-      "withExercises": 170,
-      "withoutExercises": 158,
-      "importedLemmas": 157,
+      "withExercises": 171,
+      "withoutExercises": 157,
+      "importedLemmas": 158,
       "curatedLemmas": 19,
       "importedRows": 4624,
-      "importedQuestions": 3399,
+      "importedQuestions": 3435,
       "types": {
         "nominal": {
-          "lemmas": 159,
-          "withExercises": 159
+          "lemmas": 160,
+          "withExercises": 160
         },
         "verbal": {
           "lemmas": 76,
           "withExercises": 11
         },
         "nominal-probable": {
-          "lemmas": 70,
+          "lemmas": 69,
           "withExercises": 0
         },
         "invariable": {
@@ -4742,15 +4742,6 @@
           "entry": "vēstīgĭŭm, –ī",
           "units": [
             "UD 9"
-          ],
-          "type": "nominal-probable"
-        },
-        {
-          "lemma": "vetus",
-          "entry": "vĕtŭs, veteris",
-          "units": [
-            "UD 6",
-            "UD 7"
           ],
           "type": "nominal-probable"
         },

@@ -6,7 +6,7 @@ Generada automáticamente desde las flexiones importadas y los paradigmas docent
 | Curso | Lemas | Con ejercicios | Sin ejercicios | UniMorph | Paradigmas docentes |
 |---|---:|---:|---:|---:|---:|
 | Latín I | 664 | 282 | 382 | 261 | 30 |
-| Latín 4.º ESO | 328 | 170 | 158 | 157 | 19 |
+| Latín 4.º ESO | 328 | 171 | 157 | 158 | 19 |
 | Griego I | 349 | 55 | 294 | 51 | 8 |
 
 Los bancos pueden solaparse. El JSON incluye todos los lemas sin ejercicios y su clasificación aproximada.
@@ -54,9 +54,9 @@ Ejemplos prioritarios sin ejercicios:
 
 | Tipo estimado | Lemas | Con ejercicios |
 |---|---:|---:|
-| nominal | 159 | 159 |
+| nominal | 160 | 160 |
 | verbal | 76 | 11 |
-| nominal-probable | 70 | 0 |
+| nominal-probable | 69 | 0 |
 | invariable | 16 | 0 |
 | por-clasificar | 7 | 0 |
 
