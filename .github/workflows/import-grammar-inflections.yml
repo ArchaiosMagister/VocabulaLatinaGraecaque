@@ -46,6 +46,19 @@ jobs:
         run: node scripts/import_unimorph.mjs
       - name: Verificar todos los índices y los ejercicios resultantes
         run: node tests/check-unimorph-import.mjs
+      - name: Comprobar cien formas con el corpus recién regenerado
+        run: node tests/check-100-classical-forms.cjs
+        env:
+          REGENERATED_GREEK_DATIVES: '1'
+      - name: Adjuntar cien observaciones de los índices regenerados
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: auditoria-cien-formas-tras-importacion
+          path: |
+            reports/auditoria-100-formas.json
+            reports/auditoria-100-formas.md
+          if-no-files-found: warn
       - name: Publicar los índices partidos
         if: github.event_name == 'push'
         run: |
