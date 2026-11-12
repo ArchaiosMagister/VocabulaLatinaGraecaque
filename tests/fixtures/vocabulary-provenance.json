@@ -277,5 +277,19 @@
   ],
   "notVerified": [
     "lat2: no se aportó un documento original de vocabulario por bloques; no se certifica su procedencia."
+  ],
+  "authorizedHeadwordCorrections": [
+    {
+      "id": "cdb0bb97ec06e330",
+      "subject": "lat1",
+      "mode": "general",
+      "unit": "UD 7",
+      "sourceLemma": "solis",
+      "sourceForm": "solis, –is (m.)",
+      "correctedLemma": "sol",
+      "correctedForm": "sol, solis (m.)",
+      "reason": "En UD7 el Word usa el genitivo solis como lema, pero el mismo vocabulario de UD11–12 da sol, solis, confirmado por Lewis & Short/Logeion.",
+      "source": "https://logeion.org/sol"
+    }
   ]
 }
