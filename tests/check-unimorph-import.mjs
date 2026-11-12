@@ -10,11 +10,11 @@ assert.equal(manifest.schema,1);
 // En griego los diacríticos distinguen lexemas; los índices regenerados
 // deben contener solo cabeceras compatibles con el vocabulario docente.
 const accentless=s=>String(s).toLowerCase().normalize('NFD')
- .replace(/\\u0345/g,'ι').replace(/\\p{M}/gu,'').replace(/ς/g,'σ').trim();
+ .replace(/\u0345/g,'ι').replace(/\p{M}/gu,'').replace(/ς/g,'σ').trim();
 const accented=s=>String(s).toLowerCase().normalize('NFD')
- .replace(/[\\u0304\\u0306]/g,'').replace(/\\u0300/g,'\\u0301').normalize('NFC').trim();
+ .replace(/[\u0304\u0306]/g,'').replace(/\u0300/g,'\u0301').normalize('NFC').trim();
 const vocabData=JSON.parse(fs.readFileSync(path.join(ROOT,'data.js'),'utf8')
- .replace(/^window\\.VOCAB\\s*=\\s*/,'').replace(/;\\s*$/,''));
+ .replace(/^window\.VOCAB\s*=\s*/,'').replace(/;\s*$/,''));
 const greekHeads=new Map();
 for(const entry of vocabData.filter(e=>e.subject==='gr1')){
  const head=String(entry.form).split(/[,+(]/)[0].trim().split('/')[0].trim();
