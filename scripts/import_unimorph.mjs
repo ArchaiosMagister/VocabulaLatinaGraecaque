@@ -19,6 +19,11 @@ const SOURCES={
 const canonical=s=>String(s||'').toLowerCase().normalize('NFD')
  .replace(/\u0345/g,'ι').replace(/\p{M}/gu,'').replace(/æ/g,'ae').replace(/œ/g,'oe')
  .replace(/ς/g,'σ').trim();
+// El griego ático necesita identidad léxica con acento y espíritu; ignorar
+// solo cantidad y la alternancia final agudo/grave (no otros dialectos).
+const greekHeadKey=s=>String(s||'').trim().toLowerCase().normalize('NFD')
+ .replace(/[\u0304\u0306]/g,'').replace(/\u0300/g,'\u0301')
+ .normalize('NFC');
 function bucket(s,count){let hash=2166136261;for(const ch of s)hash=Math.imul(hash^ch.codePointAt(0),16777619)>>>0;return hash%count}
 function readVocab(){
  const data=fs.readFileSync(path.join(ROOT,'data.js'),'utf8').trim();
@@ -45,17 +50,22 @@ function cleanSurface(lang,surface){
 }
 function selectVocab(data){
  const chosen={lat:new Set(),grc:new Set()},metadata={};
+ const greekAuthorizedHeads=new Map();
  for(const row of data){
   if(!['lat1','lat4','gr1'].includes(row.subject))continue;
   const lang=row.subject==='gr1'?'grc':'lat';
   const key=lemma(row.form);
   if(!key)continue;
   chosen[lang].add(key);
+  if(lang==='grc'){
+   if(!greekAuthorizedHeads.has(key))greekAuthorizedHeads.set(key,new Set());
+   greekAuthorizedHeads.get(key).add(greekHeadKey(String(row.form).split(/[,+(]/)[0].trim().split('/')[0]));
+  }
   if(!metadata[row.subject])metadata[row.subject]={lemmas:new Set(),entries:0};
   metadata[row.subject].lemmas.add(key);
   metadata[row.subject].entries++;
  }
- return {chosen,metadata};
+ return {chosen,metadata,greekAuthorizedHeads};
 }
 function openStream(url){
  return new Promise((resolve,reject)=>{
@@ -70,7 +80,7 @@ function openStream(url){
   }).on('error',reject);
  });
 }
-async function importOne(lang,source,chosen){
+async function importOne(lang,source,chosen,greekAuthorizedHeads){
  const url='https://raw.githubusercontent.com/unimorph/'+lang+'/'+source.sha+'/'+lang;
  const stream=await openStream(url),hash=crypto.createHash('sha256');
  const shards=Array.from({length:source.parts},()=>[]);
@@ -87,6 +97,10 @@ async function importOne(lang,source,chosen){
   const features=rest.join('\t').trim(),key=canonical(head);
   if(!head.trim()||!surface.trim()||!features){bad++;continue}
   if(!chosen.has(key))continue;
+  // Un acento diferente puede cambiar el lema (νόμος/νομός, βίος/βιός).
+  // El TSV no marca dialecto en cada fila. Esta barrera previene confusiones
+  // léxicas, pero NO equivale a acreditar cada flexión como ática.
+  if(lang==='grc'&&!greekAuthorizedHeads?.get(key)?.has(greekHeadKey(head)))continue;
   const form=cleanSurface(lang,surface);
   if(!form){bad++;continue}
   const id=key+'\t'+canonical(form)+'\t'+features;
@@ -114,20 +128,21 @@ async function importOne(lang,source,chosen){
  };
 }
 async function main(){
- const {chosen,metadata}=selectVocab(readVocab());
+ const {chosen,metadata,greekAuthorizedHeads}=selectVocab(readVocab());
  fs.rmSync(TARGET,{recursive:true,force:true});
  fs.mkdirSync(TARGET,{recursive:true});
  const results={};
  for(const [lang,src] of Object.entries(SOURCES)){
   console.log('Importando',lang,'lemas del curso:',chosen[lang].size);
-  results[lang]=await importOne(lang,src,chosen[lang]);
+  results[lang]=await importOne(lang,src,chosen[lang],greekAuthorizedHeads);
   console.log(lang,'original:',results[lang].source_rows,'filas; incorporadas:',results[lang].retained_rows,'lemas:',results[lang].retained_lemmas);
  }
  const manifest={
   schema:1,
-  scope:'All attested UniMorph inflections for exact lemmas in the three teacher vocabularies; not complete language morphology.',
+  scope:'UniMorph attestations filtered to the teacher vocabulary. Greek headwords must match diacritics; individual surface dialect is not certified.',
   source_license:'CC BY-SA 3.0',
   attribution:'UniMorph lat (English Wiktionary) and UniMorph grc (Wikipedia); original contributors credited in upstream READMEs.',
+  greek_headword_policy:'Attic teaching: only accent-and-breathing-matched source Greek headwords; source surface dialect tags unavailable. Not sufficient to certify every inflected form.',
   subjects:Object.fromEntries(Object.entries(metadata).map(([subject,v])=>[subject,{vocabulary_entries:v.entries,distinct_lemmas:v.lemmas.size}])),
   languages:results
  };

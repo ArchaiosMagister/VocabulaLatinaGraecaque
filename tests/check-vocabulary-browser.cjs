@@ -130,6 +130,22 @@ async function main(){
   });
   assert.ok(prepositionCases.every(x=>x.found&&x.actual===x.expected),
    'Fallo de régimen o traducción griega en Chromium: '+JSON.stringify(prepositionCases));
+  const atticSamples=await page.evaluate(()=>{
+   const cases=[
+    ['general','αἰτέω','pedir',true],
+    ['general','αἰτέω','buscar',false],
+    ['general','αἰτέω','solicitar',true],
+    ['general','ἀκρόαμα, –ματος (τὸ)','audición',true],
+    ['general','ἀκρόαμα, –ματος (τὸ)','placentero al oído',false],
+    ['general','ἀμφί + genitivo / acusativo','acerca de',true]
+   ];
+   return cases.map(([mode,form,answer,expected])=>{
+    const e=VOCAB.find(x=>x.subject==='gr1'&&x.mode===mode&&x.form===form);
+    return {form,answer,expected,found:!!e,actual:e?correct(e,answer,false):null};
+   });
+  });
+  assert.ok(atticSamples.every(x=>x.found&&x.expected===x.actual),
+   'La corrección escrita no respeta el vocabulario ático: '+JSON.stringify(atticSamples));
   assert.deepEqual(errors,[],'Errores de ejecución en navegador');
   console.log('OK navegador: '+cases+' selecciones de unidad, reinicios, cambio de corpus y distractores.');
  }finally{if(browser)await browser.close();await new Promise(resolve=>server.close(resolve))}

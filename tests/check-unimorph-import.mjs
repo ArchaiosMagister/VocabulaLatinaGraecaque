@@ -7,6 +7,21 @@ const ROOT=path.resolve(import.meta.dirname,'..');
 const DIR=path.join(ROOT,'data','unimorph-syllabus');
 const manifest=JSON.parse(fs.readFileSync(path.join(DIR,'manifest.json'),'utf8'));
 assert.equal(manifest.schema,1);
+// En griego los diacríticos distinguen lexemas; los índices regenerados
+// deben contener solo cabeceras compatibles con el vocabulario docente.
+const accentless=s=>String(s).toLowerCase().normalize('NFD')
+ .replace(/\u0345/g,'ι').replace(/\p{M}/gu,'').replace(/ς/g,'σ').trim();
+const accented=s=>String(s).toLowerCase().normalize('NFD')
+ .replace(/[\u0304\u0306]/g,'').replace(/\u0300/g,'\u0301').normalize('NFC').trim();
+const vocabData=JSON.parse(fs.readFileSync(path.join(ROOT,'data.js'),'utf8')
+ .replace(/^window\.VOCAB\s*=\s*/,'').replace(/;\s*$/,''));
+const greekHeads=new Map();
+for(const entry of vocabData.filter(e=>e.subject==='gr1')){
+ const head=String(entry.form).split(/[,+(]/)[0].trim().split('/')[0].trim();
+ const key=accentless(head);
+ if(!greekHeads.has(key))greekHeads.set(key,new Set());
+ greekHeads.get(key).add(accented(head));
+}
 for(const lang of ['lat','grc']){
  const info=manifest.languages[lang];assert.ok(info);
  assert.ok(info.source_rows>10000);
@@ -24,6 +39,11 @@ for(const lang of ['lat','grc']){
    assert.ok(Array.isArray(row)&&row.length>=3,'Fila incompleta');
    const [lemma,form,tags]=row;
    assert.ok(lemma&&form&&tags&&tags.includes(';'),'Fila inválida');
+   if(lang==='grc'&&manifest.greek_headword_policy){
+    const k=accentless(lemma),matches=greekHeads.get(k);
+    assert.ok(matches&&matches.has(accented(lemma)),
+     'Cabecera de UniMorph confundida por acento o espíritu: '+lemma);
+   }
    const id=[lemma,form,tags].join('|');
    assert.equal(ids.has(id),false,'Fila duplicada '+id);
    ids.add(id);
