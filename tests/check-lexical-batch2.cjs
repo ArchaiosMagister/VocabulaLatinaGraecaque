@@ -9,6 +9,10 @@ const root=path.resolve(__dirname,'..');
 const raw=fs.readFileSync(path.join(root,'data.js'),'utf8');
 const entries=JSON.parse(raw.replace(/^window\.VOCAB\s*=\s*/,'').replace(/;\s*$/,''));
 const fixture=JSON.parse(fs.readFileSync(path.join(root,'tests/fixtures/lexical-reviewed-batch2.json'),'utf8'));
+const later=JSON.parse(fs.readFileSync(path.join(root,'tests/fixtures/lexical-reviewed-batch3.json'),'utf8'));
+// La segunda tanda es histórica: las aclaraciones posteriores han de estar
+// registradas y no pueden borrar un lema, una unidad o una acepción antigua.
+const laterById=new Map(later.entries.map(e=>[e.id,e]));
 assert.equal(fixture.schema,1);
 assert.equal(entries.length,2055);
 assert.equal(fixture.entries.length,24,'La segunda tanda no debe perder fichas validadas');
@@ -20,11 +24,27 @@ for(const item of fixture.entries){
  reviewed.add(item.id);
  const entry=byId.get(item.id);
  assert.ok(entry,'Ficha desaparecida: '+item.id);
- for(const field of ['subject','mode','form','meaning']){
-  assert.equal(entry[field],item[field],field+' distinto del revisado: '+item.id);
+ const revised=laterById.get(item.id);
+ if(revised){
+  assert.equal(revised.category,'case-dependent-gloss','No es una revisión de régimen acreditada: '+item.id);
+  for(const field of ['subject','mode','form']){
+   assert.equal(revised[field],item[field],'Cambio del lema histórico no autorizado: '+item.id);
+   assert.equal(entry[field],item[field],field+' revertido: '+item.id);
+  }
+  assert.equal(revised.original,item.original,'Se modificó la fuente histórica: '+item.id);
+  assert.deepEqual(revised.units,item.units,'Cambio de unidad desde la tanda anterior: '+item.id);
+  assert.deepEqual(entry.units,item.units,'Unidad del lema alterada: '+item.id);
+  for(const answer of item.answers)assert.ok(revised.answers.includes(answer),
+   'Se ha descartado una respuesta de la tanda anterior: '+answer+' ('+item.id+')');
+  assert.equal(entry.meaning,revised.meaning,'Nueva explicación por casos revertida: '+item.id);
+  assert.deepEqual(entry.answers,revised.answers,'Respuestas por régimen diferentes de la última revisión: '+item.id);
+ }else{
+  for(const field of ['subject','mode','form','meaning']){
+   assert.equal(entry[field],item[field],field+' distinto del revisado: '+item.id);
+  }
+  assert.deepEqual(entry.units,item.units,'Se alteraron las unidades durante la corrección: '+item.id);
+  assert.deepEqual(entry.answers,item.answers,'Se alteraron los sinónimos verificados: '+item.id);
  }
- assert.deepEqual(entry.units,item.units,'Se alteraron las unidades durante la corrección: '+item.id);
- assert.deepEqual(entry.answers,item.answers,'Se alteraron los sinónimos verificados: '+item.id);
  assert.ok(entry.originals.includes(item.original),'Se perdió el original del Word: '+item.id);
  assert.ok(['latin-headword','latin-principal-parts','latin-conjugation',
   'greek-orthography','greek-accepted-synonym'].includes(item.category),'Categoría desconocida');
