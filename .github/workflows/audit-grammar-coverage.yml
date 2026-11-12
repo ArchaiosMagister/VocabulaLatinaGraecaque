@@ -58,5 +58,17 @@ jobs:
           git add data/morphology-coverage.json data/morphology-coverage.md
           if ! git diff --cached --quiet; then
             git commit -m 'Actualizar auditoría de cobertura morfológica'
-            git push
+            # UniMorph puede actualizar otro fichero al mismo tiempo.
+            # Nunca hacer force-push ni perder el commit de la otra tarea.
+            for attempt in 1 2 3 4 5; do
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+              echo "La rama ha avanzado: rebase y reintento ${attempt}/5"
+              git fetch origin main
+              git rebase FETCH_HEAD
+              sleep "${attempt}"
+            done
+            echo "No se pudo publicar después de cinco intentos" >&2
+            exit 1
           fi
