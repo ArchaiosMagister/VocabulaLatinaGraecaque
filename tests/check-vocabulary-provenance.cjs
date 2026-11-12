@@ -61,7 +61,12 @@ for(const [key] of rows){
  }
 }
 const greek=entries.filter(e=>e.subject==='gr1'&&e.mode==='general');
-const greekKeys=[...new Set(greek.map(e=>lemma(e.form)))];
+// El Word alfabético de Griego general se coteja con sus lecturas originales,
+// incluso si el lema operativo se ha corregido tras una auditoría ática.
+const greekKeys=[...new Set(greek.map(e=>{
+ const correction=exceptions.get(e.id);
+ return correction?correction.sourceLemma:lemma(e.form);
+}))];
 assert.equal(greekKeys.length,source.greekGeneralAlphabetical.count,
  'Vocabulario alfabético griego incompleto o aumentado sin revisión');
 assert.equal(fingerprint(greekKeys),source.greekGeneralAlphabetical.fnv32,
