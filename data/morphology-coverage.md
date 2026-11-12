@@ -7,7 +7,7 @@ Generada automáticamente desde las flexiones importadas y los paradigmas docent
 |---|---:|---:|---:|---:|---:|
 | Latín I | 663 | 283 | 380 | 262 | 30 |
 | Latín 4.º ESO | 328 | 171 | 157 | 158 | 19 |
-| Griego I | 349 | 55 | 294 | 51 | 8 |
+| Griego I | 348 | 52 | 296 | 48 | 8 |
 
 Los bancos pueden solaparse. El JSON incluye todos los lemas sin ejercicios y su clasificación aproximada.
 Las palabras invariables no necesitan paradigma y las categorías estimadas precisan revisión filológica.
@@ -92,9 +92,9 @@ Ejemplos prioritarios sin ejercicios:
 
 | Tipo estimado | Lemas | Con ejercicios |
 |---|---:|---:|
-| nominal | 53 | 53 |
+| nominal | 50 | 50 |
 | verbal | 79 | 2 |
-| nominal-probable | 166 | 0 |
+| nominal-probable | 168 | 0 |
 | invariable | 29 | 0 |
 | por-clasificar | 22 | 0 |
 
@@ -119,7 +119,7 @@ Ejemplos prioritarios sin ejercicios:
 - αἰσχρός, –ον · nominal-probable · UD 5
 - αἰτέω · verbal · Sin unidad acreditada
 - ἀκούω · verbal · UD 1–4
-- ἀκρόαμα, –ματος · nominal-probable · Sin unidad acreditada
+- ἀκρόαμα, –ματος (τὸ) · nominal-probable · Sin unidad acreditada
 - Ἀκροπόλις, –εως (ἡ) · nominal-probable · Sin unidad acreditada
 - Ἀλκιβιάδης, –ου · nominal-probable · Sin unidad acreditada
 - ἄλλος, –η, –ο · nominal-probable · Sin unidad acreditada

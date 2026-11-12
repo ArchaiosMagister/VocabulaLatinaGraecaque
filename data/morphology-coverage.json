@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-12T12:45:05.879Z",
+  "generated_at": "2026-11-12T13:17:00.580Z",
   "definition": "Presencia de al menos un ejercicio escrito autocorregible; NO supone paradigma completo.",
   "source_revisions": {
     "lat": "050924c9f013e6aba4d7c87be243a1d79b6c5b10",
@@ -3421,7 +3421,7 @@
       "withoutExercises": 157,
       "importedLemmas": 158,
       "curatedLemmas": 19,
-      "importedRows": 4624,
+      "importedRows": 4636,
       "importedQuestions": 3435,
       "types": {
         "nominal": {
@@ -4952,24 +4952,24 @@
     },
     "gr1": {
       "entries": 503,
-      "lemmas": 349,
-      "withExercises": 55,
-      "withoutExercises": 294,
-      "importedLemmas": 51,
+      "lemmas": 348,
+      "withExercises": 52,
+      "withoutExercises": 296,
+      "importedLemmas": 48,
       "curatedLemmas": 8,
-      "importedRows": 877,
-      "importedQuestions": 725,
+      "importedRows": 818,
+      "importedQuestions": 673,
       "types": {
         "nominal": {
-          "lemmas": 53,
-          "withExercises": 53
+          "lemmas": 50,
+          "withExercises": 50
         },
         "verbal": {
           "lemmas": 79,
           "withExercises": 2
         },
         "nominal-probable": {
-          "lemmas": 166,
+          "lemmas": 168,
           "withExercises": 0
         },
         "invariable": {
@@ -5152,7 +5152,7 @@
         },
         {
           "lemma": "ακροαμα",
-          "entry": "ἀκρόαμα, –ματος",
+          "entry": "ἀκρόαμα, –ματος (τὸ)",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -5193,7 +5193,7 @@
         },
         {
           "lemma": "αμφι",
-          "entry": "ἀμφί + genitivo / acusativo / dativo",
+          "entry": "ἀμφί + genitivo / acusativo",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -5432,6 +5432,14 @@
           "type": "verbal"
         },
         {
+          "lemma": "βιοσ",
+          "entry": "βίος, –ου",
+          "units": [
+            "UD 1–4"
+          ],
+          "type": "nominal-probable"
+        },
+        {
           "lemma": "βουλομαι",
           "entry": "βούλομαι",
           "units": [
@@ -5508,6 +5516,14 @@
           "entry": "δημοκρατία, –ας",
           "units": [
             "Sin unidad acreditada"
+          ],
+          "type": "nominal-probable"
+        },
+        {
+          "lemma": "δημοσ",
+          "entry": "δῆμος, –ου",
+          "units": [
+            "UD 1–4"
           ],
           "type": "nominal-probable"
         },
@@ -5913,7 +5929,7 @@
         },
         {
           "lemma": "θεοσ",
-          "entry": "θέος, –ου",
+          "entry": "θεός, –οῦ (ὁ)",
           "units": [
             "UD 1–4"
           ],
@@ -5993,7 +6009,7 @@
         },
         {
           "lemma": "ιερον",
-          "entry": "ἱερὸν, –ου (τό)",
+          "entry": "ἱερόν, –οῦ (τὸ)",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -6144,14 +6160,6 @@
           "type": "nominal-probable"
         },
         {
-          "lemma": "κυνδυνοσ",
-          "entry": "κυνδύνος, –ου",
-          "units": [
-            "Sin unidad acreditada"
-          ],
-          "type": "nominal-probable"
-        },
-        {
           "lemma": "κυριοσ",
           "entry": "κύριος, –ου",
           "units": [
@@ -6169,7 +6177,7 @@
         },
         {
           "lemma": "λακεδαιμονιοσ",
-          "entry": "Λακεδαιμονίος, –α, –ον",
+          "entry": "Λακεδαιμόνιος, –α, –ον",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -6201,7 +6209,7 @@
         },
         {
           "lemma": "λιμην",
-          "entry": "λιμήν, ένος (ὁ)",
+          "entry": "λιμήν, λιμένος (ὁ)",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -6368,8 +6376,8 @@
           "type": "nominal-probable"
         },
         {
-          "lemma": "νεκρoσ",
-          "entry": "νεκρóς, –οῦ (ὁ)",
+          "lemma": "νεκροσ",
+          "entry": "νεκρός, –οῦ (ὁ)",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -6385,7 +6393,7 @@
         },
         {
           "lemma": "νησοσ",
-          "entry": "νήσος, –ου (F)",
+          "entry": "νῆσος, –ου (ἡ)",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -6406,6 +6414,14 @@
             "Sin unidad acreditada"
           ],
           "type": "verbal"
+        },
+        {
+          "lemma": "νομοσ",
+          "entry": "νόμος, –ου",
+          "units": [
+            "UD 6–7"
+          ],
+          "type": "nominal-probable"
         },
         {
           "lemma": "νοσοσ",
@@ -6649,7 +6665,7 @@
         },
         {
           "lemma": "πελαγοσ",
-          "entry": "πέλαγος, –εος (τό)",
+          "entry": "πέλαγος, πελάγους (τὸ)",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -6665,7 +6681,7 @@
         },
         {
           "lemma": "πενησ",
-          "entry": "πένης, –ετος",
+          "entry": "πένης, –ητος (ὁ)",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -6705,7 +6721,7 @@
         },
         {
           "lemma": "περσαι",
-          "entry": "Περσαί, –ων",
+          "entry": "Πέρσαι, –ῶν (οἱ)",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -6848,8 +6864,8 @@
           "type": "verbal"
         },
         {
-          "lemma": "προταγορασ",
-          "entry": "Προταγόρας, –ου",
+          "lemma": "πρωταγορασ",
+          "entry": "Πρωταγόρας, –ου (ὁ)",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -6945,7 +6961,7 @@
         },
         {
           "lemma": "σοφιστησ",
-          "entry": "σοφίστης, –ου",
+          "entry": "σοφιστής, –οῦ (ὁ)",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -7025,7 +7041,7 @@
         },
         {
           "lemma": "σωκρατησ",
-          "entry": "Σωκράτης, –ου",
+          "entry": "Σωκράτης, Σωκράτους (ὁ)",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -7366,7 +7382,7 @@
         },
         {
           "lemma": "αληθεια",
-          "entry": "ἀληθεία, –ας",
+          "entry": "ἀλήθεια, –ας",
           "units": [
             "UD 1–4"
           ],
@@ -7443,21 +7459,8 @@
           "status": "con-ejercicios"
         },
         {
-          "lemma": "βιοσ",
-          "entry": "βίος, –ου",
-          "units": [
-            "UD 1–4"
-          ],
-          "type": "nominal",
-          "sources": [
-            "UniMorph"
-          ],
-          "writeQuestions": 9,
-          "status": "con-ejercicios"
-        },
-        {
           "lemma": "γενοσ",
-          "entry": "γένος, –εος (τὸ)",
+          "entry": "γένος, γένους (τὸ)",
           "units": [
             "Sin unidad acreditada"
           ],
@@ -7483,7 +7486,7 @@
         },
         {
           "lemma": "γη",
-          "entry": "γή, –ης",
+          "entry": "γῆ, –ῆς (ἡ)",
           "units": [
             "UD 5"
           ],
@@ -7492,6 +7495,19 @@
             "UniMorph"
           ],
           "writeQuestions": 6,
+          "status": "con-ejercicios"
+        },
+        {
+          "lemma": "γυνη",
+          "entry": "γυνή, γυναικός (ἡ)",
+          "units": [
+            "UD 8"
+          ],
+          "type": "nominal",
+          "sources": [
+            "UniMorph"
+          ],
+          "writeQuestions": 2,
           "status": "con-ejercicios"
         }
       ]
