@@ -35,7 +35,7 @@ for(const [name,html,active] of [['Vocabulario',home,'./'],['Gramática',fs.read
   assert.ok(html.includes('id="'+id+'"'),'Falta '+id+' en '+name);
  }
 }
-assert.ok(home.includes('src="teacher.js"'),'Falta módulo docente de Vocabulario');
+assert.ok(/src="teacher\\.js(?:\\?[^\"]*)?"/.test(home),'Falta módulo docente de Vocabulario');
 const page=fs.readFileSync(path.join(root,'gramatica.html'),'utf8');
 for(const script of ['config.js','gramatica-admin.js'])assert.ok(page.includes('src="'+script),'Falta '+script+' en Gramática');
 const loginCode=fs.readFileSync(path.join(root,'teacher.js'),'utf8');
