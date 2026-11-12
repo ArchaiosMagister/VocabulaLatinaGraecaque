@@ -1,0 +1,101 @@
+'use strict';
+// Prueba de integración de la práctica real de vocabulario en Chromium.
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const http=require('node:http');
+const path=require('node:path');
+const {chromium}=require('playwright');
+const root=path.resolve(__dirname,'..');
+const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8',
+ '.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.ico':'image/x-icon','.png':'image/png'};
+const server=http.createServer((req,res)=>{
+ const url=new URL(req.url,'http://localhost');
+ let pathname;try{pathname=decodeURIComponent(url.pathname)}catch{res.writeHead(400);res.end();return}
+ const file=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));
+ if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return}
+ fs.readFile(file,(err,buffer)=>{
+  if(err){res.writeHead(404);res.end();return}
+  res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream'});
+  res.end(buffer);
+ });
+});
+async function main(){
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+ let browser;
+ try{
+  browser=await chromium.launch({headless:true});
+  const page=await browser.newPage({viewport:{width:1180,height:850}});
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.route('**/functions/v1/vocabulary',route=>route.fulfill({
+   status:200,contentType:'application/json',body:JSON.stringify({words:[]})
+  }));
+  await page.goto('http://127.0.0.1:'+server.address().port+'/',{waitUntil:'load'});
+  await page.waitForFunction(()=>document.querySelector('#available')?.textContent.includes('Selecciona'));
+  await page.waitForFunction(()=>document.querySelector('#cloud-status')?.textContent.includes('Vocabulario actualizado'));
+  assert.equal(await page.locator('#units input:checked').count(),0,'No deben activarse todas las unidades al entrar');
+  assert.equal(await page.locator('#start').isDisabled(),true,'No comenzar sin unidades');
+  await page.locator('#units input[value="UD 1"]').check();
+  await page.selectOption('#activity','choice');
+  await page.locator('#start').click();
+  let first=await page.evaluate(()=>({
+   pool:session.pool.map(e=>({id:e.id,subject:e.subject,mode:e.mode,units:e.units})),
+   queue:session.queue.map(e=>({id:e.id,subject:e.subject,mode:e.mode,units:e.units})),
+   options:session.options.map(e=>e.id),
+   units:session.units
+  }));
+  assert.deepEqual(first.units,['UD 1']);
+  assert.ok(first.queue.length>0);
+  assert.ok(first.queue.every(e=>e.subject==='lat1'&&e.mode==='general'&&e.units.includes('UD 1')));
+  assert.ok(first.options.every(id=>first.pool.some(e=>e.id===id)),'Opciones fuera del vocabulario elegido');
+  const shown=await page.locator('#practice .small').first().textContent();
+  assert.ok(shown.includes('UD 1')&&!shown.includes('UD 9–10'),'No deben mostrarse unidades ajenas a la selección');
+  await page.locator('#units input[value="UD 2"]').check();
+  assert.ok((await page.locator('#practice').textContent()).includes('SELECCIÓN ACTUALIZADA'),
+   'Cambiar unidades debe interrumpir inmediatamente la sesión antigua');
+  assert.ok(await page.evaluate(()=>session===null));
+  await page.selectOption('#corpus','examen');
+  assert.deepEqual(await page.locator('#units input:checked').evaluateAll(nodes=>nodes.map(n=>n.value)),['UD 1','UD 2'],
+   'Cambiar entre General y Examen debe conservar sólo unidades coincidentes');
+  await page.selectOption('#subject','gr1');
+  assert.equal(await page.locator('#units input:checked').count(),0,'Cambiar de asignatura debe limpiar unidades');
+  assert.equal(await page.locator('#start').isDisabled(),true);
+  await page.locator('#units input[value="UD 1–4"]').check();
+  await page.selectOption('#corpus','general');
+  assert.deepEqual(await page.locator('#units input:checked').evaluateAll(nodes=>nodes.map(n=>n.value)),['UD 1–4']);
+  assert.equal(await page.locator('#units input[value="Sin unidad acreditada"]').isChecked(),false);
+
+  let cases=0;
+  for(const subject of ['lat1','lat4','gr1','lat2']){
+   await page.selectOption('#subject',subject);
+   for(const mode of ['general','examen']){
+    await page.selectOption('#corpus',mode);
+    const units=await page.locator('#units input').evaluateAll(nodes=>nodes.map(n=>n.value));
+    for(let i=0;i<units.length;i++){
+     await page.locator('#none').click();
+     await page.locator('#units input').nth(i).check();
+     assert.equal(await page.locator('#start').isEnabled(),true,subject+' '+mode+' '+units[i]);
+     await page.locator('#start').click();
+     const state=await page.evaluate(()=>({
+      subject:document.querySelector('#subject').value,
+      mode:document.querySelector('#corpus').value,
+      unit:session.units[0],
+      pool:session.pool.map(e=>({id:e.id,subject:e.subject,mode:e.mode,units:e.units})),
+      queue:session.queue.map(e=>({id:e.id,subject:e.subject,mode:e.mode,units:e.units})),
+      options:session.options.map(e=>e.id)
+     }));
+     assert.equal(state.subject,subject);assert.equal(state.mode,mode);
+     assert.equal(state.unit,units[i]);
+     assert.ok(state.queue.length>0);
+     assert.ok(state.pool.every(e=>e.subject===subject&&e.mode===mode&&e.units.includes(units[i])),
+      'Pool ajeno a la selección: '+subject+' '+mode+' '+units[i]);
+     assert.ok(state.queue.every(e=>state.pool.some(p=>p.id===e.id)),'Pregunta fuera del pool');
+     assert.ok(state.options.every(id=>state.pool.some(p=>p.id===id)),'Distractor fuera del pool');
+     cases++;
+    }
+   }
+  }
+  assert.deepEqual(errors,[],'Errores de ejecución en navegador');
+  console.log('OK navegador: '+cases+' selecciones de unidad, reinicios, cambio de corpus y distractores.');
+ }finally{if(browser)await browser.close();await new Promise(resolve=>server.close(resolve))}
+}
+main().catch(e=>{console.error(e);process.exitCode=1});
