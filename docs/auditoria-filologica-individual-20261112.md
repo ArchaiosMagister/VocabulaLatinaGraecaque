@@ -19,7 +19,7 @@ La auditoría anterior cotejó la **procedencia por unidades**. Esta segunda fas
 | Latín I general | *cado* | «cær» | «caer» | Error ortográfico |
 | Latín I general | *confero* | «refugiarse» | «reunir», «llevar juntos» | Lewis & Short: «refugiarse» es contextual en construcciones reflexivas (*se conferre*) |
 | Latín I general y examen | *appello* | Comilla inicial duplicada | «llamar» | Error de transcripción, dos fichas |
-| Latín 4.º general y examen | *vetus* | Traducción truncada «viejo | «viejo/a» | Misma palabra acreditada como «viejo/a» en otra unidad, dos fichas |
+| Latín 4.º general y examen | *vetus* | Traducción truncada «viejo…» | «viejo/a» | Misma palabra acreditada como «viejo/a» en otra unidad, dos fichas |
 
 Hay **13 fichas modificadas** porque *appello* y *vetus* aparecen en ambas modalidades. Las correcciones de *dux*, *impono* y *confero* corrigen también el contenido filológico, no únicamente la ortografía, por lo que quedan explícitamente documentadas.
 
