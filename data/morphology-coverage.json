@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-10T07:07:23.650Z",
+  "generated_at": "2026-11-12T11:06:37.279Z",
   "definition": "Presencia de al menos un ejercicio escrito autocorregible; NO supone paradigma completo.",
   "source_revisions": {
     "lat": "050924c9f013e6aba4d7c87be243a1d79b6c5b10",
@@ -1627,6 +1627,7 @@
           "lemma": "loquor",
           "entry": "loquor, locutus sum (3ª)",
           "units": [
+            "UD 11–12",
             "UD 9–10"
           ],
           "type": "verbal"
@@ -1922,6 +1923,7 @@
           "lemma": "neque",
           "entry": "neque (conj.)",
           "units": [
+            "UD 3",
             "UD 7"
           ],
           "type": "invariable"
@@ -1980,6 +1982,7 @@
           "entry": "non (adv.)",
           "units": [
             "UD 2",
+            "UD 3",
             "UD 4",
             "UD 5"
           ],
@@ -1998,6 +2001,7 @@
           "lemma": "noster",
           "entry": "noster, nostra, nostrum",
           "units": [
+            "UD 3",
             "UD 4",
             "UD 5",
             "UD 9–10"
@@ -2390,6 +2394,7 @@
           "lemma": "pugno",
           "entry": "pugno (1ª)",
           "units": [
+            "UD 11–12",
             "UD 5",
             "UD 8",
             "UD 9–10"
