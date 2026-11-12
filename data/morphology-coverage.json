@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-12T12:19:10.224Z",
+  "generated_at": "2026-11-12T12:45:05.879Z",
   "definition": "Presencia de al menos un ejercicio escrito autocorregible; NO supone paradigma completo.",
   "source_revisions": {
     "lat": "050924c9f013e6aba4d7c87be243a1d79b6c5b10",
@@ -3733,7 +3733,7 @@
         },
         {
           "lemma": "curro",
-          "entry": "cūrro (3ª)",
+          "entry": "currō (3ª)",
           "units": [
             "UD 5",
             "UD 8"
@@ -4151,8 +4151,8 @@
           "type": "verbal"
         },
         {
-          "lemma": "mуro",
-          "entry": "Mўrō̆, –onis (m.)",
+          "lemma": "myro",
+          "entry": "Myrō̆, –onis (m.)",
           "units": [
             "UD 10"
           ],
@@ -4566,8 +4566,8 @@
           "type": "por-clasificar"
         },
         {
-          "lemma": "stуlus",
-          "entry": "stўlus, –ī",
+          "lemma": "stylus",
+          "entry": "stylus, –ī",
           "units": [
             "UD 10"
           ],
