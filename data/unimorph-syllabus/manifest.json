@@ -6,7 +6,7 @@
   "subjects": {
     "lat1": {
       "vocabulary_entries": 848,
-      "distinct_lemmas": 664
+      "distinct_lemmas": 663
     },
     "lat4": {
       "vocabulary_entries": 505,
@@ -29,7 +29,7 @@
       "malformed_rows": 0,
       "retained_rows": 10036,
       "retained_lemmas": 476,
-      "vocabulary_lemmas": 772,
+      "vocabulary_lemmas": 771,
       "missing_vocabulary_lemmas": [
         "abeo",
         "absum",
@@ -281,7 +281,6 @@
         "servo",
         "sexcenti",
         "soleo",
-        "solis",
         "solvo",
         "spero",
         "statuo",
