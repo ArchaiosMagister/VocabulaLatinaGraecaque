@@ -290,6 +290,28 @@
       "correctedForm": "sol, solis (m.)",
       "reason": "En UD7 el Word usa el genitivo solis como lema, pero el mismo vocabulario de UD11–12 da sol, solis, confirmado por Lewis & Short/Logeion.",
       "source": "https://logeion.org/sol"
+    },
+    {
+      "id": "bc1b089fe0ab9bf7",
+      "subject": "lat4",
+      "mode": "general",
+      "unit": "UD 10",
+      "sourceForm": "Mўrō̆, –onis (m.)",
+      "correctedForm": "Myrō̆, –onis (m.)",
+      "reason": "La fuente Word incrusta el carácter cirílico ў en el nombre latinizado Myro; se cambia exclusivamente por la y latina sin decidir entre variantes Myro/Myron.",
+      "sourceLemma": "mуro",
+      "correctedLemma": "myro"
+    },
+    {
+      "id": "40da44265e6cddef",
+      "subject": "lat4",
+      "mode": "general",
+      "unit": "UD 10",
+      "sourceForm": "stўlus, –ī",
+      "correctedForm": "stylus, –ī",
+      "reason": "La fuente Word incrusta la letra cirílica ў en el sustantivo latino stylus; se restaura una y latina. En latín clásico también se documenta stilus, que no se impone a la lista del profesor.",
+      "sourceLemma": "stуlus",
+      "correctedLemma": "stylus"
     }
   ]
 }
