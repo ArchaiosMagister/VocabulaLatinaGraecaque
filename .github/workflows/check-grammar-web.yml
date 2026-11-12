@@ -58,6 +58,7 @@ jobs:
           node --check tests/check-lexical-batch2.cjs
           node --check tests/check-lexical-batch3.cjs
           node --check tests/check-attic-greek.cjs
+          node --check tests/check-100-classical-forms.cjs
           node --check tests/check-vocabulary-browser.cjs
           node --check tests/check-grammar.cjs
           node --check tests/check-web-release.cjs
@@ -74,6 +75,17 @@ jobs:
         run: node tests/check-lexical-batch3.cjs
       - name: Verificar ático clásico y evitar homógrafos no acreditados
         run: node tests/check-attic-greek.cjs
+      - name: Auditar cien formas flexionadas latinas y áticas
+        run: node tests/check-100-classical-forms.cjs
+      - name: Guardar las cien observaciones para consulta del profesor
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: auditoria-cien-formas-latin-atico
+          path: |
+            reports/auditoria-100-formas.json
+            reports/auditoria-100-formas.md
+          if-no-files-found: warn
       - name: Comprobar el respaldo online con un banco de prueba
         run: node tests/check-online-backup.cjs
       - name: Comprobar autocorrección y currículo

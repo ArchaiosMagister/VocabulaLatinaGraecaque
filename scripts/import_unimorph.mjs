@@ -39,7 +39,9 @@ function lemma(form){
 /* Greek UniMorph includes definite articles in noun surfaces; remove only
    explicitly recognized article prefixes. Preserve the original for audit. */
 const ARTICLES=new Set(['ο','η','το','τον','την','του','τησ','τω','τη','οι','αι',
- 'τουσ','τασ','τα','των','τοισ','ταισ','τω','τοιν','τοιν','τω','τα','τησ'].map(canonical));
+ 'τουσ','τασ','τα','των','τοισ','ταισ','τοιν','τωι','τηι'].map(canonical));
+// Canonical(τῷ) = τωι and canonical(τῇ) = τηι: ignoring the iota subscript
+// used to delete virtually every article-prefixed Greek dative singular.
 function cleanSurface(lang,surface){
  const raw=String(surface||'').trim();
  if(lang!=='grc'||!/\s/u.test(raw))return raw;
@@ -47,6 +49,17 @@ function cleanSurface(lang,surface){
  const last=raw.slice(split+1),prefix=raw.slice(0,split).trim();
  const parts=prefix.split(/[,\s]+/u).filter(Boolean).map(canonical);
  return parts.length&&parts.every(p=>ARTICLES.has(p))?last:null;
+}
+// Validate the article-stripping logic independently of upstream downloads.
+for(const [raw,expected] of [
+ ['τῷ λόγῳ','λόγῳ'],
+ ['τῇ γῇ','γῇ'],
+ ['τοῖς λόγοις','λόγοις'],
+ ['τῆς γῆς','γῆς'],
+ ['λόγῳ','λόγῳ']
+]){
+ if(cleanSurface('grc',raw)!==expected)
+  throw Error('No se conserva una forma griega con artículo: '+raw);
 }
 function selectVocab(data){
  const chosen={lat:new Set(),grc:new Set()},metadata={};
