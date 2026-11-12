@@ -1,8 +1,9 @@
 {
   "schema": 1,
-  "scope": "All attested UniMorph inflections for exact lemmas in the three teacher vocabularies; not complete language morphology.",
+  "scope": "UniMorph attestations filtered to the teacher vocabulary. Greek headwords must match diacritics; individual surface dialect is not certified.",
   "source_license": "CC BY-SA 3.0",
   "attribution": "UniMorph lat (English Wiktionary) and UniMorph grc (Wikipedia); original contributors credited in upstream READMEs.",
+  "greek_headword_policy": "Attic teaching: only accent-and-breathing-matched source Greek headwords; source surface dialect tags unavailable. Not sufficient to certify every inflected form.",
   "subjects": {
     "lat1": {
       "vocabulary_entries": 848,
@@ -14,7 +15,7 @@
     },
     "gr1": {
       "vocabulary_entries": 495,
-      "distinct_lemmas": 349
+      "distinct_lemmas": 348
     }
   },
   "languages": {
@@ -498,10 +499,10 @@
       "source_sha256": "09ff9231d90dbe481942bba143f04800ab919a31ab11801c01301488605cadd9",
       "source_bytes": 2057514,
       "source_rows": 41593,
-      "malformed_rows": 109,
-      "retained_rows": 1467,
-      "retained_lemmas": 103,
-      "vocabulary_lemmas": 349,
+      "malformed_rows": 106,
+      "retained_rows": 1451,
+      "retained_lemmas": 102,
+      "vocabulary_lemmas": 348,
       "missing_vocabulary_lemmas": [
         "αγαθοσ",
         "αγαλμα",
@@ -560,6 +561,7 @@
         "δαρειοσ",
         "δει",
         "δειπνοσ",
+        "δημοσ",
         "δημοσθηνησ",
         "δια",
         "διαφερω",
@@ -624,7 +626,6 @@
         "κοινοσ",
         "κομιζω",
         "κρητη",
-        "κυνδυνοσ",
         "κυριοσ",
         "λαμβανω",
         "λεγω",
@@ -649,7 +650,7 @@
         "μικροσ",
         "μονον",
         "ναυσ",
-        "νεκρoσ",
+        "νεκροσ",
         "νεοσ",
         "νικαω",
         "νομιζω",
@@ -702,7 +703,7 @@
         "προσ",
         "προσβαλλω",
         "προσερχομαι",
-        "προταγορασ",
+        "πρωταγορασ",
         "πρωτον",
         "πρωτοσ",
         "πυθαγορειοσ",
@@ -764,8 +765,8 @@
         },
         {
           "path": "grc/part-02.json",
-          "rows": 222,
-          "bytes": 15356
+          "rows": 208,
+          "bytes": 14567
         },
         {
           "path": "grc/part-03.json",
@@ -780,12 +781,12 @@
         {
           "path": "grc/part-05.json",
           "rows": 179,
-          "bytes": 10299
+          "bytes": 10294
         },
         {
           "path": "grc/part-06.json",
-          "rows": 171,
-          "bytes": 10891
+          "rows": 169,
+          "bytes": 10785
         },
         {
           "path": "grc/part-07.json",
