@@ -179,18 +179,16 @@ async function main(){
    assert.ok(box&&box.x>=0&&box.x+box.width<=375,'Pestaña fuera de pantalla: '+label);
   }
   assert.equal(await page.locator('#open-report').isVisible(),true,'Falta el botón de aviso en móvil');
-  assert.equal(await page.locator('#open-teacher').isVisible(),true,'Falta el acceso docente en móvil');
+  assert.equal(await page.locator('#open-teacher').count(),0,'El acceso docente antiguo no debe aparecer en móvil');
 
   await page.goto(origin+'/',{waitUntil:'load'});
   assert.equal(await page.locator('header .study-tab[aria-current="page"]').textContent(),'Vocabulario');
   assert.deepEqual(await page.locator('header .study-tab').allTextContents(),['Vocabulario','Gramática']);
   assert.equal(await page.locator('#open-report').isVisible(),true);
-  await page.locator('#open-teacher').click();
-  await page.locator('#teacher-content').waitFor({state:'visible'});
-  assert.match(await page.locator('#teacher-content .private-badge').first().textContent(),/MagisterArchaios/);
-  await page.locator('#teacher-dialog [data-close]').click();
+  assert.equal(await page.locator('#open-teacher').count(),0);
+  assert.equal(await page.locator('#teacher-dialog').count(),0);
   assert.deepEqual(errors,[],'Errores JavaScript del navegador');
-  console.log('OK navegador: pestañas, avisos, acceso docente en ambas páginas, 10 ejercicios, corrección y carga móvil.');
+  console.log('OK navegador: pestañas, avisos sin panel heredado, 10 ejercicios, corrección y carga móvil.');
  }finally{
   if(browser)await browser.close();
   await new Promise(resolve=>server.close(resolve));
