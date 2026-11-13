@@ -26,9 +26,14 @@ async function main(){
   browser=await chromium.launch({headless:true});
   const page=await browser.newPage({viewport:{width:1180,height:850}});
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  await page.route('**/functions/v1/vocabulary',route=>route.fulfill({
-   status:200,contentType:'application/json',body:JSON.stringify({words:[]})
-  }));
+  const actions=[];
+  await page.route('**/functions/v1/vocabulary',route=>{
+   const body=route.request().postDataJSON();actions.push(body);
+   assert.ok(['public_words','report'].includes(body.action),
+     'No se debe recurrir a acciones docentes heredadas');
+   const response=body.action==='public_words'?{words:[]}:{ok:true};
+   return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(response)});
+  });
   await page.goto('http://127.0.0.1:'+server.address().port+'/',{waitUntil:'load'});
   await page.waitForFunction(()=>document.querySelector('#available')?.textContent.includes('Selecciona'));
   await page.waitForFunction(()=>document.querySelector('#cloud-status')?.textContent.includes('Vocabulario actualizado'));
@@ -146,6 +151,14 @@ async function main(){
   });
   assert.ok(atticSamples.every(x=>x.found&&x.expected===x.actual),
    'La corrección escrita no respeta el vocabulario ático: '+JSON.stringify(atticSamples));
+  assert.equal(await page.locator('#open-teacher').count(),0);
+  assert.equal(await page.locator('#teacher-dialog').count(),0);
+  await page.locator('#open-report').click();
+  await page.locator('#report-message').fill('La traducción debería aceptar otra acepción.');
+  await page.locator('#send-report').click();
+  await page.locator('#report-dialog .feedback').waitFor();
+  assert.ok(actions.some(x=>x.action==='report'),'El alumnado debe seguir enviando avisos');
+  assert.ok(actions.some(x=>x.action==='public_words'),'Debe continuar la sincronización');
   assert.deepEqual(errors,[],'Errores de ejecución en navegador');
   console.log('OK navegador: '+cases+' selecciones de unidad, reinicios, cambio de corpus y distractores.');
  }finally{if(browser)await browser.close();await new Promise(resolve=>server.close(resolve))}

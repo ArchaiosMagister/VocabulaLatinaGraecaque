@@ -95,25 +95,12 @@ async function main(){
   assert.ok(reportCall.entry_form.includes(questionBeforeReport),'El aviso no indica la pregunta');
   await page.locator('#report-dialog [data-close]').first().click();
 
-  await page.locator('#open-teacher').click();
-  assert.equal(await page.locator('#teacher-username').inputValue(),'MagisterArchaios');
-  await page.locator('#teacher-username').fill('UsuarioIncorrecto');
-  await page.locator('#teacher-code').fill('x'.repeat(25));
-  await page.locator('#login-button').click();
-  assert.match(await page.locator('#login-status').textContent(),/usuario no es correcto/i);
-  assert.ok(!calls.some(q=>q.action==='login'),'No debe autenticar usuarios incorrectos');
-  await page.locator('#teacher-username').fill('MagisterArchaios');
-  await page.locator('#login-button').click();
-  await page.locator('#grammar-exercises .cardrow').first().waitFor();
-  await page.locator('#grammar-coverage .cardrow').first().waitFor();
-  assert.match(await page.locator('#grammar-coverage').textContent(),/282 de 664 lemas/);
-  assert.match(await page.locator('#grammar-coverage').textContent(),/no equivale a una declinación o conjugación completa/);
-
-  assert.ok(calls.some(q=>q.action==='login'),'No se ha solicitado acceso con código');
-  await page.locator('[data-save-grammar-report]').click();
-  assert.ok(calls.some(q=>q.action==='update_report'),'No se pudo revisar el aviso');
-  await page.locator('#teacher-dialog [data-close]').click();
-
+  assert.equal(await page.locator('#open-teacher').count(),0,
+    'El panel docente antiguo ya no debe aparecer');
+  assert.equal(await page.locator('#teacher-dialog').count(),0);
+  assert.ok(!calls.some(q=>['login','session','reports','update_report'].includes(q.action)),
+    'No debe utilizarse el sistema de sesión heredado');
+  // Se conserva el aviso contextualizado con el ID original de pregunta.
   for(let i=0;i<10;i++){
    const prompt=await page.locator('.grammar-question').textContent();
    const expected=await page.evaluate(text=>{
@@ -192,18 +179,16 @@ async function main(){
    assert.ok(box&&box.x>=0&&box.x+box.width<=375,'Pestaña fuera de pantalla: '+label);
   }
   assert.equal(await page.locator('#open-report').isVisible(),true,'Falta el botón de aviso en móvil');
-  assert.equal(await page.locator('#open-teacher').isVisible(),true,'Falta el acceso docente en móvil');
+  assert.equal(await page.locator('#open-teacher').count(),0,'El acceso docente antiguo no debe aparecer en móvil');
 
   await page.goto(origin+'/',{waitUntil:'load'});
   assert.equal(await page.locator('header .study-tab[aria-current="page"]').textContent(),'Vocabulario');
   assert.deepEqual(await page.locator('header .study-tab').allTextContents(),['Vocabulario','Gramática']);
   assert.equal(await page.locator('#open-report').isVisible(),true);
-  await page.locator('#open-teacher').click();
-  await page.locator('#teacher-content').waitFor({state:'visible'});
-  assert.match(await page.locator('#teacher-content .private-badge').first().textContent(),/MagisterArchaios/);
-  await page.locator('#teacher-dialog [data-close]').click();
+  assert.equal(await page.locator('#open-teacher').count(),0);
+  assert.equal(await page.locator('#teacher-dialog').count(),0);
   assert.deepEqual(errors,[],'Errores JavaScript del navegador');
-  console.log('OK navegador: pestañas, avisos, acceso docente en ambas páginas, 10 ejercicios, corrección y carga móvil.');
+  console.log('OK navegador: pestañas, avisos sin panel heredado, 10 ejercicios, corrección y carga móvil.');
  }finally{
   if(browser)await browser.close();
   await new Promise(resolve=>server.close(resolve));
