@@ -31,16 +31,31 @@ for(const [name,html,active] of [['Vocabulario',home,'./'],['Gramática',fs.read
   assert.ok(html.includes('class="study-tab" href="'+href+'"'),'Falta pestaña '+label+' en '+name);
  }
  assert.ok(html.includes('class="study-tab" href="'+active+'" aria-current="page"'),'La pestaña activa es incorrecta en '+name);
- for(const id of ['open-report','open-teacher','report-dialog','teacher-dialog']){
+ for(const id of ['open-report','report-dialog']){
   assert.ok(html.includes('id="'+id+'"'),'Falta '+id+' en '+name);
  }
+ for(const id of ['open-teacher','teacher-dialog','teacher-code']){
+  assert.ok(!html.includes('id="'+id+'"'),'No debe publicarse '+id+' en '+name);
+ }
 }
-assert.ok(/src="teacher\.js(?:\?[^"]*)?"/.test(home),'Falta módulo docente de Vocabulario');
+assert.ok(/src="teacher\.js(?:\?[^"]*)?"/.test(home),'Falta módulo de avisos y sincronización de Vocabulario');
 const page=fs.readFileSync(path.join(root,'gramatica.html'),'utf8');
 for(const script of ['config.js','gramatica-admin.js'])assert.ok(page.includes('src="'+script),'Falta '+script+' en Gramática');
 const loginCode=fs.readFileSync(path.join(root,'teacher.js'),'utf8');
 const grammarAdmin=fs.readFileSync(path.join(root,'gramatica-admin.js'),'utf8');
-for(const script of [loginCode,grammarAdmin])assert.ok(script.includes('MagisterArchaios'),'Falta identificar el usuario docente');
+for(const script of [loginCode,grammarAdmin]){
+ assert.ok(!script.includes('MagisterArchaios'),'El alumnado no debe cargar identidades docentes');
+ assert.ok(!script.includes('sessionStorage'),'El alumnado no debe conservar tokens docentes');
+ assert.ok(!script.includes("api('login'"),'El login docente está retirado');
+ assert.ok(script.includes("api('report'"),'El formulario de avisos debe seguir disponible');
+}
+const backend=fs.readFileSync(path.join(root,'backend/index.ts'),'utf8');
+for(const removed of ['vocab_sessions','vocab_settings',"action==='login'","action==='save_word'","action==='teacher_words'"]){
+ assert.ok(!backend.includes(removed),'Acceso heredado todavía operativo: '+removed);
+}
+assert.ok(backend.includes("action==='public_words'"));
+assert.ok(backend.includes("action==='report'"));
+
 
 assert.ok(/id="start"/.test(page)&&/id="practice"/.test(page),'Falta interfaz para realizar el ejercicio');
 assert.ok(/id="errors"/.test(page),'Falta el modo de repaso de fallos');
