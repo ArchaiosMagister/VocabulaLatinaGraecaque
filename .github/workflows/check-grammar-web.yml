@@ -60,6 +60,7 @@ jobs:
           node --check tests/check-attic-greek.cjs
           node --check tests/check-100-classical-forms.cjs
           node --check tests/check-vocabulary-browser.cjs
+          node --check tests/check-vocabulary-public-service.cjs
           node --check tests/check-grammar.cjs
           node --check tests/check-web-release.cjs
           node --check tests/check-grammar-browser.cjs
@@ -102,3 +103,5 @@ jobs:
         run: |
           node tests/check-grammar-browser.cjs
           node tests/check-vocabulary-browser.cjs
+      - name: Contrastar aportaciones docentes con consulta pública real de Supabase
+        run: node tests/check-vocabulary-public-service.cjs
