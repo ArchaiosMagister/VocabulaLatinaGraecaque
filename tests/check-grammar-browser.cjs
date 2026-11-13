@@ -95,25 +95,12 @@ async function main(){
   assert.ok(reportCall.entry_form.includes(questionBeforeReport),'El aviso no indica la pregunta');
   await page.locator('#report-dialog [data-close]').first().click();
 
-  await page.locator('#open-teacher').click();
-  assert.equal(await page.locator('#teacher-username').inputValue(),'MagisterArchaios');
-  await page.locator('#teacher-username').fill('UsuarioIncorrecto');
-  await page.locator('#teacher-code').fill('x'.repeat(25));
-  await page.locator('#login-button').click();
-  assert.match(await page.locator('#login-status').textContent(),/usuario no es correcto/i);
-  assert.ok(!calls.some(q=>q.action==='login'),'No debe autenticar usuarios incorrectos');
-  await page.locator('#teacher-username').fill('MagisterArchaios');
-  await page.locator('#login-button').click();
-  await page.locator('#grammar-exercises .cardrow').first().waitFor();
-  await page.locator('#grammar-coverage .cardrow').first().waitFor();
-  assert.match(await page.locator('#grammar-coverage').textContent(),/282 de 664 lemas/);
-  assert.match(await page.locator('#grammar-coverage').textContent(),/no equivale a una declinación o conjugación completa/);
-
-  assert.ok(calls.some(q=>q.action==='login'),'No se ha solicitado acceso con código');
-  await page.locator('[data-save-grammar-report]').click();
-  assert.ok(calls.some(q=>q.action==='update_report'),'No se pudo revisar el aviso');
-  await page.locator('#teacher-dialog [data-close]').click();
-
+  assert.equal(await page.locator('#open-teacher').count(),0,
+    'El panel docente antiguo ya no debe aparecer');
+  assert.equal(await page.locator('#teacher-dialog').count(),0);
+  assert.ok(!calls.some(q=>['login','session','reports','update_report'].includes(q.action)),
+    'No debe utilizarse el sistema de sesión heredado');
+  // Se conserva el aviso contextualizado con el ID original de pregunta.
   for(let i=0;i<10;i++){
    const prompt=await page.locator('.grammar-question').textContent();
    const expected=await page.evaluate(text=>{
