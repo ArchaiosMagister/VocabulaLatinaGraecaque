@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-12T13:17:00.580Z",
+  "generated_at": "2026-11-13T20:52:21.778Z",
   "definition": "Presencia de al menos un ejercicio escrito autocorregible; NO supone paradigma completo.",
   "source_revisions": {
     "lat": "050924c9f013e6aba4d7c87be243a1d79b6c5b10",
@@ -4953,23 +4953,23 @@
     "gr1": {
       "entries": 503,
       "lemmas": 348,
-      "withExercises": 52,
-      "withoutExercises": 296,
-      "importedLemmas": 48,
+      "withExercises": 54,
+      "withoutExercises": 294,
+      "importedLemmas": 50,
       "curatedLemmas": 8,
-      "importedRows": 818,
-      "importedQuestions": 673,
+      "importedRows": 896,
+      "importedQuestions": 789,
       "types": {
         "nominal": {
-          "lemmas": 50,
-          "withExercises": 50
+          "lemmas": 52,
+          "withExercises": 52
         },
         "verbal": {
           "lemmas": 79,
           "withExercises": 2
         },
         "nominal-probable": {
-          "lemmas": 168,
+          "lemmas": 166,
           "withExercises": 0
         },
         "invariable": {
@@ -5430,14 +5430,6 @@
             "UD 1–4"
           ],
           "type": "verbal"
-        },
-        {
-          "lemma": "βιοσ",
-          "entry": "βίος, –ου",
-          "units": [
-            "UD 1–4"
-          ],
-          "type": "nominal-probable"
         },
         {
           "lemma": "βουλομαι",
@@ -6416,14 +6408,6 @@
           "type": "verbal"
         },
         {
-          "lemma": "νομοσ",
-          "entry": "νόμος, –ου",
-          "units": [
-            "UD 6–7"
-          ],
-          "type": "nominal-probable"
-        },
-        {
           "lemma": "νοσοσ",
           "entry": "νόσος, –ου",
           "units": [
@@ -7364,7 +7348,7 @@
             "UniMorph",
             "docente"
           ],
-          "writeQuestions": 19,
+          "writeQuestions": 20,
           "status": "con-ejercicios"
         },
         {
@@ -7377,7 +7361,7 @@
           "sources": [
             "UniMorph"
           ],
-          "writeQuestions": 9,
+          "writeQuestions": 10,
           "status": "con-ejercicios"
         },
         {
@@ -7390,7 +7374,7 @@
           "sources": [
             "UniMorph"
           ],
-          "writeQuestions": 9,
+          "writeQuestions": 10,
           "status": "con-ejercicios"
         },
         {
@@ -7403,7 +7387,7 @@
           "sources": [
             "UniMorph"
           ],
-          "writeQuestions": 9,
+          "writeQuestions": 10,
           "status": "con-ejercicios"
         },
         {
@@ -7416,7 +7400,7 @@
           "sources": [
             "UniMorph"
           ],
-          "writeQuestions": 9,
+          "writeQuestions": 10,
           "status": "con-ejercicios"
         },
         {
@@ -7429,7 +7413,7 @@
           "sources": [
             "UniMorph"
           ],
-          "writeQuestions": 9,
+          "writeQuestions": 10,
           "status": "con-ejercicios"
         },
         {
@@ -7442,7 +7426,7 @@
           "sources": [
             "UniMorph"
           ],
-          "writeQuestions": 9,
+          "writeQuestions": 10,
           "status": "con-ejercicios"
         },
         {
@@ -7455,7 +7439,20 @@
           "sources": [
             "UniMorph"
           ],
-          "writeQuestions": 9,
+          "writeQuestions": 10,
+          "status": "con-ejercicios"
+        },
+        {
+          "lemma": "βιοσ",
+          "entry": "βίος, –ου",
+          "units": [
+            "UD 1–4"
+          ],
+          "type": "nominal",
+          "sources": [
+            "UniMorph"
+          ],
+          "writeQuestions": 10,
           "status": "con-ejercicios"
         },
         {
@@ -7494,20 +7491,7 @@
           "sources": [
             "UniMorph"
           ],
-          "writeQuestions": 6,
-          "status": "con-ejercicios"
-        },
-        {
-          "lemma": "γυνη",
-          "entry": "γυνή, γυναικός (ἡ)",
-          "units": [
-            "UD 8"
-          ],
-          "type": "nominal",
-          "sources": [
-            "UniMorph"
-          ],
-          "writeQuestions": 2,
+          "writeQuestions": 7,
           "status": "con-ejercicios"
         }
       ]

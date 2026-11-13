@@ -7,7 +7,7 @@ Generada automáticamente desde las flexiones importadas y los paradigmas docent
 |---|---:|---:|---:|---:|---:|
 | Latín I | 663 | 283 | 380 | 262 | 30 |
 | Latín 4.º ESO | 328 | 171 | 157 | 158 | 19 |
-| Griego I | 348 | 52 | 296 | 48 | 8 |
+| Griego I | 348 | 54 | 294 | 50 | 8 |
 
 Los bancos pueden solaparse. El JSON incluye todos los lemas sin ejercicios y su clasificación aproximada.
 Las palabras invariables no necesitan paradigma y las categorías estimadas precisan revisión filológica.
@@ -92,9 +92,9 @@ Ejemplos prioritarios sin ejercicios:
 
 | Tipo estimado | Lemas | Con ejercicios |
 |---|---:|---:|
-| nominal | 50 | 50 |
+| nominal | 52 | 52 |
 | verbal | 79 | 2 |
-| nominal-probable | 168 | 0 |
+| nominal-probable | 166 | 0 |
 | invariable | 29 | 0 |
 | por-clasificar | 22 | 0 |
 
