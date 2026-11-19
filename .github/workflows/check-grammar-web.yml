@@ -64,6 +64,10 @@ jobs:
           node --check tests/check-grammar.cjs
           node --check tests/check-web-release.cjs
           node --check tests/check-grammar-browser.cjs
+      - name: Comprobar aviso de transición sin cambiar el progreso
+        run: |
+          node --check theme.js
+          node tests/check-transition-scholaclassica.cjs
       - name: Verificar el alcance por curso, unidades y distractores
         run: node tests/check-vocabulary-scope.cjs
       - name: Contrastar el banco léxico con las fuentes docentes
