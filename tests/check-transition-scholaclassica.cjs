@@ -22,7 +22,7 @@ const simulate=(path,search='')=>{
 for(const [path,query,target] of [
  ['/VocabulaLatinaGraecaque/','','/ScholaClassica/apps/vocabulario/index.html'],
  ['/VocabulaLatinaGraecaque/index.html','?subject=gr1','/ScholaClassica/apps/vocabulario/index.html?subject=gr1'],
- ['/VocabulaLatinaGraecaque/gramatica.html','','/ScholaClassica/'],
+ ['/VocabulaLatinaGraecaque/gramatica.html','','/ScholaClassica/apps/repaso-gramatica/index.html'],
  ['/ScholaClassica/apps/vocabulario/index.html','',null]
 ]){
  const node=simulate(path,query);
