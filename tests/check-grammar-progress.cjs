@@ -1,0 +1,21 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const source=fs.readFileSync('gramatica-progreso.js','utf8');
+const html=fs.readFileSync('gramatica.html','utf8');
+const sandbox={module:{exports:{}}};
+vm.runInNewContext(source,sandbox);
+const model=sandbox.module.exports;
+assert.ok(html.includes('<script src="gramatica-progreso.js?v=20261120" defer></script>'));
+assert.ok(html.includes('<script src="gramatica.js?v=5" defer></script>'));
+assert.equal(model.KEY,'classics-grammar-v1');
+const progress={'lat1|UD 2|concept-8':{total:3,right:2,failed:true},
+ 'import|gr1|UD 3|lemma|write':{total:2,right:2,failed:false}};
+assert.deepEqual(JSON.parse(JSON.stringify(model.unpack(model.pack(progress)))),progress);
+assert.equal(model.merge(progress,progress)['lat1|UD 2|concept-8'].total,3);
+assert.throws(()=>model.unpack(JSON.stringify({version:1,progress})),/gramatical/);
+assert.throws(()=>model.pack({'lat1|UD 2|concept-8':{total:1,right:2,failed:false}}));
+assert.ok(!source.includes("localStorage.setItem('classics-progress-v1'"));
+assert.ok(!source.includes("location.replace("));
+console.log('Historial de gramática antigua: exportar/importar JSON independiente y sin tocar vocabulario.');
