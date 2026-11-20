@@ -39,8 +39,8 @@ window.addEventListener('storage',event=>{
    ?'Las herramientas de gramática y morfología están reunidas también en ScholaClassica. Este repaso sigue funcionando. '
    :'Este vocabulario también está disponible en ScholaClassica. Puedes seguir practicando aquí. ';
   const link=document.createElement('a');
-  link.href=grammar?'/ScholaClassica/':'/ScholaClassica/apps/vocabulario/index.html'+location.search;
-  link.textContent=grammar?'Ver las herramientas de ScholaClassica':'Abrir Vocabulario en ScholaClassica';
+  link.href=grammar?'/ScholaClassica/apps/repaso-gramatica/index.html':'/ScholaClassica/apps/vocabulario/index.html'+location.search;
+  link.textContent=grammar?'Abrir repaso gramatical en ScholaClassica':'Abrir Vocabulario en ScholaClassica';
   link.style.fontWeight='600';
   const notice=document.createElement('aside');
   notice.id='schola-legacy-notice';
